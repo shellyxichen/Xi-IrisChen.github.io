@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
+        <script type="text/javascript">
+            window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+              heap.load("3026647544");
+        </script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-128514351-1');
+        </script>
+<title>Google Design Challenge 1</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/project.css">
+<link rel="stylesheet" href="assets/css/zoom.css">
+<style>
+    .top-img, .bottom-nav, .select:before { background-color:#4285F4; }
+    .float-nav { background-color:rgba(66, 133, 244, 0.9); }
+    .select { color: #4285F4 !important; }
+    .left-vertical-line {border-left-color: #4285F4; }
+    a:hover {color: #4285F4;}
+    @media screen and (max-width: 480px) { .bottom-nav > .nav-left { background: #7EC8DC; } .bottom-nav > .nav-right { background: #FAAB73;}}
+
+</style>
+</head>
+
+<body>
+<div id="project-page">
+    <div class="top-nav">
+        <a href="index.html"><div class="logo"></div></a>
+        <div class="nav">
+            <a href="index.html#first" class="nav-active">WORK</a>
+            <a href="about.html">ABOUT</a>
+            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
+        </div>
+    </div>
+    <div class="float-nav"></div>
+
+    <span class="project-nav-toggle"><i></i></span>
+    <aside class="project-aside">
+        <div class="project-aside-container">
+      <!-- <button onclick="location.href='index.html#second'" type="button" class="back-btn">Back</button> -->
+            <nav class="project-main-menu">
+                <ul class="menu-ul">
+                    <li><a href="#overview" class="sub pT">OVERVIEW</a></li>
+                    <li><a href="#understand" class="sub pT">UNDERSTANDING</a></li>
+                    <li><a href="#ideation" class="sub pT">IDEATION</a></li>
+                    <li><a href="#design" class="sub pT">DESIGN</a></li>
+                    <li><a href="#future step" class="sub pT">FUTURE STEPS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div id="project-main">
+        <div class="top-img" style="background-image:url(assets/img/google/overview.png);"></div>
+        <div class="project-narrow-content" >
+            <div id="overview">
+                <h2 class="page-header bT">OVERVIEW</h2>
+                <hr><br><br>
+
+                <h3 class="overview_subtitle">Background</h3> 
+                    <p class="project-desc">There are 450 organizations in Georgia Tech. <strong>Most students will only explore new student organizations at the activity fair</strong>, which is a huge gathering for all student organizations at the beginning of the semester. Moreover, <strong>many students may join a lot of organizations at the beginning, but only actively involve in 1-2 later,</strong> whether because they forget events or the organization is not active at all.<br>
+
+                        <br>For proposing experience, about 20-30 students will attempt to propose a student organization each semester, but only about 5-10 get approved. <strong>The process of proposing is really complicated. It always comes to problems like it's hard to find an advisor or similar organizations already exist</strong>...</p><br><br><br>
+
+                <h3 class="overview_subtitle">Design outcome</h3> 
+                    <p class="project-desc">Both app and website are provided to <strong>combine the online and offline (activity fair) experience</strong>. Instead of just providing information relate to organization, here, I decided to focus on <strong>events information</strong> to help users browse in daily life. The key features are as below:</p>
+                    <img style = "width:100%" src="assets/img/google/outcome1.png" data-action="zoom"><br>
+                    <img style = "width:100%" src="assets/img/google/outcome2.png" data-action="zoom"><br>
+                    <img style = "width:100%" src="assets/img/google/outcome3.png" data-action="zoom"><br><br><br><br>
+                
+
+                <h3 class="overview_subtitle">Process</h3>   
+                    <img style = "width:100%" src="assets/img/google/process.png"><br><br><br><br>
+
+
+            </div>
+
+            <div id="understand">
+                <h2 class="page-header bT">UNDERSTANDING</h2>
+                <hr>
+                <h3 class="overview_subtitle">Interview</h3>
+                    <p class="project-desc">As the user group were new students who want to join or propose a student organization, I started by a <strong>semi-structured interview</strong> with my classmates who had related experience before. The objectives for the interview mainly include:<br>
+                        - What’s their motivation for joining?<br>
+                        - How to find the organization they’re interested in?<br><br>
+
+                        I recruited 6 people who all had joining experience before. <strong>However, only one student had proposing experience. Other students I reached out to either did not have related experience, or could not remember details.</strong> So I decided to look for some help at Student Engagement (which was responsible for managing student organization in Georgia Tech) and conducted a <strong>stakeholder interview with their associates dean. </strong></p>
+                        <img style = "width:100%" src="assets/img/google/research.png"><br><br><br>
+
+                <h3 class="overview_subtitle">Analyze</h3>
+                    <p class="project-desc">Based on the interview, I used spreadsheet to analyze the results and summarized their experience and pain points: 
+                
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">'Browse', 'search' experience</span>
+                    </p><br>
+                    <p class="project-desc">Students mainly have <strong>4 ways to discover student organizations</strong>. <strong>Almost everyone join by the activity fair.</strong> A lot join later by the friends' recommendation and posters. <strong>However, only a minority of people browse the website before going to the activity fair</strong> —— some think it's unnecessary, while others don't know there is a website at all.</p>
+                    <img style = "width:100%" src="assets/img/google/analyze_browse1.png"><br><br><br>
+
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">What's wrong with 'browse', 'search' experience?</span>
+                    </p><br>
+                    <p class="project-desc">From the research, main pain points lie in 'website browse' and 'activity fair'. The user flow and pain points are as below:</p>
+                    <img style = "width:100%" src="assets/img/google/analyze_browse22.png" data-action="zoom"><br>
+                    <img style = "width:100%" src="assets/img/google/analyze_browse2.png" data-action="zoom"><br><br>
+
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">What's wrong with 'propose' experience?</span>
+                    </p><br>
+                    <p class="project-desc">Students attempt to propose about 20 -30 organizations each semester, but finally about 5 - 10 get approved. Students give up either because the process is too long or similar organizations exist.</p>
+                    <img style = "width:100%" src="assets/img/google/analyze_propose.png" data-action="zoom"><br><br><br><br>
+
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">What information do users care when browsing?</span>
+                    </p><br>
+                    <p class="project-desc">For browsing experience, one important factor is what information we want to provide to users. Therefore, I asked users to rank information they care in the interview. The results are categorized into the following primary and secondary factors. Among these, users especially care about <strong> 'event' information</strong>, including latest events and event content.</p>
+                    <img style = "width:100%" src="assets/img/google/analyze_info.png"><br><br>
+
+                <h3 class="overview_subtitle">Personas</h3>
+                    <p class="project-desc">Finally I built the personas which include main frustrations for users. I referred to them a lot at the next stage of design to make sure my design solves users' challenges.</p>
+                    <img style = "width:100%" src="assets/img/google/personas1.png">
+                    <img style = "width:100%" src="assets/img/google/personas2.png"><br><br>
+                   
+            </div>
+
+
+            <div id="ideation">
+                <h2 class="page-header bT">IDEATION</h2>
+                <hr>
+                <h3 class="overview_subtitle">What method to join?</h3>
+                    <p class="project-desc">For the browsing experience, the current method is mainly offline (activity fair), although a small group of people will use website to browse first. So which could provide a better experience? Online (website or app) or offline (activity fair)?</p>
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">Why we need offline (activity fair) experience?</span>
+                    </p><br>
+                    <img style = "width:100%" src="assets/img/google/offline.png">
+
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">Then why we need online experience?</span>
+                    </p><br>
+                    <img style = "width:100%" src="assets/img/google/online.png">
+
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">So, can we combine the offline and online experience? The advantage of this is:</span>
+                    </p><br>
+                    <img style = "width:100%" src="assets/img/google/online and offline.png"><br><br><br><br>
+
+                <h3 class="overview_subtitle">What method to propose?</h3>
+                    <p class="project-desc">For the <strong>proposing experience</strong>, as summarized in the research, the current method is too complicated. Students need to learn about the process first, go to Student Engagement to set up a portal, and then submit related materials. So can we simplify the process - let users directly submit the materials? Actually we can integrate the process instruction and material submission portal to one platform.<br><br>
+                    Then which platform to use? As users need to fill out a lot of information when proposing, and sometimes need to go back again to refill it. <strong>Website instead of app is more suitable here.</strong> </p> 
+                        <br><br>
+
+                <h3 class="overview_subtitle">Refined experience</h3>
+                    <p class="project-desc">So from the previous analyze, <strong>the activity fair should still be our focus,</strong> but we could use online platform (app) to optimize their offline experience. Different stages of the refined experience are categorized based on the activity fair, and their targets are:</p>
+                    <img style = "width:100%" src="assets/img/google/target.png"><br><br><br><br>
+
+            </div>
+
+
+            <div id="design">
+                <h2 class="page-header bT">DESIGN</h2>
+                <hr>
+                    <p class="project-desc">For the design session, I sticked the key research findings on a whiteboard like current and refined experience and design target (as shown below). I want to make sure my design aligns with users needs and solves their real problems. </p>
+                    <img style = "width:50%" src="assets/img/google/whiteboard.jpeg" data-action="zoom"><br><br>
+                    <p class="project-desc">And also from the previous analyze, browsing and searching mostly happens in the app. While website provides a better proposing experience. In order to make it consistent, design should be provided for both platforms. <strong>However because of time constraints, and app covers mainly usage for browsing and searching, I focused on the app design. But a basic version of website was also provided.</strong></p><br><br>
+                
+                <h3 class="overview_subtitle">Sketching</h3>
+                    <p class="project-desc">So I started sketching! As our target was to utilize app to optimize the activity fair's experience. I started from the pain points of the activity fair and proposing experience, and designed the corresponding features to solve challenges, with keeping in mind the targets for each steps.</p>
+                    <img style = "width:100%" src="assets/img/google/wireframe.png"><br><br><br><br>
+
+
+                <h3 class="overview_subtitle">Design iteration 1</h3>
+                    <p class="project-desc">Right now the design covers the activity fair experience. But if it mainly designed for the activity fair, although it has other functions like managing all events and organizations, I felt it was hard for students to find a strong motivation to open it later. So students may only use it once. </p>
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">So can we apply this not only for the campus fair but also for daily usage?</span>
+                    </p><br>
+                    <p class="project-desc"><strong>I looked back to research. One feedback is that 'Most users will join a lot at the beginning but forget to join the events later'.</strong> It inspired me that one step is actually missing here. </p>
+                    <img style = "width:100%" src="assets/img/google/iteration1.png"><br><br>
+                    
+                    <p class="project-desc">If users can explore some events to join in their daily life, it could help them to join some regular events. Moreover, even some organization that they have not joined before at the activity fair, they could still explore those here. Let the app becomes a way to discover school events! So I focused on the <strong>'event'</strong> and made the following refinements:</p>
+                    <h4 class="mini-title">Change 1: Reconsider the navigation bar</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_1.png" data-action="zoom"><br>
+                    <h4 class="mini-title">Change 2: To suit more to daily life, focusing on events.</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_2.png" data-action="zoom"><br>
+                    <h4 class="mini-title">Change 3: Event notification</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_3.png" data-action="zoom"><br><br><br><br>
+
+
+
+
+               <!-- <h3 class="overview_subtitle">NAVIGATION BAR</h3>
+                    <p class="project-desc">As the main target is activity fair, <strong>one tab 'explore' is specifically designed for the activity fair</strong>, which including let users quickly browse and keep track of interested organizations. <strong>Another tab 'saved' is mainly for managing all organizations.</strong> Apart from this, the most important needs from the research is 'event' information. That's why in the 'saved' tab, users also can manage all events they gonna join.<br></p><br>
+                    <img style = "width:100%" src="assets/img/google/navigation bar1.png" data-action="zoom"><br><br>
+                    
+                    <p class="project-desc">As organization has 'explore' and 'manage', but for events, it only has 'manage'. It inspires me to think: do we need 'explore event' or not? Actually it is especially useful for the daily usage.
+                    <p class="left-vertical-line margin-top-2">
+                        <span class="key-word">So can we apply this not only for the campus fair but also for daily usage?</span>
+                    </p>
+
+                    <p class="project-desc"><strong>I looked back to research. One feedback is that 'Most users will join a lot at the beginning but forget to join the events later'.</strong> Exploring events can perfectly solve this pain point. Users can explore some events to join. Even some organization that they have not joined yet. <strong>So it came to the second alternative: design for daily life but it should support the activity fair.</strong>.</p><br>
+                    <img style = "width:100%" src="assets/img/google/navigation bar2.png" data-action="zoom"><br><br><br><br>
+
+-->
+
+                <h3 class="overview_subtitle">Wireframe</h3>
+                    <p class="project-desc">Now we covered all their experiences not only for the activity fair, but also for daily usage. In order to conduct a feedback session to identify potential issues, I drew a complete wireframe with details inside to clarify the whole flow.</p>
+                    <img style = "width:100%" src="assets/img/google/wireframe1.png" data-action="zoom">
+                    <img style = "width:100%" src="assets/img/google/wireframe2.png" data-action="zoom"><br><br><br><br>
+                    <img style = "width:100%" src="assets/img/google/wireframe3.png" data-action="zoom"><br>
+                    <img style = "width:100%" src="assets/img/google/wireframe4.png" data-action="zoom"><br><br>
+
+
+                    <p class="project-desc">The web version of corresponding functions is as below:</p>
+                    <img style = "width:100%" src="assets/img/google/wireframe_web.png" data-action="zoom"><br><br><br><br>
+
+               <!-- <h3 class="overview_subtitle">DESIGN ITERATION 1</h3>
+                    <img style = "width:100%" src="assets/img/google/iteration1.png" data-action="zoom"><br>
+                    <p class="project-desc">Right now our mainly focus is the activity fair. But when I looked back to the summarize of current browse experience, I found the experience of welcome event to the regular events is missing here. That's when I thought:   
+                        <p class="left-vertical-line margin-top-2">
+                            <span class="key-word">How can we apply this not only for the campus fair but for daily usage?</span>
+                        </p>
+                    </p><br><br><br>
+                    <h4 class="mini-title">Change 1: Reconsider the navigation bar</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_1.png" data-action="zoom"><br>
+                    <h4 class="mini-title">Change 2: To suit more to daily life, focusing on events.</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_2.png" data-action="zoom"><br>
+                    <h4 class="mini-title">Change 3: Event notification</h4>
+                        <img style = "width:100%" src="assets/img/google/iteration1_3.png" data-action="zoom"><br><br><br><br>
+-->
+
+                <h3 class="overview_subtitle">Design iteration 2</h3>
+                    <p class="project-desc">I conducted feedback session for 3 users. I simply showed them my wireframes and walked through the user flow to see if there was any problem. Based on the feedback, I identified 2 main issues:</p><br>
+
+                    <p class="project-desc">1. (1) <strong>'Everytime I look at it, the order may change. It's wierd'.</strong> Also the order is generated based on current location, and 'the accuracy of location may be pretty low.'<br>
+                        (2) <strong>'Except from the booth number, I cannot feel an activity fair is ongoing.'</strong></p><br>
+                    <img style = "width:100%" src="assets/img/google/iteration2_1.png" data-action="zoom"><br><br><br><br>
+
+                    <p class="project-desc"><strong>2.'Just from the design, I didn't realize the proposing process is so complicate.'</strong></p><br>
+                    <img style = "width:100%" src="assets/img/google/iteration2_2.png" data-action="zoom">
+                    <img style = "width:100%" src="assets/img/google/iteration2_22.png"><br><br><br><br>
+
+                <h3 class="overview_subtitle">Visual design</h3>
+                    <p class="project-desc">When deciding the visual style of the system, I kept in mind of the target user (new student) and the context (campus) and drew the mood board. Two keywords are summarized - youthful and modern.<br><br> 
+                    <img style = "width:100%" src="assets/img/google/visual design.png" data-action="zoom"><br><br><br>
+
+                <h3 class="overview_subtitle">Hifi design</h3>
+                    <p class="project-desc">Because of the time constraints, <strong>I only drew the hifi of browsing and exploring experience on the app.</strong> The website version and proposing experience on the app are shown with the low fidelity design below.</p>
+
+
+            </div>   
+        </div>
+    </div>
+    <img style = "width:100%" src="assets/img/google/user flow1.png">
+    <img style = "width:100%" src="assets/img/google/user flow2.png"><br><br><br>
+    <img style = "width:100%" src="assets/img/google/user flow others.png">
+
+
+    <div id="project-main">
+        <div class="project-narrow-content" >
+
+            <div id="future step">
+                <h2 class="page-header bT">Future steps</h2>
+                <hr>
+                    <h3 class="overview_subtitle">Cross-Platform Adaptation</h3>
+                    <p class="project-desc">The proposed experience is cross-platform, in which browsing and searching mostly happens on the app, while website provide a better proposing experience. But due to the time constraints, I mainly focus on the app design and website proposing design. More details of website design should be considered later.</p>
+
+                    <h3 class="overview_subtitle">Further Cooperation with Student Engagement</h3>
+                    <p class="project-desc">For the proposing experience, although I’ve tried to optimize it to make it shorter, it still needs to negotiate with Student Engagement later, like revising the proposal and presenting to the committee. So it’s still the first step! More deeper research can be conducted with Student Engagement together to optimize the whole proposing flow.</p>
+
+                    <h3 class="overview_subtitle">Task-based Usability Testing</h3>
+                    <p class="project-desc">Due to the time constraints, I only conducted 3 feedback session to walk them through. But I didn’t have time to evaluate it using task-based usability testing. Iteration never ends!</p><br><br><br><br><br>
+
+                    <p class="project-desc">Wowwww! You make it! Thanks for reading through all the process patiently! Actually this is my first design challenge. At first, I was kind of frustrated. The solution I brought up can only solve part of the problem but unable to polish it to perfection feels really bad! But later when I try to think broader and broader: from mainly focusing on website / app, to integrating the online and offline experience, to applying it not only for activity fair but for daily usage. I realize every problem could find its potential! We just need to think bold with keeping in mind every step has intentional decision making. However, I still feel there is a lot of things I could improve. Mostly when I faced with a challenge, one idea always directly come to mind. But if I have time, I should provide more design alternatives, even for some small details. Anyway, improving never ends! Thanks again and hope to hear from your feedback :)</p><br><br><br> 
+                
+            </div><br><br>
+        </div>
+    </div>
+
+
+
+    <div class="bottom-nav">
+        <div class="bottom-nav-a nav-left">
+            <a href="Tencent.html" class="nav-active">NEXT PROJECT: TENCENT INTERNSHIP</a>
+        </div>
+        <div class="bottom-nav-a nav-right">
+            <a href="InfoNice.html" class="nav-active">NEXT PROJECT: MICROSOFT INTERNSHIP</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/transition.js"></script>
+<script src="assets/js/project.js"></script>
+<script src="assets/js/zoom.js"></script>
+</html>
+

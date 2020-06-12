@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
+        <script type="text/javascript">
+            window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+              heap.load("3026647544");
+        </script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-128514351-1');
+        </script>
+<title>Finger Proximity - Projects</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/project.css">
+<link rel="stylesheet" href="assets/css/zoom.css">
+<style>
+    .top-img, .bottom-nav, .select:before { background-color:#FAAB73; }
+    .float-nav { background-color:rgba(250, 171, 115, 0.9); }
+    .select { color: #FAAB73 !important; }
+    @media screen and (max-width: 480px) { .bottom-nav > .nav-left { background: #7481E5; } .bottom-nav > .nav-right { background: #71CBE2;}}
+</style>
+</head>
+<body>
+
+<div id="project-page">
+    <div class="top-nav">
+        <a href="index.html"><div class="logo"></div></a>
+        <div class="nav">
+            <a href="index.html#first" class="nav-active">WORK</a>
+            <a href="about.html">ABOUT</a>
+            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
+        </div>
+    </div>
+    <div class="float-nav"></div>
+
+    <span class="project-nav-toggle"><i></i></span>
+
+    <div id="project-main">
+            <div class="top-img" style="background-image:url(assets/img/finger/overview.png);"></div>
+            <div class="project-narrow-content" >
+                <div id="Overview">
+
+                    <h2 class="page-header">BACKGROUND</h2> 
+                    <hr>
+                        <p class="project-desc">​The interaction of keyboards and touchscreens requires efforts and attention. Considering the convenient and accessible wearable input, we introduce Gesture Detection, a novel thumb-mounted sensing solution to enable eyes-free interactions using one handed input technologies.<br></p>
+                   <!-- <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h3 class="overview_subtitle">MY ROLE</h3>
+                                <h4 class="mini-title">Design</h4>
+                                    <p class="project-desc">​Refined the physical ring prototype with four proximity sensors. Designed the interaction scenario it could be used.</p>
+                                <h4 class="mini-title">Algorithm</h4>
+                                    <p class="project-desc">​Developing a novel method using machine learning algorithm for touch detection.</p>
+                                <h4 class="mini-title">User Study</h4>
+                                    <p class="project-desc">​Conducted user study to evaluate the accuracy of the whole system. </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <h3 class="overview_subtitle">DURATION</h3>
+                                <p class="project-desc">Nov 2017 - Present @ Georgia Tech</p>
+                            <h3 class="overview_subtitle">METHODS AND TOOLS</h3>
+                                <p class="project-desc">Hardware Design, 3D Printing, Proximity Sensor, Fusion 360, Arduino, Java</p>
+                        </div>
+-->
+
+                </div>
+                
+                <div id="Design">
+                    <h2 class="page-header">HARDWARE DESIGN</h2> 
+                    <hr>
+                    <p class="project-desc">Finger Proximity has two main parts of the hardware: A ring and 4 proximity sensors. The distance figures received from sensors will be relayed to the computer for data processing.</p>
+                    <img style="width:100%" src="assets/img/finger/hardware design.png" data-action="zoom">
+                    <h2 class="page-header">RING DESIGN</h2> 
+                    <hr>
+                        <p class="project-desc">For different hand poses, we want to recognize it by four distance figures collected from four proximity sensors. So the goal is to design a thumb-mounted ring with four proximity sensors and maximum the difference between four figures, that is try to differentiate the locations of the four proximity sensors.</p>
+                        <img style="width:30%" src="assets/img/finger/Ring Design.png" data-action="zoom">
+                </div>
+                       
+
+                <div id="Scenario">
+                    <h2 class="page-header">SCENARIO</h2>
+                    <hr>
+                    <p class="project-desc">Due to the fast and high accurate of the current method, it can be applied to T9 Text Input<br>
+                        - The user can note numbers down without social inappropriateness.<br>
+                        <img style="width:100%" src="assets/img/finger/scenario1.png" data-action="zoom">
+                        - Play a game like Play-Snake by using sign language only.<br>
+                        <img style="width:100%" src="assets/img/finger/scenario2.png" data-action="zoom"></p>
+                </div>
+
+                <div id="User Study">
+                    <h2 class="page-header">USER STUDY</h2>
+                    <hr>
+                    <p class="project-desc">I implemented user study interface where the real-time classification results were given and conducted user study to evaluate the accuracy of the whole system. The final accuracy is 97% - 98%.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <div class="bottom-nav-a nav-left">
+                <a href="InfNote.html" class="nav-active">PREVIOUS PROJECT: INFNOTE</a>
+            </div>
+            <div class="bottom-nav-a nav-right">
+            <a href="about.html" class="nav-active">NEXT: ABOUT ME</a>
+        </div>
+        </div>
+
+</div>
+
+</body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/transition.js"></script>
+<script src="assets/js/project.js"></script>
+<script src="assets/js/zoom.js"></script>
+</html>
+
