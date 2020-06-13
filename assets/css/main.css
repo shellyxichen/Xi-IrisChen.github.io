@@ -10,6 +10,13 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+a:active{
+	text-decoration: none;
 }
 
 .p-center-wrapper {
@@ -104,7 +111,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .card-title-block {
 	padding-bottom: 250px;
-	width: 100%
+	width: 100%;
 	position: relative;
 	z-index: 1;
 	display: block;
@@ -113,6 +120,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 #continuum {
 	background-color: #ffffff;
+	background-image: url(../img/main/socialeyes.png); 
 }
 #continuum h5{
 	color: #000000;
@@ -120,13 +128,20 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #continuum h4{
 	color: #000000;
 }
-
 #continuum:hover{
-	background-color: #ffffff;
+	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top,#ECE9E6, #ffffff);
 }
+/*#continuum:hover h5{
+	color: #ffffff;
+}
+#continuum:hover h4{
+	color: #ffffff;
+}
+*/
 
 #socialeyes {
 	background-color: #000000;
+	background-image: url(../img/main/socialeyes.png); 
 }
 #socialeyes h5{
 	color: #ffffff;
@@ -134,9 +149,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #socialeyes h4{
 	color: #ffffff;
 }
+#socialeyes:hover{
+	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #000000, #434343);
+}
+
 
 #vinyl {
 	background-color: #000000;
+	background-image: url(../img/main/socialeyes.png); 
 }
 #vinyl h5{
 	color: #ffffff;
@@ -144,9 +164,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #vinyl h4{
 	color: #ffffff;
 }
+#vinyl:hover{
+	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #03001e, #7303c0, #ec38bc, #fdeff9);
+}
+
 
 #tencent {
 	background-color: #ffffff;
+	background-image: url(../img/main/tencent.png); 
 }
 #tencent h5{
 	color: #000000;
@@ -154,9 +179,20 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #tencent h4{
 	color: #000000;
 }
+#tencent:hover{
+	background-image: url(../img/main/tencent.png), linear-gradient(to right top, #1488CC, #2B32B2);
+}
+#tencent:hover h5{
+	color: #ffffff;
+}
+#tencent:hover h4{
+	color: #ffffff;
+}
+
 
 #associatetasking {
 	background-color: #ffffff;
+	background-image: url(../img/main/homedepot.png); 
 }
 #associatetasking h5{
 	color: #000000;
@@ -164,9 +200,23 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #associatetasking h4{
 	color: #000000;
 }
+#associatetasking:hover {
+	background-image: #ffffff;
+}
+#associatetasking:hover{
+	background-image: url(../img/main/homedepot.png), linear-gradient(to right top, #f5af19, #f12711);
+}
+#associatetasking:hover h5{
+	color: #fff;
+}
+#associatetasking:hover h4{
+	color: #fff;
+}
+
 
 #nextfornest {
 	background-color: #000000;
+	background-image: url(../img/main/nest.png); 
 }
 #nextfornest h5{
 	color: #ffffff;
@@ -174,9 +224,13 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #nextfornest h4{
 	color: #ffffff;
 }
+#nextfornest:hover{
+	background-image: url(../img/main/nest.png), linear-gradient(to right top, #ff00cc, #333399);
+}
 
 #align {
 	background-color: #000000;
+	background-image: url(../img/main/align.png); 
 }
 #align h5{
 	color: #ffffff;
@@ -186,11 +240,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 #align:hover{
-	background-color: linear-gradient(red, yellow);
+	background-image: url(../img/main/align.png), linear-gradient(to right top, #01e3d0, #198dc9);
 }
 
 #microsoft {
 	background-color: #ffffff;
+	background-image: url(../img/main/microsoft.png); 
 }
 #microsoft h5{
 	color: #000000;
@@ -198,8 +253,15 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #microsoft h4{
 	color: #000000;
 }
-
-
+#microsoft:hover{
+	background-image: url(../img/main/microsoft.png), linear-gradient(to right top, #232526, #414345); 
+}
+#microsoft:hover h5{
+	color: #ffffff;
+}
+#microsoft:hover h4{
+	color: #ffffff;
+}
 
 
 /*about*/
