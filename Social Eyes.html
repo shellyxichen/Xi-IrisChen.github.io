@@ -22,9 +22,9 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/project_socialeyes.css">
 <link rel="stylesheet" href="assets/css/zoom.css">
+<link rel="stylesheet" href="assets/css/aos.css">
 <style>
     .bottom-nav { background-color:#ffffff; }
-    .float-nav { background-color:rgba(255, 255, 255, 0.9); }
     .select { color: #000000 !important; }
     .left-vertical-line {border-left-color: #000000;} 
     .select:before  {background: #000000;}
@@ -36,13 +36,20 @@
 </head>
 
 <body>
+
+<div class="spinner-wrapper">
+  <div class="p-center-wrapper ">
+    <img class="loader-image" src="assets/img/main/infinity-loader.gif">
+  </div>
+</div>
+
+
 <div id="project-page">
     <div class="top-nav">
-        <a href="index.html"><div class="logo_dark"></div></a>
-        <div class="nav_dark">
+        <a href="index.html"><div class="logo"></div></a>
+        <div class="nav">
             <a href="index.html#third" class="nav-active">WORK</a>
             <a href="about.html">ABOUT</a>
-            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
         </div>
     </div>
     <div class="float-nav"></div>
@@ -288,17 +295,45 @@
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <div class="bottom-nav-a-white nav-right">
+    <div class="bottom-nav col-centered">
+        <div class="row no-gutters">
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="home depot.html">
+            <div class="bottom-nav-block-left" id="continuum-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Previous
+                    </h5>
+                    <h4>
+                        Continuum
+                    </h4>
+                </div>
+            </div>
+          </a>
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="home depot.html">
+            <div class="bottom-nav-block-right vinyl-nav" id="vinyl-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Next
+                    </h5>
+                    <h4>
+                        Vinyl
+                    </h4>
+                </div>
+            </div>
+          </a>
+<!--         <div class="bottom-nav-a-white nav-right">
             <a href="home depot.html" class="nav-active">NEXT PROJECT: ASSOCIATE TASKING</a>
-        </div>
+        </div> -->
     </div>
 </div>
 </body>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/transition.js"></script>
+<script src="assets/js/main.js"></script>
 <script src="assets/js/project.js"></script>
 <script src="assets/js/zoom.js"></script>
+<script src="assets/js/aos.js"></script>
+
 
 </html>
 

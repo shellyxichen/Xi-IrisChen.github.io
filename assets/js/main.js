@@ -4,23 +4,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-// $(document).ready(function(){
-
-// 	const mq = window.matchMedia( "(min-width: 991px)" );
-
-// 	$( window ).on( "load", function() {
-// 	    preloaderFadeOutTime = 5000;
-// 	    var preloader = $('.spinner-wrapper');
-// 	    preloader.animate({
-// 	      up:'40px',
-// 	      opacity:0
-// 	    },preloaderFadeOutTime);
-// 	    preloader.css("visibility","hidden");
-// 	    fadeOut(preloaderFadeOutTime);
-// 	    AOS.init();
-// 	  });
-// });
-
 $(document).ready(function(){
 
 	const mq = window.matchMedia( "(min-width: 991px)" );
@@ -34,6 +17,7 @@ $(document).ready(function(){
 	    preloader = $('.spinner-wrapper');
 	    loadNow(1);
 	    AOS.init();
+	    // console.log("loading");
 	 });
 
 
@@ -93,36 +77,3 @@ $(document).ready(function(){
 	}
 
 });
-
-
-
-
-
-// var loader;
-// var flag = 0;
-
-// function loadNow(opacity) {
-//     if (opacity <= 0) {
-//         displayContent();
-//     } else {
-//     	if(flag == 0)
-//     		window.setTimeout(function(){
-//     			flag = 1;
-
-//     		})
-//         loader.style.opacity = opacity;
-//         window.setTimeout(function() {
-//             loadNow(opacity - 0.9);
-//         }, 2000);
-//     }
-// }
-
-// function displayContent() {
-//     loader.style.display = 'none';
-// }
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     loader = document.getElementById('loader');
-
-//     loadNow(1);
-// });

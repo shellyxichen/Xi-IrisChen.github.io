@@ -23,6 +23,11 @@ $(function(){
         setTimeout(()=> $(".sub").removeClass("select"),10);
     });
 
+    $( window ).on( "load", function() {
+        // console.log("load");
+        $('.float-nav').addClass('float-nav-hide');
+    });
+
     $(window).on('scroll',function(e){
         var whs = $(window).scrollTop();
         if(win_w>415){
@@ -38,13 +43,14 @@ $(function(){
         }
         toggleSelect(whs);
 
-        if( whs >= current_top ){ //向下滑动
+        if( whs >= current_top ){ //scroll down
             if (!$('.float-nav').hasClass('float-nav-hide')) {
                 $('.float-nav').addClass('float-nav-hide');
             }
             current_top = whs;
-        }else{
+        }else{ //scroll up
             if ($('.float-nav').hasClass('float-nav-hide')) {
+                // console.log("scroll up");
                 $('.float-nav').removeClass('float-nav-hide');
             }
             current_top = whs;

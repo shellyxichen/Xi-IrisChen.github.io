@@ -43,6 +43,10 @@ a:focus{
 .col-side {
   padding-left: 80px
 }
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
 
 .button {
 	position:relative;
@@ -314,6 +318,7 @@ a:focus{
 }
 #socialeyes:hover{
 	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #000000, #434343);
+	transition: all .5s ease;
 }
 
 
@@ -329,6 +334,7 @@ a:focus{
 }
 #vinyl:hover{
 	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #fdeff9, #ec38bc, #7303c0);
+	transition: all .5s ease;
 }
 
 
@@ -344,6 +350,7 @@ a:focus{
 }
 #tencent:hover{
 	background-image: url(../img/main/tencent.png), linear-gradient(to right top, #1488CC, #2B32B2);
+	transition: all .5s ease;
 }
 #tencent:hover h5{
 	color: #ffffff;
@@ -365,15 +372,19 @@ a:focus{
 }
 #associatetasking:hover {
 	background-image: #ffffff;
+	transition: all .5s ease;
 }
 #associatetasking:hover{
 	background-image: url(../img/main/homedepot.png), linear-gradient(to right top, #f5af19, #f12711);
+	transition: all .5s ease;
 }
 #associatetasking:hover h5{
 	color: #fff;
+	transition: all .5s ease;
 }
 #associatetasking:hover h4{
 	color: #fff;
+	transition: all .5s ease;
 }
 
 
@@ -389,6 +400,7 @@ a:focus{
 }
 #nextfornest:hover{
 	background-image: url(../img/main/nest.png), linear-gradient(to right top, #ff00cc, #333399);
+	transition: all .5s ease;
 }
 
 #align {
@@ -404,6 +416,7 @@ a:focus{
 
 #align:hover{
 	background-image: url(../img/main/align.png), linear-gradient(to right top, #01e3d0, #198dc9);
+	transition: all .5s ease;
 }
 
 #microsoft {
@@ -418,12 +431,15 @@ a:focus{
 }
 #microsoft:hover{
 	background-image: url(../img/main/microsoft.png), linear-gradient(to right top, #232526, #414345); 
+	transition: all .5s ease;
 }
 #microsoft:hover h5{
 	color: #ffffff;
+	transition: all .5s ease;
 }
 #microsoft:hover h4{
 	color: #ffffff;
+	transition: all .5s ease;
 }
 
 
@@ -447,9 +463,10 @@ a:focus{
 /*Different screen size*/
 
 .portfolio-title {
-	font-family: proxima-nova, sans-serif;
+	/*font-family: proxima-nova-extra-condensed, sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
-	font-weight: 700;
+	font-weight: 900;
 	font-size: 60px;
 	text-align: center;
 	padding-top: 15vh;
@@ -457,7 +474,8 @@ a:focus{
 }
 
 .portfolio-subtitle {
-	font-family: proxima-nova, sans-serif;
+	/*font-family: proxima-nova, sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 700;
 	font-size: 20px;
@@ -493,22 +511,35 @@ a:focus{
 	font-size:12px;
 	text-transform: uppercase;
 	letter-spacing: .2em;
-	opacity: 50%
-	/*-webkit-font-smoothing:antialiased;*/
+	opacity: 50%;
+	transition: all .5s ease;
+	-webkit-font-smoothing:antialiased;
 }
-
 .card-subtitle {
-	font-family: proxima-nova, sans-serif;
+	font-family: 'Montserrat', sans-serif;
+	/*font-family: proxima-nova, sans-serif;*/
 	font-style: normal;
 	font-weight: 700;
 	font-size: 30px;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	transition: all .5s ease;
 }
+
+/*.card-block:hover .card-title{
+	font-size: 13px;
+	transition: all .5s ease;
+}
+.card-block:hover .card-subtitle{
+	font-size: 31px;
+	transition: all .5s ease;
+}*/
+
 
 
 .about-text{
-	font-family: proxima-nova, sans-serif;
+	/*font-family: proxima-nova, sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size:15px;
@@ -520,20 +551,23 @@ a:focus{
 }
 
 .quote {
-	font-family: proxima-nova, sans-serif;
+	/*font-family: proxima-nova, sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
-	font-weight: 700;
+	font-weight: 900;
 	font-size: 45px;
 	margin-bottom: 3vh;
 	line-height: 0.85;
 }
 
 .footer-text{
-	font-family: proxima-nova, sans-serif;
+	/*font-family: proxima-nova, sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 500;
 	font-size:15px;
 	color: #000;
+	/*color: rgba(0,0,0, 0.5);*/
 	line-height: 1.8;
 	text-align: center;
 }
@@ -553,7 +587,11 @@ a:focus{
 }
 
 .footer-icons a{
-	color: #000;
+	/*color: #000;*/
+	color: rgba(0,0,0, 0.5);
+}
+.footer-icons a:hover{
+	color: rgba(0,0,0, 1);
 }
 
 .footer-icons i {
