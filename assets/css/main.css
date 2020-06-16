@@ -11,6 +11,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	font: inherit;
 	vertical-align: baseline;
 	text-decoration: none;
+	scroll-behavior: smooth;
 }
 a:hover{
 	text-decoration: none;
@@ -132,7 +133,7 @@ a:focus{
 	width:80px;
 	height:20px;
 	margin:auto;
-	animation:bounce 3s infinite ease-in-out
+	animation:bounce 3s infinite ease-in-out;
 }
 .link-bottom:after,.link-bottom:before{
 	content:'';
@@ -143,8 +144,10 @@ a:focus{
 	background: #fff;
 	opacity: 50%;
 	top:40%;
-	left:50%
+	left:50%;
+	transition: all .5s ease;
 }
+
 .link-bottom:before{
 	margin-left:-38px;
 	-webkit-transform:rotate(25deg);
@@ -155,9 +158,25 @@ a:focus{
 	-webkit-transform:rotate(-25deg);
 	transform:rotate(-25deg)
 }
+
+.link-bottom:hover:after, .link-bottom:hover:before{
+	background: #fff;
+	opacity: 100%;
+	width: 50px;
+	/*stroke-width: 4;*/
+	transition: all .5s ease;
+}
+.link-bottom:hover:after{
+	margin-left: -2px;
+}
+.link-bottom:hover:before{
+	margin-left: -45px;
+}
+
+
 @keyframes bounce{
 	0%,100%{transform:translate3d(0,0,0)}
-	40%{transform:translate3d(0,20%,0)}
+	40%{transform:translate3d(0,40%,0)}
 }
 
 .u-ir{
@@ -433,11 +452,18 @@ a:focus{
 	text-transform: uppercase;
 	letter-spacing: .2em;
 	color:#fff;
-	opacity: 50%
+	opacity: 50%;
+	transition: all .5s ease;
 	/*-webkit-font-smoothing:antialiased;*/
 }
 .nav-title a:not(:last-child){
 	margin-right:1.5em
+}
+
+.nav-title a:hover{
+	opacity: 100%;
+	font-size: 14px;
+	transition: all .5s ease;
 }
 
 

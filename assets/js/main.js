@@ -26,14 +26,50 @@ $(document).ready(function(){
 	const mq = window.matchMedia( "(min-width: 991px)" );
 	var preloader;
 	var preloaderShowUpTime = 2000;
-	var preloaderFadeOutTime = 50;
+	var preloaderFadeOutTime = 30;
 	var flag;
 
 	$( window ).on( "load", function() {
 	    flag = 0;
 	    preloader = $('.spinner-wrapper');
 	    loadNow(1);
+	    AOS.init();
 	 });
+
+
+	$(window).scroll(function(){
+
+	    $(".scroll-disappear").css("opacity", 1 - $(window).scrollTop() / 500);
+	    $(".u-ir").css("opacity", 1 - $(window).scrollTop() / 20);
+
+	    $(".highlight").each(function(){
+	    	    if ( $(this).isOnScreenHighlight() ) {
+	            $(this).addClass('shown');
+	    	        } else {
+	                  $(this).removeClass('shown');
+	    	    }
+	    });
+
+	    $(".highlight-link").each(function(){
+	          if ( $(this).isOnScreenHighlight() ) {
+	                  $(this).css("animation-delay","0s");
+	                  $(this).addClass('shown');
+	              } else {
+	                $(this).removeClass('shown');
+	          }
+	    });
+  	});
+
+
+// Note: infinity gif animation delay time: 2600
+    var infinity = new Image();
+    infinity.src = 'assets/img/main/infinity.gif';
+    infinity.onload = function() {
+        window.setTimeout(function(){
+        	document.getElementById('infinity').src = infinity.src;
+        }, 2600);
+    }
+
 
 	function loadNow(opacity){
 		// console.log(preloader);
