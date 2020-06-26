@@ -1,18 +1,31 @@
 body{
     width: auto;
     height: auto;
-    font-size: 13px;
+    font-size: 15px;
     background: #FFF;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+}
+strong{
+    font-weight: 700;
 }
 body::before{
     display: none;
 }
-h1, h2, h3, h4, h5, h6,strong, b{
+/*h1, h2, h3, h4, h5, h6,strong, b{
     color: #000110;
+}*/
+
+a {
+    transition: all .5s ease;
+    transition: all .5s ease;
 }
 a:hover {
     border-bottom-color: transparent;
-    color:rgb(143, 160, 255)
+    font-weight: 700;
+    transition: all .5s ease;
+    transition: all .5s ease;
 }
 img{
    /* margin: 20px 0;*/
@@ -28,14 +41,34 @@ video{
     display: none;
 }
 
+h1{
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-style: normal;
+    font-weight: 900;
+    font-size: 60px;
+    text-align: center;
+    padding-top: 15vh;
+    margin-bottom: 3vh;
+}
+
 .float-nav { 
     background-color: #000; 
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+#overview {
+    background: #fff;
+    color: #000;
+}
+
+#research {
+    background: #000;
+    color: #fff;
+}
+
 .overview-table {
     margin: 0 auto;
-    width: 55%;
+    width: 30%;
 }
 .overview-table tbody tr {
     background: none !important;
@@ -45,30 +78,12 @@ video{
     padding: 0.55rem 0.75rem;
 }
 
+
 .hidden{
     display: none;
 }
-#project-page {
-    width: 100%;
-    margin: 0 auto;
-}
-#project-main {
-    background: #FAFAFA;
-    padding: 0px;
-    color: #000110;
-}
-.project-narrow-content{
-    padding: 1.8rem 20%;
-}
-@media screen and (max-width: 480px) {
-    .project-narrow-content {
-        padding: 0;
-        padding-top: 325px;
-    }
-}
-.about_content{
-    padding: 1.8rem 5%;
-}
+
+/*float nav*/
 .float-nav-hide {
     opacity: 0 !important;
     top: -80px !important;
@@ -129,22 +144,7 @@ video{
     transition: all .5s ease;
 }
 
-/*.float-nav .nav_dark {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-}
-.float-nav .nav_dark a {
-    color: #6a6a6a;
-    text-decoration: none;
-    border: 0px;
-    font-size: 16px;
-    padding: 0 10px;
-}
-.float-nav .nav_dark a:hover {
-    color: #000000;
-}
-*/
+/*bottom nav*/
 .bottom-nav {
     width: 100%;
     height: 200px;
@@ -235,50 +235,6 @@ video{
     transition: all .5s ease;
 }
 
-/*
-.bottom-nav-a {
-	margin-top: 40px;
-}
-.bottom-nav-a a {
-    position: relative;
-    float: left;
-    list-style: none;
-    font-size: 17px;
-    padding: 0;
-    margin: 0 15px;
-    cursor: pointer;
-	color: #FFF;
-	text-decoration: none;
-	border-bottom: 0px solid #FFF;
-    transition: all 0.1s;
-}
-.bottom-nav-a a:hover {
-	color: #FFF;
-	border-bottom: 3px solid #FFF;
-	transition: all 0.1s;
-}
-
-.bottom-nav-a-white {
-    margin-top: 40px;
-}
-.bottom-nav-a-white a {
-    position: relative;
-    float: left;
-    list-style: none;
-    font-size: 17px;
-    padding: 0;
-    margin: 0 15px;
-    cursor: pointer;
-    color: #000;
-    text-decoration: none;
-    border-bottom: 0px solid #000;
-    transition: all 0.1s;
-}
-
-.bottom-nav-a-white a:hover {
-    border-bottom: 3px solid #000;
-    transition: all 0.1s;
-}*/
 @media screen and (max-width: 480px) {
     .bottom-nav {
         height: auto;
@@ -358,53 +314,6 @@ ul.row {
     border: 1px solid #DDD;
 }
 
-.project-aside {
-    position: fixed;
-    margin-left: -300px;
-    height: 100%;
-    z-index: 9;
-    display: table;
-    opacity: 0;
-    transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
-}
-.project-aside-float {
-    margin-left: 20px;
-    transition: all 1s;
-    opacity: 1;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
-}
-.project-aside-container {
-    display: table-cell;
-    vertical-align: middle;
-}
-.project-main-menu li {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-.project-main-menu li a{
-    border-bottom: none;
-    font-family: aktiv-grotesk,Helvetica,sans-serif;
-    /*font-weight: 300;*/
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    color:#000;
-    /*opacity: 50%;*/
-    /*transition: all .5s ease;*/
-}
-/*.project-main-menu li a:hover, a:focus{
-    opacity: 1;
-    font-weight: 700;
-    transition: all .5s ease;
-}
-
-*/
 
 .back-btn{
     width: 100%;
@@ -810,7 +719,7 @@ p.image-desc {
     background-repeat: no-repeat;
     background-size: contain;
     background-position-x: center;
-    background-position-y: 60px;
+/*    background-position-y: 60px;*/
 }
 @media screen and (max-width: 480px) {
     .top-img {
