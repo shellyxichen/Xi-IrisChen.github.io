@@ -51,6 +51,15 @@ h1{
     margin-bottom: 3vh;
 }
 
+mark{
+    background-color: #000;
+    color: #fff;
+}
+
+.p-center{
+    text-align: center;
+}
+
 .float-nav { 
     background-color: #000; 
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -62,6 +71,16 @@ h1{
 }
 
 #research {
+    background: #000;
+    color: #fff;
+}
+
+#iteration{
+    background: #fff;
+    color: #000;
+}
+
+#final{
     background: #000;
     color: #fff;
 }
@@ -557,7 +576,12 @@ a.btn-warning{
 
 iframe {
     width: 100%;
+    height: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: block;
     margin: 0 auto;
+    
 }
 
 iframe.prototype{
