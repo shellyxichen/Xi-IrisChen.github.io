@@ -233,20 +233,20 @@ mark{
     transition: all .5s ease;
 }
 
-#continuum-nav:hover{
+#socialeyes-nav:hover{
     background: linear-gradient(to right top,#ECE9E6, #ffffff);
     transition: all .5s ease;
 }
-#continuum-nav:hover h4{
+#socialeyes-nav:hover h4{
     color: #000;
     transition: all .5s ease;
 }
-#continuum-nav:hover h5{
+#socialeyes-nav:hover h5{
     color: #000;
     transition: all .5s ease;
 }
 
-#vinyl-nav:hover{
+/*#vinyl-nav:hover{
     background: linear-gradient(to right top, #fdeff9, #ec38bc, #7303c0);
     transition: all .5s ease;
 }
@@ -257,7 +257,7 @@ mark{
 #vinyl-nav:hover h5{
     color: #fff;
     transition: all .5s ease;
-}
+}*/
 
 @media screen and (max-width: 480px) {
     .bottom-nav {
