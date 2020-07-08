@@ -31,11 +31,11 @@ $(function(){
     $(window).on('scroll',function(e){
         var whs = $(window).scrollTop();
         if(win_w>415){
-            if ($('.project-narrow-content').offset().top - whs < 0){
-                $(".project-aside").addClass('project-aside-float');
-            } else {
-                $(".project-aside").removeClass('project-aside-float');
-            }
+            // if ($('.project-narrow-content').offset().top - whs < 0){
+            //     $(".project-aside").addClass('project-aside-float');
+            // } else {
+            //     $(".project-aside").removeClass('project-aside-float');
+            // }
             // if($('.top-nav').css('opacity')>0 || whs < 200){
             //     $('.top-nav').css('opacity',(60-whs)/60);
             //     $('.top-nav').show();

@@ -284,7 +284,7 @@ a:focus{
 
 #continuum {
 	background-color: #ffffff;
-	background-image: url(../img/main/socialeyes.png); 
+	background-image: url(../img/main/continuum.png); 
 }
 #continuum h5{
 	color: #000000;
@@ -293,15 +293,15 @@ a:focus{
 	color: #000000;
 }
 #continuum:hover{
-	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top,#ECE9E6, #ffffff);
+	background-image: url(../img/main/continuum.png), linear-gradient(to right top, #000000, #434343);
 }
-/*#continuum:hover h5{
+#continuum:hover h5{
 	color: #ffffff;
 }
 #continuum:hover h4{
 	color: #ffffff;
 }
-*/
+
 
 #socialeyes {
 	background-color: #000000;
@@ -314,9 +314,16 @@ a:focus{
 	color: #ffffff;
 }
 #socialeyes:hover{
-	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #000000, #434343);
+	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top,#ECE9E6, #ffffff);
 	transition: all .5s ease;
 }
+#socialeyes:hover h5{
+	color: #000000;
+}
+#socialeyes:hover h4{
+	color: #000000;
+}
+
 
 
 #vinyl {
