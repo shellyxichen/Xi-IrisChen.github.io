@@ -328,7 +328,7 @@ a:focus{
 
 #vinyl {
 	background-color: #000000;
-	background-image: url(../img/main/socialeyes.png); 
+	background-image: url(../img/main/vinyl.png); 
 }
 #vinyl h5{
 	color: #ffffff;
@@ -337,7 +337,7 @@ a:focus{
 	color: #ffffff;
 }
 #vinyl:hover{
-	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top, #fdeff9, #ec38bc, #7303c0);
+	background-image: url(../img/main/vinyl.png), linear-gradient(to right top, #4A00E0, #8E2DE2);
 	transition: all .5s ease;
 }
 

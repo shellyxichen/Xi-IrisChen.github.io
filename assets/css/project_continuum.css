@@ -83,6 +83,16 @@ mark{
     background: #FFFFFF;
     color: #000110;
 }
+/*Vinyl*/
+#overview_vinyl, #iteration_vinyl, #end_vinyl {
+    background: #fff;
+    color: #000;
+}
+
+#research_vinyl, #final_vinyl {
+    background: #000;
+    color: #fff;
+}
 
 
 
@@ -779,6 +789,17 @@ p.image-desc {
     background-size: contain;
     background-position-x: center;
 /*    background-position-y: 60px;*/
+}
+
+.top-video{
+    position:absolute;
+    left:40%;
+    right:0;
+    top: 0;
+    bottom: 0;
+    /*bottom:30px;*/
+    height: 100%;
+    margin:auto;
 }
 @media screen and (max-width: 480px) {
     .top-img {
