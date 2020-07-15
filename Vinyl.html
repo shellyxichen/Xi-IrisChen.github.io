@@ -55,8 +55,11 @@
     <div class="float-nav"></div>
 
     <header>
-        <div class="top-img" style="background-image:url(assets/img/vinyl/cover.png), linear-gradient(to right bottom,#212039, #212039);"></div> 
-        <img class="top-video" src="assets/img/vinyl/cover.gif">
+        <div class="top-img" style="background-image:url(assets/img/vinyl/cover.png), linear-gradient(to right bottom,#221D39, #221D39);"></div> 
+        <video class="top-video" autoplay="autoplay" loop="loop" muted="muted">
+            <source src="assets/img/vinyl/cover.mp4" />
+        </video>
+        <!-- <img class="top-video" src="assets/img/vinyl/cover.gif"> -->
         <a class="link-bottom u-ir" href="#overview_vinyl"></a>
     </header>
 
@@ -299,7 +302,18 @@
             <br><br><br><br><br><br>
 
 
-            <p class="portfolio-subtitle">Informative.</p><br>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
+                    <p class="portfolio-subtitle">Informative.</p><br>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                    Maximize data-ink ratio: Focus on data, eliminate background.
+                  </p>
+                </div>
+            </div><br><br>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <img class="card_img" style = "width:100%" src="assets/img/vinyl/informative_1.png"><br><br>
@@ -321,6 +335,38 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
+                    <p class="portfolio-subtitle">Information overload.</p><br>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                    Design should be ‘boiled down’ and ‘simplified’.
+                  </p>
+                </div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <img class="card_img" style = "width:100%" src="assets/img/vinyl/info1.png"><br><br>
+                    <p class="p-center" style="padding: 0 15%;">
+                        <strong>Before.</strong><br>
+                        Use default bar view format.
+                    </p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <img class="card_img" style = "width:100%" src="assets/img/vinyl/info2.png"><br><br>
+                    <p class="p-center" style="padding: 0 15%;">
+                        <strong>After.</strong><br>
+                         Faded axises, eliminated numbers, etc to stress more of the key element - bars.
+                    </p>
+                </div>
+            </div>
+            <br><br><br><br><br><br>
+
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
                     <p class="portfolio-subtitle">Interconnective.</p><br>
                     <p>
                       Three main views - artist selection, vinyl view and bar view are interconnected. Once users hover one element in the view, the corresponding elements in other views will be highlighted. 
@@ -334,8 +380,11 @@
                   </p>
                 </div>
             </div><br><br>
-            <img class="card_img" style = "width:100%" src="assets/img/vinyl/interconnective.gif">
-            <br><br><br><br><br><br>
+            
+            <video class="card_img" style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/vinyl/interconnective.mp4" />
+            </video>
+            <br><br><br><br><br><br><br><br><br>
 
         </div>
       </div>
@@ -347,383 +396,121 @@
         </p><br><br>
 
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
-            <p class="portfolio-subtitle">Visualization visual design principles.</p><br>
+            <p class="portfolio-subtitle">Moodboard</p><br>
+            <img style = "width:100%" src="assets/img/vinyl/moodboard.png">
+            <br><br><br><br><br><br>
 
 
-
+            <p class="portfolio-subtitle">Color palette</p><br>
 
         </div>
+        <img style = "width:100%" src="assets/img/vinyl/color.png">
+            <br><br><br><br><br><br>
       </div>
 
 
-
-
-
-
-
-
-
-
-        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">Design scope.</p>     
-                    <p> 
-                       <!--  We decided on system level feature due to limitations listed below for other alternatives. In addition, we want to support in-app level feature as it's especially convenient for sending current app to other devices.
-                        <br><br> -->
-                        <strong>In-app level</strong> (e.g. Spotify)<br>
-                       Pros: <strong>Broader target market</strong> - app builder instead of system builder. Apps have more control for customization. <br>
-                       Cons: Users need to locate the application to continue first which could be troublesome. Hard to access system level data.<br><br>
-
-                       <strong>Third-party level</strong> (e.g. Dropbox)<br>
-                       Pros: Highest <strong>flexibility</strong> - not constrained by apps / systems.<br>
-                       Cons: Will users willing to use one more app to do that? Hard to access system level data.<br><br>
-
-                       <strong>System level</strong> (e.g. Apple Handoff)<br>
-                       Pros: Support <strong>integrated system level decision making</strong> and reduce bias by separate apps.<br>
-                       Cons: Need to tailor for different ecosystems.
-                   </p>
-
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    System level decision making is critical to support transition for the right app, at the right time, on the right device.
-                  </p>
-                </div>
-            </div><br><br><br><br><br><br>
-
-            <p class="portfolio-subtitle">Entry point.</p>
-            <img style = "width:100%" src="assets/img/continuum/entry.png">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <p class="p-center">
-                        <strong>App switcher.</strong><br>
-                        Similar with Apple Handoff<br><br>
-                        Pros: Make sense for receiving the app from another device as it’s also to switch to the app to continue.<br>
-                        Cons: For sending apps to other devices it’s not consistent as it’s device switcher instead of app switcher. Discoverability problem. 
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <p class="p-center">
-                        <strong>Control center.</strong><br><br><br>
-                        Integrated system level control like Airplay / bluetooth.
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <p class="p-center">
-                        <strong>In-app share.</strong><br><br><br>
-                        Useful for sending the current app to other devices.
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <p class="p-center">
-                        <strong>Siri suggestion.</strong><br><br><br>
-                        Useful for receiving the app from another device.
-                    </p>
-                </div>
-            </div>
-
-            <br><br><br><br><br>
-
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">ML-empowered suggestion.</p><br>
-                    <p>
-                        <mark><strong>Why is ML needed?</strong></mark><br>
-                        <strong>“I don’t know that I can switch”</strong> is the top funnel user pain points. We came up with two alternatives and verified needs through concept testing - user initiated switch and system predictive switch. Users highly praised the discoverability by predictive switch and felt it much more intelligent and convenient. But at the same time, it should be as less intrusive as possible. With sending prediction notifications, we need to be <strong>very intentional to make sure it only shows up at the right time, on the right device</strong>. <br><br><br>
-                        
-                        <mark><strong>What if ML goes wrong?</strong></mark><br>
-                        False positive: False positives are where the system incorrectly predicts and pushes a suggesiton. Sometimes users pick up another device to work on a different task rather than continue the task. Sometimes users are just in the middle of something and do not have the intention to switch to another device even more appropriate. Notifications can be really distracting.<br><br>>
-                        False negative:  False negative means the suggestion should show up but not which will not affect users too much as users are still able to accomplish a switch through conventional non-predictive methods. <br><br><br>
-                        
-                        <mark><strong>Deal with false positive: Co-learning and adaptation</strong></mark><br>
-                        Whenever users dismiss or ignore a notification, we put it as the top priority that this scenario will never show up any more. 
-                    </p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Wouldn’t it be great if contextual clues are presented and users can switch with a single click?
-                  </p><br><br>
-
-                  <img  data-aos="fade-up" data-aos-duration="1500" style = "width:100%" src="assets/img/continuum/ML.png">
-                </div>
-            </div><br>
-            <img style = "width:100%" src="assets/img/continuum/predictive_iteration.png"><br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 15%;">
-                        <strong>False positive case 1.</strong><br>
-                        User picks up the phone. He wants to work on a different task rather than continue playing music.
-                    </p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 15%;">
-                        <strong>False positive case 2.</strong><br>
-                        User is in the middle of browsing. Even a laptop is near him and more suitable for deeper actions, he doesn't have the intention to switch.
-                    </p>
-                </div>
-            </div>
-            <br><br><br><br><br><br>
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">Authentication.</p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    What if...?
-                  </p>
-                </div>
-            </div><br><br>
-
-            
-            <mark><strong>What if users send to a public device?</strong></mark><br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img style = "width:100%" src="assets/img/continuum/nonpersonal_iter_1.gif">
-                    <p class="p-center"><strong>Before</strong></p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
-                    <img style = "width:100%" src="assets/img/continuum/nonpersonal_iter_2.gif">
-                    <p class="p-center" style="padding: 0 10%;">
-                        <strong>After.</strong><br>
-                        For non-personal devices, as multiple users may have the access to the device, approval is needed on the targeted device to avoid overwriting. 
-                    </p>
-                </div>
-            </div><br><br><br><br>
-
-
-            <mark><strong>What if users want to add a device to the account?</strong></mark><br>
-            <img style = "width:100%" src="assets/img/continuum/add_device_iter.png"><br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 10%;">
-                        <strong>Before.</strong><br>
-                    </p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 10%;">
-                        <strong>After.</strong><br>
-                        Once added, as all devices can access the device’s information and the device can access all devices’ information as well, users need to be aware of the potential outcome of their actions.
-                    </p>
-                </div>
-            </div>
-            <br><br><br><br>
-
-
-            <mark><strong>What if users want to hold the control of the device?</strong></mark><br>
-            <img style = "width:100%" src="assets/img/continuum/mirror_iter.png"><br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 15%;">
-                        <strong>Before.</strong><br>
-                        Users only have the option to send, the control will hand over to the targeted device once switched.
-                    </p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="p-center" style="padding: 0 15%;">
-                        <strong>After.</strong><br>
-                        Even if users send the current app to another device, users may still want to retain their control on the original device due to the privacy concern.
-                    </p>
-                </div>
-            </div>
-            <br><br><br><br>
-
-            <mark><strong>What if users click the wrong device?</strong></mark><br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img style = "width:100%" src="assets/img/continuum/cancel_iter_1.gif">
-                    <p class="p-center" style="padding: 0 10%;"><strong>Before</strong></p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
-                    <img style = "width:100%" src="assets/img/continuum/cancel_iter_2.gif">
-                    <p class="p-center" style="padding: 0 10%;">
-                        <strong>After.</strong><br>
-                        With a list of devices, it happens when users mistouch the device. Users are always able to cancel the action while switching.
-                    </p>
-                </div>
-            </div><br><br>
-
-
-
-
-
-
-      <br><br><br><br>
-
-    </div>
-
-
-    <div id="final_continuum">
+    <div id="final_vinyl">
         <p class="p-center-wrapper portfolio-title">
           Final design.
         </p><br><br>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">ML-empowered suggestion.</p>
-                    <p><strong>"I don’t know that I can switch"</strong> is the top funnel user pain points. We solve this problem by identifying content that a user may need later and <strong>presenting contextual clues to users at a relevant moment</strong>. We created a prediction algorithm and refined it from user habits to ensure it only shows up at the right time, on the right device. </p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Switch with a single click.
-                  </p>
-                </div>
-            </div><br><br><br>
-
-            <p class="p-center">
-                <strong>"I was listening to music on my computer and I need to go. So I take out my phone and get the suggestion to continue listening."</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/Notif_receive.gif">
-            <p class="p-center">
-                <strong>"I was browsing events near me on my phone and my laptop is aside. So I get the suggestion to switch to laptop and continue browsing."</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/Notif_send.gif">
-            <br><br><br><br><br><br>
-
-
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">Send / Receive.</p>
+                    <p class="portfolio-subtitle">Guideline.</p>
                     <p>
-                        Products vary on where to switch.  <strong>“Should I do it here (original device) or there (targeted devices)”</strong> is one of the confusions users have. We also found users’ preference of where to switch varies in different scenarios. Therefore, we provide the <strong>flexibility to switch on both original device (send) and targeted device (receive)</strong> for easier access.<br><br>
-                        <strong>“Where was I left off”</strong> is the bottom funnel user pain points. We ensure <strong>application states are synced</strong> and the system would jump to where they were directly after opening the application. <br><br>
-                        <strong>“What’s my password again?”</strong> is another barrier. For your own devices, <strong>login credentials will be synced</strong> and users can open a state of an application without needing to put in their login credentials.
+                      Compared to normal websites, visualization systems normally have multivariate dataset which means more complex visual representations and multiple visualization views. Apart from simplifying the dataset and the view, proper guidelines should be provided to reduce the cognitive effort. <br><br>
+                      When you first enter the landing page, you’ll see a quick <strong>tutorial explaining key visual representations</strong>. We also provide a <strong>step by step tutorial</strong> to walk you through the above main actions you can do. But whenever you need help, you can just click <strong>‘how to read this vis’</strong> to get more ideas of main interactions you can do.
                     </p>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                   <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Switch with the interconnected system.
+                    How to read the visualization?
                   </p>
                 </div>
             </div><br><br><br>
-
-            <p class="p-center">
-                <strong> "I was listening to music on my computer and I need to go. So I take out my phone and bring up what I was doing on my computer."</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/Receive.gif">
-            <p class="p-center">
-                <strong>"I was browning events near me on my phone and felt the screen was small. So I send it to my computer."</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/Send.gif">
-
-            <br><br><br><br><br><br>
-
+            <video class="card_img" style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/vinyl/guideline.mp4" />
+            </video>
+            <br><br><br><br><br><br><br><br>
 
 
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">Add a new device.</p>
-                    <p>
-                        When devices in the account can access all information for the purpose of convenience, privacy becomes more important when adding a new device to the account. Both sides of devices need verification, should be notified about potential risks and able to terminate the action throughout the process. 
-                    </p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Transparent about potential outcomes of user actions for privacy consideration.
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <p class="portfolio-subtitle">Artist comparison.</p>
+                  <p>
+                    You could add your favorite artists for comparison. Different colors indicate different artists and you can hover one artist to highlight his / her songs. The main view conveys music attributes for each song. You could always change the axis to see other attributes, or group similar songs. You could click the ‘split view’ to even separate artists into different views - true music DNA. 
                   </p>
-                </div>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  How do Muse and Radiohead differ / similar with each other?
+                </p>
+              </div>
             </div><br><br><br>
-
-            <p class="p-center">
-                <strong> “I want to add my new laptop to my account.”</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/addnew.gif">
-            <br><br><br><br><br><br>
+            <video class="card_img" style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/vinyl/compare_artists.mp4" />
+            </video>
+            <br><br><br><br><br><br><br><br>
 
 
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="portfolio-subtitle">Gesture.</p>
-                    <p>
-                        <strong>“Too many devices to choose from”</strong> is one of the top pain points. Most gestures have discoverability and learnability issues. However, if <strong>clear instructions of what the gesture is and the gesture built in an intuitive manner</strong>, it could speed up processes or perhaps eventually become a standard interaction once familiar to users. We use ‘point to’ as an example to indicate users can point the device to other devices.<br><br>
-                        <strong>Gestures should never be gesture reliant, instead, should serve as an alternative way.</strong> In our case, users could choose the targeted device from the device list or use the pointing gesture.
-
-                    </p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Point to target a device.
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <p class="portfolio-subtitle">Song comparison.</p>
+                  <p>
+                    When you hover over a song you’re interested in, it’ll play the song clip. On the right view of feature distributions, it’ll highlight the bin that contains this song for each song attribute. If you’re interested in more details of this song, you can always drag the song to the bottom to get a song-by-song comparison.  
                   </p>
-                </div>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  How do Supremacy and Survival by Muse differ / similar with each other?
+                </p>
+              </div>
             </div><br><br><br>
+            <video class="card_img" style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/vinyl/compare_songs.mp4" />
+            </video>
+            <br><br><br><br><br><br><br><br>
 
-            <p class="p-center">
-                <strong> “I want to add my new laptop to my account.”</strong><br>
-            </p>
-            <img style = "width:80%" src="assets/img/continuum/target.gif">
-            <br><br><br><br><br><br>
 
-            <p class="portfolio-subtitle">Examples of how Continuum could extend to other devices.</p>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <p class="portfolio-subtitle">Discover new music.</p>
+                  <p>
+                    We calculate music similarity based on music attributes. Whenever you hover over a song, lines will be highlighted and point to other similar songs you might be interested in. 
+                  </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  What are other songs I might be interested in based on what I like?
+                </p>
+              </div>
+            </div><br><br><br>
+            <video class="card_img" style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/vinyl/discover.mp4" />
+            </video>
+            <br><br><br><br><br><br><br><br>
 
-        </div>  <br><br>   
-
-        <img style = "width:100%" src="assets/img/continuum/devices.png">
-        <br><br><br><br><br><br><br><br><br><br><br><br>
+            
     </div>
 
-
-    <div id="end_continuum">
-        <p class="p-center-wrapper portfolio-title">
-          End story.
-        </p><br><br>
-
-        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p>
-                        Sal awakens early today. She opens her eyes and says good morning to Alexa, which is already her daily habit. “Good morning Sal! Do you want to start your day with news as usual?” Alexa says while turning on the light and rolling up the curtain. “Sure!” “Georgia Floyd….” Wait, only 8 mins and dead? Sal is thinking and picking up her phone. The news suggestion is already on her lock screen. She taps to open the news, watches the video and signs deeply. It’s a tough morning. Sal’s thinking.<br><br>
-
-                        Sal then goes out for a run. She’s running quicker day after day and always satisfied with the numbers on her Apple Watch. After the run, she pulls up her phone to see more detailed statistics. Still, the suggestion is already on her lock screen. Sal clicks and quickly analyzes her heart rate and calories burned.<br><br>
-
-                        Sal has a busy schedule today so she quickly replies to some urgent emails on her laptop. The alarm rings and she needs to catch the shuttle bus. She takes out her phone, taps the email suggestion, quickly wraps up the last few sentences, sends the email. <br><br>
-
-                        Sal kicks off the meeting with a presentation. She opens Continuum, points her computer to Apple TV which then shows up on the top of the device list and she taps to mirror her slides. Several colleagues have things to update today. Every time, once the Apple TV approves, slides will be synced seamlessly...<br><br>
-
-                        The meeting almost finished! Sal’s excited as tonight is her book night! She always plans a biweekly book night when she could immerse herself into books without disruption. Sal starts to plan what books to read tonight and compare different books on the phone. A suggestion shows up to switch to the laptop. “Oh, right! It would be much easier to do the comparison on the laptop!” Sal’s thinking. She taps yes. Chrome opens on her laptop...<br><br>
-
-                        Sal heads to bed in the late night. There’s still one more chapter left for Machine of Loving Grace. Sal curls up in bed, picks up her tablet, taps and continues reading. “Such a lovely night” Sal’s thinking...
-                    </p>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                  <p class="quote" data-aos="fade-up" data-aos-duration="1500">
-                    Weiser proposed Sal’s story on how our life will look like with ubiquitous computers around us. <br>
-                    Let’s continue Sal’s story using Continuum...
-                  </p>
-                </div>
-            </div><br><br><br> 
-        </div> 
-
-        <br><br><br><br><br><br><br><br><br>     
-    </div>
 
 
 
     <div class="bottom-nav col-centered">
         <div class="row no-gutters">
-          <a class="col-lg-12 col-md-12 col-sm-12 col-xs-12" href="Social Eyes.html">
-            <div class="bottom-nav-block-left" id="socialeyes-nav">
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="Social Eyes.html">
+            <div class="bottom-nav-block-right" id="socialeyes-nav">
                 <div class="bottom-nav-inblock">
                     <h5>
-                        Next
+                        Previous
                     </h5>
                     <h4>
                         Social Eyes
@@ -731,18 +518,19 @@
                 </div>
             </div>
           </a>
-          <!-- <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="home depot.html">
-            <div class="bottom-nav-block-right vinyl-nav" id="vinyl-nav">
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="Tencent.html">
+            <div class="bottom-nav-block-left" id="tencent-nav">
                 <div class="bottom-nav-inblock">
                     <h5>
                         Next
                     </h5>
                     <h4>
-                        Vinyl
+                        Tencent
                     </h4>
                 </div>
             </div>
-          </a> -->
+          </a>
+          
 <!--         <div class="bottom-nav-a-white nav-right">
             <a href="home depot.html" class="nav-active">NEXT PROJECT: ASSOCIATE TASKING</a>
         </div> -->

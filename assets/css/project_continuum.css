@@ -270,6 +270,7 @@ mark{
     color: #fff;
     transition: all .5s ease;
 }
+
 #socialeyes-nav:hover{
     background: linear-gradient(to right top,#ECE9E6, #ffffff);
     transition: all .5s ease;
@@ -285,7 +286,7 @@ mark{
 
 
 #vinyl-nav:hover{
-    background: linear-gradient(to right top, #fdeff9, #ec38bc, #7303c0);
+    background: linear-gradient(to right top, #4A00E0, #8E2DE2);
     transition: all .5s ease;
 }
 #vinyl-nav:hover h4{
@@ -297,18 +298,72 @@ mark{
     transition: all .5s ease;
 }
 
-/*#vinyl-nav:hover{
-    background: linear-gradient(to right top, #fdeff9, #ec38bc, #7303c0);
+#tencent-nav:hover{
+    background: linear-gradient(to right top, #1488CC, #2B32B2);
     transition: all .5s ease;
 }
-#vinyl-nav:hover h4{
+#tencent-nav:hover h4{
     color: #fff;
     transition: all .5s ease;
 }
-#vinyl-nav:hover h5{
+#tencent-nav:hover h5{
     color: #fff;
     transition: all .5s ease;
-}*/
+}
+
+#associatetasking-nav:hover{
+    background: linear-gradient(to right top, #f5af19, #f12711);
+    transition: all .5s ease;
+}
+#associatetasking-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#associatetasking-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+#nextfornest-nav:hover{
+    background: linear-gradient(to right top, #ff00cc, #333399);
+    transition: all .5s ease;
+}
+#nextfornest-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#nextfornest-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+#align-nav:hover{
+    background: linear-gradient(to right top, #01e3d0, #198dc9);
+    transition: all .5s ease;
+}
+#align-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#align-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+#microsoft-nav:hover{
+    background: linear-gradient(to right top, #232526, #414345);
+    transition: all .5s ease;
+}
+#microsoft-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#microsoft-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+
 
 @media screen and (max-width: 480px) {
     .bottom-nav {
