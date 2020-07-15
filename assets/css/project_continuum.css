@@ -33,6 +33,13 @@ img{
    margin: auto;
 
 }
+
+.card_img{
+    box-shadow: 0 2px 50px rgba(0,0,0,.2);
+    border-color: rgba(117,117,163,.5);
+    border-radius: 30px;
+}
+
 video{
    display: block;
    margin: auto;
@@ -84,13 +91,17 @@ mark{
     color: #000110;
 }
 /*Vinyl*/
-#overview_vinyl, #iteration_vinyl, #end_vinyl {
+#overview_vinyl, #visual_vinyl {
     background: #fff;
     color: #000;
 }
+#research_vinyl{
+    background: #7575A3;
+    color: #fff;
+}
 
-#research_vinyl, #final_vinyl {
-    background: #000;
+#iteration_vinyl, #final_vinyl {
+    background: #212039;
     color: #fff;
 }
 
