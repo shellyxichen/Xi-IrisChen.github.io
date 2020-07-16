@@ -48,12 +48,19 @@ a:focus{
 .button {
 	position:relative;
 	width:25%;
-	height:2.5%;
 	text-align:center;
 	display:table;
 	transition: all .5s ease;
-	background-color:#ffffff;
+	
 	transition: all .5s ease;
+}
+#about-button{
+	background-color:#ffffff;
+	height:2.5%;
+}
+#vinyl-button{
+	background-color: #212039;
+	/*height: 20px;*/
 }
 .button-text {
 	text-decoration:none;
@@ -62,17 +69,36 @@ a:focus{
 	font-size: 12px;
 	text-transform: uppercase;
 	letter-spacing: .2em;
-	color:#000;
 	transition: all .5s ease;
+}
+.proj-button{
+	padding: 15px;
+}
+#about-button-text{
+	color:#000;
+}
+#proj-button-text{
+	color: #fff;
 }
 .button-arrow {
 	margin-left: 10px;
-	color: #000;
 	transition: all .5s ease;
+}
+#about-button-arrow{
+	color: #000;
+}
+#proj-button-arrow{
+	color: #fff;
 }
 .button:hover .button-text{
 	text-decoration: none;
+	
+}
+#about-button:hover #about-button-text{
 	color: #000;
+}
+#vinyl-button:hover #proj-button-text{
+	color: #fff;
 }
 .button:hover{
 	width: 28%;
@@ -82,6 +108,7 @@ a:focus{
 	margin-left: 30px;
 	transition: all .5s ease;
 }
+
 
 
 
