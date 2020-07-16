@@ -332,7 +332,7 @@ a:focus{
 
 #socialeyes {
 	background-color: #000000;
-	background-image: url(../img/main/socialeyes.png); 
+	background-image: url(../img/main/socialeyes1.png); 
 }
 #socialeyes h5{
 	color: #ffffff;
@@ -341,7 +341,7 @@ a:focus{
 	color: #ffffff;
 }
 #socialeyes:hover{
-	background-image: url(../img/main/socialeyes.png), linear-gradient(to right top,#ECE9E6, #ffffff);
+	background-image: url(../img/main/socialeyes2.png), linear-gradient(to right top,#ECE9E6, #ffffff);
 	transition: all .5s ease;
 }
 #socialeyes:hover h5{
