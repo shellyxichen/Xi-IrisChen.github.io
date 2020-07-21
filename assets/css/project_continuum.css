@@ -104,6 +104,17 @@ mark{
     background: #212039;
     color: #fff;
 }
+/*Nest*/
+#overview_nest, #iteration_nest{
+    background: #fff;
+    color: #000;
+}
+
+#research_nest, #final_nest {
+    background: #4D007E;
+    color: #fff;
+}
+
 
 
 
@@ -866,6 +877,17 @@ p.image-desc {
     /*bottom:30px;*/
     height: 100%;
     margin:auto;
+}
+/*Nest*/
+.top-gif{
+    position:absolute;
+    left:50%;
+    right:0;
+    top: 0;
+    bottom: 0;
+    height: 50%;
+    /*bottom:30px;*/
+    margin:auto;   
 }
 @media screen and (max-width: 480px) {
     .top-img {
