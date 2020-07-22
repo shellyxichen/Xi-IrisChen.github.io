@@ -104,6 +104,14 @@ mark{
     background: #212039;
     color: #fff;
 }
+
+/*InsVoice*/
+#insvoice-main{
+    background: #FFFFFF;
+    color: #000110;
+}
+
+
 /*Associate tasking*/
 #overview_thd, #design_thd, #research_thd, #iteration_thd, #evaluation_thd {
     background: #fff;
@@ -316,6 +324,33 @@ mark{
     transition: all .5s ease;
 }
 
+#insvoice-nav:hover{
+    background: linear-gradient(to right top, #fcb045, #fd1d1d, #833ab4);
+    transition: all .5s ease;
+}
+#insvoice-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#insvoice-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+#designchallenge-nav:hover{
+    background: linear-gradient(to right top, #00d2ff, #928DAB);
+    transition: all .5s ease;
+}
+#designchallenge-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#designchallenge-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+
 #tencent-nav:hover{
     background: linear-gradient(to right top, #1488CC, #2B32B2);
     transition: all .5s ease;
@@ -364,6 +399,19 @@ mark{
     transition: all .5s ease;
 }
 #align-nav:hover h5{
+    color: #fff;
+    transition: all .5s ease;
+}
+
+#infnote-nav:hover{
+    background: linear-gradient(to right top, #4e54c8, #8f94fb);
+    transition: all .5s ease;
+}
+#infnote-nav:hover h4{
+    color: #fff;
+    transition: all .5s ease;
+}
+#infnote-nav:hover h5{
     color: #fff;
     transition: all .5s ease;
 }

@@ -20,235 +20,334 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/project.css">
+<!-- <link rel="stylesheet" href="assets/css/project.css"> -->
+<link rel="stylesheet" href="assets/css/project_continuum.css">
 <link rel="stylesheet" href="assets/css/zoom.css">
+<link rel="stylesheet" href="assets/css/aos.css">
 <style>
-    .bottom-nav { background-color:#ffffff; }
-    .float-nav { background-color:rgba(255, 255, 255, 0.9); }
+   .bottom-nav { background-color:#ffffff; }
     .select { color: #000000 !important; }
     .left-vertical-line {border-left-color: #000000;} 
     .select:before  {background: #000000;}
     a:hover {color: #000000;}
     .bottom-nav-a a {color: #000;}
     .bottom-nav-a a:hover {color: #000;}
+    @media screen and (max-width: 480px) { .bottom-nav > .nav-left { background: #6d8ad7; } .bottom-nav > .nav-right { background: #7EC8DC;}}
 </style>
 </head>
 
 <body>
-<div id="project-page">
+
+    <div class="spinner-wrapper">
+      <div class="p-center-wrapper ">
+        <img class="loader-image" src="assets/img/main/infinity-loader.gif">
+      </div>
+    </div>
+
     <div class="top-nav">
-        <a href="index.html"><div class="logo_dark"></div></a>
-        <div class="nav_dark">
-            <a href="index.html#fifth" class="nav-active">WORK</a>
+        <a href="index.html"><div class="logo"></div></a>
+        <div class="nav">
+            <a href="index.html#projects" class="nav-active">PROJECTS</a>
             <a href="about.html">ABOUT</a>
-            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
         </div>
     </div>
     <div class="float-nav"></div>
 
-    <span class="project-nav-toggle"><i></i></span>
-    <aside class="project-aside">
-        <div class="project-aside-container">
-      <!-- <button onclick="location.href='index.html#second'" type="button" class="back-btn">Back</button> -->
-            <nav class="project-main-menu">
-                <ul class="menu-ul">
-                    <li><a href="#overview" class="sub pT">OVERVIEW</a></li>
-                    <li><a href="#understand" class="sub pT">UNDERSTANDING</a></li>
-                    <li><a href="#define" class="sub pT">DEFINE</a></li>
-                    <li><a href="#design" class="sub pT">DESIGN</a></li>
-                    <li><a href="#evaluation" class="sub pT">EVALUATION</a></li>
+    <header>
+        <div class="top-img" style="background-image:url(assets/img/insvoice/cover.png), linear-gradient(to right bottom,#fcb045, #fd1d1d, #833ab4);"></div>
+        <a class="link-bottom u-ir" href="#insvoice-main"></a>
+    </header>
 
-                </ul>
-            </nav>
-        </div>
-    </aside>
-
-    <div id="project-main">
-        <div class="top-img" style="background-image:url(assets/img/insvoice/overview.png);"></div>
-        <div class="project-narrow-content" >
-            <div id="overview">
-                <h2 class="page-header bT">OVERVIEW</h2>
-                <hr><br><br>
-                <table class="overview-table">
-                        <tr>
-                            <td class="table-left">ROLE</td>
-                            <td>Interaction Designer</td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">DURATION</td>
-                            <td>Design Challenge (Nov.10 - Nov.11, 2018) </td>
-                            
-                        </tr>
-                        <tr>
-                            <td class="table-left"></td>
-                            <td class="table-right">with <a href="http://yizhou.design/" target="_blank">Fred Liu</a></td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">TAG</td>
-                            <td>Voice User Interface. Motion Design.</td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">TOOL</td>
-                            <td>Sketch. Principle. Final Cut Pro.</td>
-                        </tr>
-                    </table><br><br><br>
-
-                <h3 class="overview_subtitle">CHALLENGE</h3>
-                    <p class="project-desc">​When you try to type comments or forward a post to a friend in the Instagram:</p>
-                    <img style = "width:100%" src="assets/img/insvoice/challenge.png"><br><br><br><br>
-                <h3 class="overview_subtitle">DESIGN OUTCOME</h3>
-                    <p class="project-desc">Use voice interaction to enjoy your quicker communication with Instagram. <strong>Just long press the post to start:</strong></p><br>
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                            <video autoplay muted loop class="video-features">
-                                <source src="assets/img/insvoice/add a comment.mp4"/>
-                            </video>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                            <div class="card-text">
-                                <h4 style="text-align: left; text-transform: uppercase;margin-bottom: 10px;">Add a comment</h4>
-                                <p class="project-desc" style="text-align: left;padding-bottom: 20px;">Directly long press the post and say ‘I love the outfit’ to add the comment. Emoji will also be automatically generated based on sentiment analysis of the recognized texts.</p>
-                            </div>
-                        </div>
-                    </div><br><br>
-
-                    <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                            <div class="card-text">
-                                <h4 style="text-align: left; text-transform: uppercase;margin-bottom: 10px;">@ a friend in the comment</h4>
-                                <p class="project-desc" style="text-align: left;padding-bottom: 20px;">Directly say ‘@ Agrim’. If there are several ‘Agrim’s in your friend, we will provide you options. Just drag and drop to select, and it will add to your comment.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                            <video autoplay muted loop class="video-features">
-                                <source src="assets/img/insvoice/@.mp4"/>
-                            </video>
-                        </div>
-                    </div><br><br>
-
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                            <video autoplay muted loop class="video-features">
-                                <source src="assets/img/insvoice/send.mp4"/>
-                            </video>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                            <div class="card-text">
-                                <h4 style="text-align: left; text-transform: uppercase;margin-bottom: 10px;">Send the post to a friend</h4>
-                                <p class="project-desc" style="text-align: left;padding-bottom: 20px;">Directly long press the post and say ‘Send to Agrim’. Recognized friends will pop up, you can just drag and drop to select.</p>
-                            </div>
-                        </div>
-                    </div>
-            </div><br><br><br><br>
-
-            <div id="understand">
-                <h2 class="page-header bT">UNDERSTANDING</h2>
-                <hr>
-                <h3 class="overview_subtitle">DESIGN PROMPT</h3>
-                    <p class="project-desc">Our design origins from a rough data analysis of people’s experience in the post stream of Instagram. We find that comment and forward are all light features. </p>
-                    <img style = "width:100%" src="assets/img/insvoice/design prompt.png"><br><br><br>
-
-                <h3 class="overview_subtitle">INTERVIEW</h3>
-                    <p class="project-desc">We conducted interviews for 5 Instagram users to dig more into this phenomenon and find the opportunities. And the findings are below:</p>
-                    <h4 class="mini-title">Accessibility issue contexts</h4>
-                        <p class="project-desc">Tapping on the screen to comment sometimes is difficult when a hand is occupied or the screen is too small.</p><br>
-                        <img style = "width:60%" src="assets/img/insvoice/accessibility.png"><br><br><br>
+    <div id="insvoice-main">
+        <p class="p-center-wrapper portfolio-title">
+          Overview.
+        </p><br><br>
+        <table class="overview-table">
+                <tr>
+                    <td class="table-left">Role</td>
+                    <td>Interaction Designer</td>
+                </tr>
+                <tr>
+                    <td class="table-left">Duration</td>
+                    <td>Design Challenge (Nov.10 - Nov.11, 2018) </td>
                     
-                    <h4 class="mini-title">Users prefer effortless</h4>
-                        <p class="project-desc">The effort that users currently devote on two features are already light enough. But users never satisfied and they always want easier ways to finish their task.</p>
-                        <img style = "width:100%" src="assets/img/insvoice/less effort.png" data-action="zoom"><br><br><br>
+                </tr>
+                <tr>
+                    <td class="table-left"></td>
+                    <td class="table-right">with <a href="http://yizhou.design/" target="_blank">Fred Liu</a></td>
+                </tr>
+                <tr>
+                    <td class="table-left">Tag</td>
+                    <td>Voice User Interface. Motion Design.</td>
+                </tr>
+                <tr>
+                    <td class="table-left">Tool</td>
+                    <td>Sketch. Principle. Final Cut Pro.</td>
+                </tr>
+        </table><br><br><br><br>
 
-                <h3 class="overview_subtitle">COMPETITIVE ANALYSIS</h3>
-                    <p class="project-desc">One major issue for voice interaction is <strong>‘discoverability’</strong>. So we conducted a competitive analysis to summarize current voice entrance and interactions used to start the conversation in social media and voice assistant tools. </p>
-                    <h4 class="mini-title">Voice entrance</h4>
-                        <p class="project-desc">Most voice interaction only have one access, which is for the whole system, instead of multi access locating to different parts of the system.</p><br><br>
 
-                    <h4 class="mini-title">Interaction to start the conversation</h4>
-                        <img style = "width:100%" src="assets/img/insvoice/competitive analysis.png" data-action="zoom"><br><br><br>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
+            <p class="portfolio-subtitle">Challenge.</p><br>
+            <p>​When you try to type comments or forward a post to a friend in the Instagram:</p>
+            <img style = "width:80%" src="assets/img/insvoice/challenge.png"><br><br><br><br>
 
+            <p class="portfolio-subtitle">Video.</p><br>
+            <video width="100%" controls>
+                <source src="assets/img/insvoice/video.mp4" type="video/mp4">
+            </video><br><br><br><br><br><br><br><br>
+
+
+             <p class="p-center-wrapper portfolio-title">
+              Understanding.
+            </p><br><br>
+
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <p class="portfolio-subtitle">Design prompt.</p><br>
+                <p>Our design origins from a rough data analysis of people’s experience in the post stream of Instagram. We find that comment and forward are all light features. </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Comment and foraward are all light features.
+                </p>
+              </div>
+            </div><br>
+            <img style = "width:80%" src="assets/img/insvoice/design prompt.png"><br><br><br>
+            <br><br><br>
+
+            <p class="portfolio-subtitle">Interview.</p><br>
+            <p>We conducted interviews for 5 Instagram users to dig more into this phenomenon and find the opportunities. And the findings are below:</p><br><br><br>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <p>Tapping on the screen to comment sometimes is difficult when a hand is occupied or the screen is too small.</p><br>
+                <img style = "width:100%" src="assets/img/insvoice/accessibility.png"><br><br><br>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Accessibility issue contexts.
+                </p>
+              </div>
             </div><br><br><br>
+            
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <p>The effort that users currently devote on two features are already light enough. But users never satisfied and they always want easier ways to finish their task.</p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Users prefer effortless.
+                </p>
+              </div>
+            </div><br>
+            <img style = "width:100%" src="assets/img/insvoice/less effort.png" data-action="zoom"><br><br><br><br><br><br>
 
 
-            <div id="define">
-                <h2 class="page-header bT">DEFINE</h2>
-                <hr>
-                <h3 class="overview_subtitle">PERSONAS</h3>
-                    <p class="project-desc">After the research, we summarized what we found and created a persona to help us identify the target users and their key problems.</p>
-                    <img style = "width:100%" src="assets/img/insvoice/personas.png" data-action="zoom"><br><br><br>
 
-                <h3 class="overview_subtitle">JOURNEY MAP</h3>
-                    <p class="project-desc">Also, based on the current user flow and interfaces, we made a user journey map to analyze the touchpoints and the opportunities.</p>
-                    <img style = "width:100%" src="assets/img/insvoice/journey map.png" data-action="zoom"><br><br><br>
+            <p class="portfolio-subtitle">Competitive analysis.</p><br>
+            <p>One major issue for voice interaction is <strong>‘discoverability’</strong>. So we conducted a competitive analysis to summarize current voice entrance and interactions used to start the conversation in social media and voice assistant tools. </p>
+            <br><br>
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <p>
+                    <strong>Entry of voice</strong><br>
+                    Most voice interaction only have one access, which is for the whole system, instead of multi access locating to different parts of the system.
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <p>
+                    <strong>Interactions to start the conversation</strong><br>
+                    <img style = "width:100%" src="assets/img/insvoice/competitive analysis.png" data-action="zoom">
+                </p>
+              </div>
+            </div><br><br><br><br><br><br>
 
-                <h3 class="overview_subtitle">DESIGN CRITERIA</h3>
-                    <p class="project-desc">Based on previous understanding, we define the following design criterias:</p>
-                    <img style = "width:100%" src="assets/img/insvoice/design criteria.png"><br><br><br>
 
-            </div>
+            <p class="portfolio-subtitle">Design criteria.</p><br>
+            <div class="row">
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p>
+                    <strong>Accessibility</strong><br>
+                    Applicable for people with physical impairments or under certain contexts. Provide voice input or large area of touch.
+                </p>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p>
+                    <strong>Effortless</strong><br>
+                    Minimal effort to comment simple words, @ in comment and forward a post.
+                </p>
+              </div>
+            </div><br><br><br><br><br>
 
-            <div id="design">
-                <h2 class="page-header bT">DESIGN</h2>
-                <hr>
-                <h3 class="overview_subtitle">DESIGN CONSIDERATION</h3>
-                    <h4 class="mini-title">How many voice entrance?</h4>
-                    <img style = "width:100%" src="assets/img/insvoice/consideration1.png" data-action="zoom"><br>
-                    <p class="project-desc">Our target is to provide effortless interaction for users. So we chose the one with fewer steps at first, that is provide multiple accesses under each post.</p><br><br>
 
-                    <h4 class="mini-title">Where is the voice entrance?</h4>
-                    <img style = "width:100%" src="assets/img/insvoice/consideration2.png" data-action="zoom"><br>
-                    <p class="project-desc">As our user scenarios are mainly for “accessibility contexts”, so we put accessibility issue at the first place. And also for the cons of “on the image”, we put it in our design consideration that “interaction should involve indication of what actions users are doing(such as indication of whether they are making a comment or sharing the post to a friend)”.</p><br><br>
 
-                    <h4 class="mini-title">Start voice interaction with what gesture?</h4>
-                    <p class="project-desc">Right now in the post stream of Instagram, gestures for image include: Tab for people tagged in the post and double Tab to like the post. So we are thinking using “long press” as the voice input.</p>
-                    <img style = "width:80%" src="assets/img/insvoice/consideration3.png" data-action="zoom"><br><br><br>
+            <p class="p-center-wrapper portfolio-title">
+              Design
+            </p><br><br>
+
+            <p class="portfolio-subtitle">How many voice entrances?</p><br>
+            <p>Our target is to minimize workload for users. So we chose the one with fewer steps, which is to provide multiple accesses under each post.</p><br><br>
+            <img style = "width:80%" src="assets/img/insvoice/consideration1.png" data-action="zoom"><br><br><br><br><br>
+
+
+            <p class="portfolio-subtitle">Where is the voice entrance?</p><br>
+            <p>As our user scenarios are mainly for “accessibility contexts”, we chose the one with larger touch area. At the same time, “interaction should involve indication of what actions users are doing(such as indication of whether they are making a comment or sharing the post to a friend)” should also be put into consideration for further design. </p><br><br>
+            <img style = "width:80%" src="assets/img/insvoice/consideration2.png" data-action="zoom"><br><br><br><br>
+
+            <p class="portfolio-subtitle">Use what gesture to start voice interaction?</p><br>
+            <p>Right now in the post stream of Instagram, gestures for image include: Tab for people tagged in the post and double Tab to like the post. So we are thinking using “long press” as the voice input.</p>
+            <img style = "width:60%" src="assets/img/insvoice/consideration3.png" data-action="zoom"><br><br><br><br>
+
+            <p class="portfolio-subtitle">User flow.</p><br>
+            <img style = "width:80%" src="assets/img/insvoice/user flow.png"><br><br><br><br><br><br>
+
+
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="portfolio-subtitle">Design outcome.</p><br>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Use voice interaction to enjoy your quicker communication with Instagram. <br>Just long press the post to start.
+                </p>
+              </div>
+            </div><br><br>
+
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <video autoplay muted loop class="video-features">
+                        <source src="assets/img/insvoice/add a comment.mp4"/>
+                    </video>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     
+                    <p class="quote">
+                      <br><br><br><br><br><br><br>
+                      Add a comment.
+                    </p><br>
+                    <p>
+                        Directly long press the post and say ‘I love the outfit’ to add the comment. Emoji will also be automatically generated based on sentiment analysis of the recognized texts.
+                    </p>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+            </div><br><br>
 
-                <h3 class="overview_subtitle">USER FLOW</h3>
-                    <p class="project-desc">After deciding the interaction - long press the image for each post to speak, we went to details of interactions for different tasks (@ someone, make a comment, send to someone) and made it consistent. Then we drew the following user flow to clarify the whole process of interaction:</p>
-                    <img style = "width:100%" src="assets/img/insvoice/user flow.png"><br><br><br>
-            </div>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <p class="quote">
+                      <br><br><br><br><br><br><br>
+                      @ a friend in the comment.
+                    </p><br>
+                    <p>
+                        Directly say ‘@ Agrim’. If there are several ‘Agrim’s in your friend, we will provide you options. Just drag and drop to select, and it will add to your comment.
+                    </p>
 
-            <div id="evaluation">
-                <h2 class="page-header bT">EVALUATION</h2>
-                <hr>
-                <h3 class="overview_subtitle">PROTOTYPE</h3>
-                    <p class="project-desc">For prototype, we need to incorporate audio input and animation like what we did using principle. But no prototype tool as far as we know can do both, that’s why we decide to build our prototype by video. We includes user scenarios and also how users interact with our system in the video.</p>
-                    <video width="100%" controls>
-                        <source src="assets/img/insvoice/video.mp4" type="video/mp4">
-                    </video><br><br><br><br>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <video autoplay muted loop class="video-features">
+                        <source src="assets/img/insvoice/@.mp4"/>
+                    </video>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+            </div><br><br>
 
-                <h3 class="overview_subtitle">USABILITY TESTING</h3>
-                    <p class="project-desc">We conducted task based usability testing for 5 target users. The results are coming soon...</p>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <video autoplay muted loop class="video-features">
+                        <source src="assets/img/insvoice/send.mp4"/>
+                    </video>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    
+                    <p class="quote">
+                      <br><br><br><br><br><br><br>
+                      Send the post to a friend.
+                    </p><br>
+                    <p>
+                        Directly long press the post and say ‘Send to Agrim’. Recognized friends will pop up, you can just drag and drop to select.
+                    </p>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                </div>
+            </div><br><br>
 
-            </div>
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br>
-
+            <br><br><br><br><br><br><br><br>
 
 
 
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <div class="bottom-nav-a-white nav-left">
-            <a href="Align.html" class="nav-active">PREVIOUS PROJECT: ALIGN</a>
-        </div>
-        <div class="bottom-nav-a-white nav-right">
-            <a href="InfNote.html" class="nav-active">NEXT PROJECT: INFNOTE</a>
-        </div>
+
+
+
+    <div class="bottom-nav col-centered">
+        <div class="row no-gutters">
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="Nest.html">
+            <div class="bottom-nav-block-left" id="nextfornest-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Previous
+                    </h5>
+                    <h4>
+                        Next for Nest
+                    </h4>
+                </div>
+            </div>
+          </a>
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="google exercise.html">
+            <div class="bottom-nav-block-right" id="designchallenge-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Next
+                    </h5>
+                    <h4>
+                        Design Challenge
+                    </h4>
+                </div>
+            </div>
+          </a>
+<!--         <div class="bottom-nav-a-white nav-right">
+            <a href="home depot.html" class="nav-active">NEXT PROJECT: ASSOCIATE TASKING</a>
+        </div> -->
     </div>
 </div>
 </body>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/transition.js"></script>
+<script src="assets/js/main.js"></script>
 <script src="assets/js/project.js"></script>
 <script src="assets/js/zoom.js"></script>
+<script src="assets/js/aos.js"></script>
 </html>
 
