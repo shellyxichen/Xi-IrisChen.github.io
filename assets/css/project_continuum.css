@@ -104,6 +104,13 @@ mark{
     background: #212039;
     color: #fff;
 }
+/*Associate tasking*/
+#overview_thd, #design_thd, #research_thd, #iteration_thd, #evaluation_thd {
+    background: #fff;
+    color: #000;
+}
+
+
 /*Nest*/
 #overview_nest, #iteration_nest{
     background: #fff;
