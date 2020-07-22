@@ -105,8 +105,8 @@ mark{
     color: #fff;
 }
 
-/*InsVoice*/
-#insvoice-main{
+/*InsVoice, Google*/
+#insvoice-main, #designchallenge-main{
     background: #FFFFFF;
     color: #000110;
 }
