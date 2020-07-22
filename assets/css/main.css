@@ -342,7 +342,7 @@ a:focus{
 }
 #socialeyes:hover{
 	background-image: url(../img/main/socialeyes2.png), linear-gradient(to right top,#ECE9E6, #ffffff);
-	transition: all .5s ease;
+/*	transition: all .5s ease;*/
 }
 #socialeyes:hover h5{
 	color: #000000;
@@ -368,6 +368,56 @@ a:focus{
 	transition: all .5s ease;
 }
 
+#insvoice {
+	background-color: #ffffff;
+	background-image: url(../img/main/insvoice.png); 
+}
+#insvoice h5{
+	color: #000000;
+}
+#insvoice h4{
+	color: #000000;
+}
+#insvoice:hover{
+	background-image: url(../img/main/insvoice.png), linear-gradient(to right top, #fcb045, #fd1d1d, #833ab4);
+	transition: all .5s ease;
+}
+#insvoice:hover h5{
+	color: #ffffff;
+}
+#insvoice:hover h4{
+	color: #ffffff;
+}
+
+#designchallenge {
+	background-color: #000000;
+	background-image: url(../img/main/google.png); 
+}
+#designchallenge h5{
+	color: #ffffff;
+}
+#designchallenge h4{
+	color: #ffffff;
+}
+#designchallenge:hover{
+	background-image: url(../img/main/google.png), linear-gradient(to right top, #00d2ff, #928DAB);
+	transition: all .5s ease;
+}
+
+#associatetasking {
+	background-color: #000000;
+	background-image: url(../img/main/homedepot.png); 
+}
+#associatetasking h5{
+	color: #ffffff;
+}
+#associatetasking h4{
+	color: #ffffff;
+}
+#associatetasking:hover{
+	background-image: url(../img/main/homedepot.png), linear-gradient(to right top, #f5af19, #f12711);
+	transition: all .5s ease;
+}
 
 #tencent {
 	background-color: #ffffff;
@@ -390,81 +440,84 @@ a:focus{
 	color: #ffffff;
 }
 
-
-#associatetasking {
+#align {
 	background-color: #ffffff;
-	background-image: url(../img/main/homedepot.png); 
+	background-image: url(../img/main/align.png); 
 }
-#associatetasking h5{
+#align h5{
 	color: #000000;
 }
-#associatetasking h4{
+#align h4{
 	color: #000000;
 }
-#associatetasking:hover {
-	background-image: #ffffff;
+#align:hover{
+	background-image: url(../img/main/align.png), linear-gradient(to right top, #01e3d0, #198dc9);
 	transition: all .5s ease;
 }
-#associatetasking:hover{
-	background-image: url(../img/main/homedepot.png), linear-gradient(to right top, #f5af19, #f12711);
+#align:hover h5{
+	color: #ffffff;
+}
+#align:hover h4{
+	color: #ffffff;
+}
+
+#infnote {
+	background-color: #000000;
+	background-image: url(../img/main/infnote.png); 
+}
+#infnote h5{
+	color: #ffffff;
+}
+#infnote h4{
+	color: #ffffff;
+}
+#infnote:hover{
+	background-image: url(../img/main/infnote.png), linear-gradient(to right top, #4e54c8, #8f94fb);
 	transition: all .5s ease;
 }
-#associatetasking:hover h5{
-	color: #fff;
-	transition: all .5s ease;
-}
-#associatetasking:hover h4{
-	color: #fff;
-	transition: all .5s ease;
-}
+
+
 
 
 #nextfornest {
-	background-color: #000000;
+	background-color: #ffffff;
 	background-image: url(../img/main/nest.png); 
 }
 #nextfornest h5{
-	color: #ffffff;
+	color: #000000;
 }
 #nextfornest h4{
-	color: #ffffff;
+	color: #000000;
 }
 #nextfornest:hover{
 	background-image: url(../img/main/nest.png), linear-gradient(to right top, #ff00cc, #333399);
 	transition: all .5s ease;
 }
-
-#align {
-	background-color: #000000;
-	background-image: url(../img/main/align.png); 
+#nextfornest:hover h5{
+	color: #fff;
+	transition: all .5s ease;
 }
-#align h5{
-	color: #ffffff;
-}
-#align h4{
-	color: #ffffff;
-}
-
-#align:hover{
-	background-image: url(../img/main/align.png), linear-gradient(to right top, #01e3d0, #198dc9);
+#nextfornest:hover h4{
+	color: #fff;
 	transition: all .5s ease;
 }
 
+
 #microsoft {
-	background-color: #ffffff;
+	background-color: #000000;
 	background-image: url(../img/main/microsoft.png); 
 }
 #microsoft h5{
-	color: #000000;
+	color: #ffffff;
 }
 #microsoft h4{
-	color: #000000;
+	color: #ffffff;
 }
 #microsoft:hover{
 	background-image: url(../img/main/microsoft.png), linear-gradient(to right top, #232526, #414345); 
 	transition: all .5s ease;
 }
-#microsoft:hover h5{
+/*#microsoft:hover h5{
 	color: #ffffff;
 	transition: all .5s ease;
 }
@@ -472,7 +525,7 @@ a:focus{
 	color: #ffffff;
 	transition: all .5s ease;
 }
-
+*/
 
 /*about*/
 
