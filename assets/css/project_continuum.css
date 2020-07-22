@@ -111,6 +111,12 @@ mark{
     color: #000110;
 }
 
+/*Tencent*/
+#tencent-main{
+    background: radial-gradient(220% 105% at top center, #000 10%, #000035 40%, #000035 65%, #0b2570);
+    background-attachment: fixed;
+    color: #ffffff;
+}
 
 /*Associate tasking*/
 #overview_thd, #design_thd, #research_thd, #iteration_thd, #evaluation_thd {

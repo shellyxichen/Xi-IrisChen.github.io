@@ -20,328 +20,358 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/project.css">
-<link rel="stylesheet" href="assets/css/project_tencent.css">
+<!-- <link rel="stylesheet" href="assets/css/project.css"> -->
+<link rel="stylesheet" href="assets/css/project_continuum.css">
 <link rel="stylesheet" href="assets/css/zoom.css">
+<link rel="stylesheet" href="assets/css/aos.css">
 <style>
-    .select:before { background-color:#8FC3FF; }
-    .select { color: #8FC3FF !important; }
-    .left-vertical-line {border-left-color: #8FC3FF; }
+    .bottom-nav { background-color:#ffffff; }
+    .select { color: #000000 !important; }
+    .left-vertical-line {border-left-color: #000000;} 
+    .select:before  {background: #000000;}
+    a:hover {color: #000000;}
+    .bottom-nav-a a {color: #000;}
+    .bottom-nav-a a:hover {color: #000;}
+    @media screen and (max-width: 480px) { .bottom-nav > .nav-left { background: #6d8ad7; } .bottom-nav > .nav-right { background: #7EC8DC;}}
+
 </style>
 </head>
 
 <body>
-<div id="project-page">
+
+    <div class="spinner-wrapper">
+      <div class="p-center-wrapper ">
+        <img class="loader-image" src="assets/img/main/infinity-loader.gif">
+      </div>
+    </div>
+
     <div class="top-nav">
         <a href="index.html"><div class="logo"></div></a>
         <div class="nav">
-            <a href="index.html#first" class="nav-active">WORK</a>
+            <a href="index.html#projects" class="nav-active">PROJECTS</a>
             <a href="about.html">ABOUT</a>
-            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
         </div>
     </div>
     <div class="float-nav"></div>
 
-    <span class="project-nav-toggle"><i></i></span>
-    <aside class="project-aside">
-        <div class="project-aside-container">
-            <nav class="project-main-menu">
-                <ul class="menu-ul">
-                    <!--<li class="font_padding"><a href="#Overview">Overview</a></li>
-                    <li><a href="#Objective" class="sub p1">Objective</a></li>
-                    <li><a href="#Process" class="sub p2">Process</a></li>
-                    <li class="font_padding"><a href="#Research">Research</a></li>
-                    <li><a href="#Research_Goal" class="sub p3">Research Goal</a></li>
-                    <li><a href="#Contextual_Inquiry" class="sub p4">Contextul Inquiry</a></li>
-                    <li><a href="#Affinity_Mapping" class="sub p5">Affinity Mapping</a></li>
-                    <li class="font_padding"><a href="#Design">Design Iteration</a></li>
-                    <li><a href="#Ideation" class="sub p6">Ideation</a></li>
-                    <li><a href="#Journey_Map" class="sub p7">Journey Map</a></li>
-                    <li><a href="#Iteration" class="sub p8">Iteration</a></li>
-                    <li class="font_padding"><a href="#Usability_Testing">Usability Testing</a></li>
-                    <li><a href="#Refinement" class="sub p9">Refinement</a></li>
-                    <li class="font_padding"><a href="#Final_Design">Final Design</a></li>
-                    <li><a href="#User_Flow" class="sub p10">User Flow</a></li>
-                    <li><a href="#Prototype" class="sub p11">Prototype</a></li>-->
-                    <li><a href="#Overview" class="sub pT">Overview</a></li>
-                    <li><a href="#Understanding" class="sub pT">Understanding</a></li>
-                    <li><a href="#Process" class="sub pT">Design Process</a></li>
-                    <li><a href="#Final Design" class="sub pT">Final Design</a></li>
-                    <li><a href="#What I learn" class="sub pT">What I learned</a></li>
-                </ul>
-            </nav>
-        </div>
-    </aside>
-    <div id="project-main">
+    <header>
         <div class="top-img">
             <video height="100%" autoplay="autoplay" loop="loop" class="video" muted="muted">
                 <source src="assets/img/tencent/overview.mp4" />
             </video>
         </div>
-        <div class="project-narrow-content" >
+        <a class="link-bottom u-ir" href="#overview_thd"></a>
+    </header>
 
-                
-                <!--<img style = "width:100%" src="assets/img/tencent/timeline.png"><br><br>-->
+    <div id="tencent-main">
+        <p class="p-center-wrapper portfolio-title">
+          Overview.
+        </p><br><br>
 
-               <!-- <br>
-                    Co-mentored by the design lead and a senior UX Designer, I presented my progress to them about twice a week, and got valuable feedback to move on. For total, I joined 4 projects. Following are the project statuses and my collaborators:</p><br>
-                <img style = "width:100%" src="assets/img/tencent/project.png" data-action="zoom"><br><br>
-                <p class="project-desc">​<strong>As the first two were my major projects and were initiated from the same research problem, I would like to share details of the first two together. But other projects' design also shown in the "final design" session. Now lets start!</strong></p><br><br>-->
+        <table class="overview-table">
+            <tr>
+                <td class="table-left">Role</td>
+                <td>UX Designer. Visual Designer.</td>
+            </tr>
+            <tr>
+                <td class="table-left">Duration</td>
+                <td>Summer 2018 @ Tencent Internship</td>
+            </tr>
+            <tr>
+                <td class="table-left">Tag</td>
+                <td>Feature Personalization. Do Not Disturb Mode.</td>
+            </tr>
+            <tr>
+                <td class="table-left">Tool</td>
+                <td>Sketch. Principle. SAP Scenes. Xmind.</td>
+            </tr>
+        </table><br><br><br>
 
-                <div id="Overview">
-                    <h2 class="page-header bT">OVERVIEW</h2> 
-                    <hr>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
+            <p>​Last summer, I interned at <strong>Tencent</strong> as a UX Designer and was part of the QQ Browser team (QB). <strong>QB has 350 million MAU, the largest among Chinese web browsers.</strong><strong> I was the individual designer on the project, but I was co-mentored by the design lead and a senior UX designer.</strong></p><br><br><br><br><br>
 
-                    <table class="overview-table">
-                        <tr>
-                            <td class="table-left">ROLE</td>
-                            <td>UX Designer. Visual Designer.</td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">DURATION</td>
-                            <td>Summer 2018 @ Tencent Internship</td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">TAG</td>
-                            <td>Feature Personalization. Do Not Disturb Mode.</td>
-                        </tr>
-                        <tr>
-                            <td class="table-left">TOOL</td>
-                            <td>Sketch. Principle. SAP Scenes. Xmind.</td>
-                        </tr>
-                    </table><br><br><br>
+            <div class="row">
+              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 
-                    <p class="project-desc">​Last summer, I interned at <strong>Tencent</strong> as a UX Designer and was part of the QQ Browser team (QB). <strong>QB has 350 million MAU, the largest among Chinese web browsers.</strong><strong> I was the individual designer on the project, but I was co-mentored by the design lead and a senior UX designer.</strong></p>
+                <p class="portfolio-subtitle">Background.</p>
+                <p>QB (QQ Web Browser) has diverse user contexts like watching movies, playing games, reading e-books, studying... To tailor for those, QB keeps rolling out new features like video center or reading modes. So there are so many cool features. But the problem is that users don't know that!</p><br>
+                <img style = "width:100%" src="assets/img/tencent/challenge1.png"><br><br><br><br>
 
-                    <h3 class="overview_subtitle">Background</h3>
-                        <p class="project-desc">​QB (QQ Web Browser) has diverse user contexts like watching movies, playing games, reading e-books, studying... To tailor for those, QB keeps rolling out new features like video center or reading modes. So there are so many cool features. But the problem is that users don't know that!</p>
-                        <img style = "width:100%" src="assets/img/tencent/challenge1.png"><br><br><br><br>
-
-                        <p class="project-desc">One common solution is that a lot of features will provide notifications to attract users' attention, like notifying users when the newest episode comes. A lot of users complain it's such annoying!</p>
-                        <img style = "width:100%" src="assets/img/tencent/challenge2.png"><br><br><br><br>
-
-
-                        <p class="project-desc"><strong>So our goal is to reduce the distraction of too many notifications and find other ways to increase the discoverability of features.</strong></p><br><br>
-                        
-
-                    <h3 class="overview_subtitle">Process</h3>
-                        <img style = "width:100%" src="assets/img/tencent/process.png">
-
-
-                    <h3 class="overview_subtitle">Solution 1: Feature Personalization</h3>
-                        <p class="project-desc">​A lot of products already provide personalizing news, feeds, or activities, but how about personalizing features? So I initiated an idea of personalizing all features in the web browser based on the user’s profile and contexts of use: </p><br>
-                        <img style = "width:100%" src="assets/img/tencent/solution1.png"><br><br>
-                        <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
-                            <source src="assets/img/tencent/functionality guide.mp4" />
-                        </video>
-                        <br><br>
-
-                    <h3 class="overview_subtitle">Solution 2: Do Not Disturb Mode</h3><br>
-                        <img style = "width:100%" src="assets/img/tencent/do not disturb_overview.png" data-action="zoom"><br><br><br>
-
-                    
-
-                </div>
-
-                
-                <div id="Understanding">
-                    <h2 class="page-header bT">UNDERSTANDING</h2> 
-                    <hr>
-                    <h3 class="overview_subtitle">Survey</h3>
-                        <p class="project-desc">​The research team spent three months conducting 2 NPS surveys. QB active users' survey aimed to understand users' satisfaction of all features. And to compare users' satisfaction with competitive products, another survey also conducted for QQ marketing users. </p>
-                        <img style="width:100%" src="assets/img/tencent/understanding1.png" data-action="zoom">
-
-                    <h3 class="overview_subtitle">BBS FEEDBACK</h3>
-                        <p class="project-desc">To collect feedback for the major finding 1 in a short time, I went to the online QB BBS to collect users' comments regarding notifications for Jun 2018.</p>
-                        <img style="width:100%" src="assets/img/tencent/understanding3.png" data-action="zoom">
-
-                    <h3 class="overview_subtitle">CONTEXTUAL INQUIRY</h3>
-                        <p class="project-desc"> For the finding 2, a UX researcher and I conducted 10 contextual inquiries to understand their use cases and pain points during their end-to-end process.</p>
-                        <img style="width:100%" src="assets/img/tencent/understanding4.png" data-action="zoom"><br><br>
-
-                    <h3 class="overview_subtitle">FEATURE HIERARCHY</h3>
-                        <p class="project-desc">Based on the problem space - various features are for different contexts, I mapped all features to their suitable contexts. So how to determine what contexts to map? Whether more coarse-grained like working, entertainment or fine-grained like reading books, watching movies? To make it simple at this stage, I chose the biggest two contexts and categorized features to working and entertainment contexts.</p>
-                        <img style="width:100%" src="assets/img/tencent/mindmap.png"><br><br><br>
-                    
-                    <h3 class="overview_subtitle">PERSONAS</h3>
-                        <p class="project-desc">Now it's time to define user groups under two contexts. But before I start, I conducted a quick <strong>data log analysis</strong> to make sure personas represents QB's target users. Data log analysis also helps us to determine our major user context - working: 
-                        <!--- Age distribution: 13 - 40.<br>
-                        - Usage time distribution: almost same proportion of morning, afternoon, evening.<br>
-                        - Target users include middle-aged businessman. And this group always use QB at daily time (working time)</p>--><br><br>
-
-                        <img style="width:100%" src="assets/img/tencent/personas.png"><br>
-
-                </div><br><br><br><br>
-
-                <div id="Process">
-                    <h2 class="page-header bT">DESIGN PROCESS</h2>
-                    <hr> 
-
-                    <h3 class="overview_subtitle">DESIGN ITERATIONS</h3><br>
-                        <p class="project-desc">The whole design process includes four design iterations. For each design iteration, I got feedback from other designers, and then talked to design lead about potential refinement and the next step’s design. After the 3rd round of iteration, I had a meeting with design lead and product manager lead, that’s when we brought up with tons of ideas together and determined the final iteration of design.</p><br>
-                        <img style="width:100%" src="assets/img/tencent/iteration_1.png" data-action="zoom">
-                        <img style="width:100%" src="assets/img/tencent/iteration_2.png" data-action="zoom"><br><br>
-
-                    <button data-toggle="collapse" data-target="#iteration">Click to see the process of iteration 1 - 3</button>
-
-                    <div id="iteration" class="collapse">
-
-                    <h3 class="overview_subtitle">ITERATION 1 - DUAL MODE</h3>
-                        <p class="project-desc">One click to switch between working mode and entertainment mode. </p><br> 
-                        <img style="width:100%" src="assets/img/tencent/concept1.png" data-action="zoom"><br><br><br><br>
-                        <h4 class="mini-title">Feedback</h4>
-                            <p class="project-desc">
-                                - 'Dual mode' is not so intuitive enough to associate with working and entertainment.<br>
-                                - Entertainment may not need a separate mode: Users don't care so much about efficiency during entertainment.</p>
+                <p>One common solution is that a lot of features will provide notifications to attract users' attention, like notifying users when the newest episode comes. A lot of users complain it's such annoying!</p><br>
+                <img style = "width:100%" src="assets/img/tencent/challenge2.png"><br><br><br><br>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Our goal is to reduce the distraction of too many notifications and find other ways to increase the discoverability of features.
+                </p>
+              </div>
+            </div><br><br><br><br><br><br>
 
 
-                    <h3 class="overview_subtitle">ITERATION 2 - OFFICE MODE</h3><br>
-                        <img style="width:80%" src="assets/img/tencent/iteration2.png" data-action="zoom"><br><br><br>
-                        <p class="project-desc">Instead of having dual mode, I focused on working contexts and put up with office mode. Then I went deeper to come up with several refinements especially tailored for efficient and seamless working experience. </p><br>
-                        <img style="width:100%" src="assets/img/tencent/concept2_1.png" data-action="zoom">
-                        <img style="width:100%" src="assets/img/tencent/concept2_2.png" data-action="zoom">
-                        <img style="width:100%" src="assets/img/tencent/concept2_3.png" data-action="zoom"><br><br><br><br>
-                        <h4 class="mini-title">Feedback</h4>
-                            <p class="project-desc">
-                                - Integrate functions to one mode may not always be the best choice. Especially when we also provide new functions within it.<br>
-                                - The difference between working and normal mode is that ‘do not disturb’, ‘users can choose style at the beginning’. Can we directly separate it to two modes? </p>
 
-                    <h3 class="overview_subtitle">ITERATION 3 - DO NOT DISTURB MODE & MINIMALISM MODE</h3><br>
-                        <img style="width:100%" src="assets/img/tencent/iteration3.png" data-action="zoom"><br><br><br>
-                        <p class="project-desc">I separated 'office mode' to 'do not disturb mode' and 'minimalism mode' and also refined each modes. For do not disturb mode, contexts including working, playing games, and sharing screens with others. And for minimalism mode, the target was to provide simple and clear UI.</p><br><br>
-                        <img style="width:100%" src="assets/img/tencent/concept3_1.png" data-action="zoom">
-                        <img style="width:100%" src="assets/img/tencent/concept3_2.png" data-action="zoom"><br><br><br><br>
-                        <h4 class="mini-title">Feedback</h4>
-                            <p class="project-desc"> For the feedback session, I talked to product manager lead and also design lead. This session is very useful, we brought up with 3 main challenges for the current design and also the following core new idea together:<br>
-                                - The concept of minimalism mode is to provide a bundle of functions for people who prefer simple UI. But can we extend the user group to all users and incorporate more flexibility in customization?</p>
-
-                   
-                    </div>
-
-                    <h3 class="overview_subtitle">ITERATION 4 - DO NOT DISTURB MODE & AI + FUNCTION</h3><br>
-                        <img style="width:100%" src="assets/img/tencent/iteration4.png" data-action="zoom"><br><br><br>
-                        <p class="project-desc">Based on the feedback session with product manager lead and design lead, I got 2 main challenges for the do not disturb mode, so I refined the "do not disturb mode". In addition, we transferred 'minimalism mode' to 'AI + Function' to provide personalization of functions. Following are 4 major refinements:</p><br><br>
-                        <h4 class="mini-title">DO NOT DISTURB MODE</h4>
-                        <p class="left-vertical-line margin-top-2">
-                            <span class="key-word">Refine 1 - Customize two time slots instead of one time slot</span>
-                        </p>
-                            <p class="project-desc">Normally for automatic mode switch, users need intermittent time slots (morning and afternoon) instead of one continuous time slot. (As users can still get notification during lunch time). But for the two time slots, if we provide complete customization, is it too much for users to start? How to balance between complete customization and easy interaction?</p><br><br>
-                            <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted" data-action="zoom">
-                                <source src="assets/img/tencent/refine1.mp4" />
-                            </video><br><br><br>
-
-                        <p class="left-vertical-line margin-top-2">
-                            <span class="key-word">Refine 2 - Lighten do not disturb mode button in the main menu</span>
-                        </p>
-                            <p class="project-desc">Do not disturb mode button in the main menu has lower priority compared to other control buttons. Can the switch button in main menu be lighter?</p><br><br>
-                            <img style="width:100%" src="assets/img/tencent/refine2.png" data-action="zoom"><br><br><br><br>
-                        
-                        <h4 class="mini-title">FEATURE PERSONALIZATION</h4>
-                        <p class="left-vertical-line margin-top-2">
-                            <span class="key-word">Refine 3 - Feature personalization concept</span>
-                        </p>
-                            <p class="project-desc">The concept of minimalism mode is to provide a bundle of features for people who prefer simple UI. But from the research, users all mentioned 'irrelevant features', so can we extend the user group to all users and incorporate more flexibility in customization?</p><br><br>
-                            <img style="width:100%" src="assets/img/tencent/refine3.png" data-action="zoom"><br><br><br><br>
+            <p class="portfolio-subtitle">Process.</p>
+            <img style = "width:80%" src="assets/img/tencent/process.png"><br><br><br><br>
 
 
-                        <p class="left-vertical-line margin-top-2">
-                            <span class="key-word">Refine 4 - Start from where?</span>
-                        </p>
-                            <p class="project-desc">Right now users customize functions at the setup page. But from the research, 60% users will close the setup page. Can we consider to recommend functions when users using it?</p><br><br>
-                            <img style="width:100%" src="assets/img/tencent/refine4.png" data-action="zoom"><br><br><br><br>
+            <p class="portfolio-subtitle">Solution 1: Feature Personalization</p>
+            <p>​A lot of products already provide personalizing news, feeds, or activities, but how about personalizing features? So I initiated an idea of personalizing all features in the web browser based on the user’s profile and contexts of use: </p><br>
+            <img style = "width:80%" src="assets/img/tencent/solution1.png"><br><br>
+            <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="assets/img/tencent/functionality guide.mp4" />
+            </video>
+            <br><br><br><br><br><br>
 
-                </div>
+            <p class="portfolio-subtitle">Solution 2: Do Not Disturb Mode</p><br>
+            <img style = "width:100%" src="assets/img/tencent/do not disturb_overview.png" data-action="zoom"><br><br><br><br><br><br>
 
 
-                <div id="Final Design">
-                        <h2 class="page-header bT">FINAL DESIGN</h2>
-                        <hr>
-                        <h3 class="overview_subtitle">VISUAL DESIGN</h3>
-                            <img style="width:100%" src="assets/img/tencent/visual design.png" data-action="zoom"><br><br>
-                        <h3 class="overview_subtitle">FEATURE PERSONALIZATION</h3>
-                            <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
-                                <source src="assets/img/tencent/functionality guide.mp4" />
-                            </video>
 
-                        <h3 class="overview_subtitle">DO NOT DISTURB MODE</h3>
-                            <img style="width:100%" src="assets/img/tencent/do not disturb.png" data-action="zoom"><br><br>
-                        
-                        <h3 class="overview_subtitle"><p class="project-desc"><strong>I joined 4 projects for total during my internship, Following is my another project's final design. As the layout and word length may change if I translate Chinese to English, I only show the Chinese version here. But annotations are provided below:</strong></p><br>BOOKMARK AND NOTE REDESIGN</h3>
-                            <h4 class="mini-title">Bookmark Tag</h4><br>
-                                <p class="project-desc">Center place for people to organize bookmarks using tag structure instead of folder hierarchy to simplify adding, searching experience.</p>
-                                <img style="width:100%" src="assets/img/tencent/collection1.png" data-action="zoom"><br><br>
-                                <img style="width:100%" src="assets/img/tencent/collection2.png" data-action="zoom"><br><br>
-                                <img style="width:100%" src="assets/img/tencent/collection3.png" data-action="zoom"><br><br>
-                                <img style="width:100%" src="assets/img/tencent/collection.gif" data-action="zoom">
-                            <br><br><br>
-  
-                            <h4 class="mini-title">Edit Reading Mode</h4><br>
-                                <p class="project-desc">Under reading mode, multiple customizations are provided. Users can easily change their preferred font size, background color, or highlight some sentences in the article.</p>
-                                <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
-                                    <source src="assets/img/tencent/notes.mp4" />
-                                </video></div><br><br><br><br>
 
-            <div id="What I learn">
-                <h2 class="page-header bT">WHAT I LEARNED</h2>
-                <hr>
-                <h3 class="overview_subtitle">Business Side</h3>
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">Balancing between business needs and users’ needs</span>
-                    </p>
-                    <p class="project-desc">User-centered design. It’s true, but in real-world we need to balance with business needs. Such as from users’ needs, providing less functions can simplify workload and enhance efficiency. But more functions can increase user retention from business target. How to solve this conflict? This is where UX designer is needed to solve the problem and come up with new ideas! With keeping in mind both users’ needs and business target constraints.</p>
 
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">Incorporate implementation cost and design values into consideration</span>
-                    </p>
-                    <p class="project-desc">Considering implementation effort is already a natural process during my design process, but what’s more, good designer should try to simplify solution as much as possible, especially under constraints like time or implementation costs. For example, when I redesigned game center, considering the ddl for rapid releasing, instead of incorporating something new at the first version, it’s better to optimize whole flow but use existing widgets at first. And then I also presented the expected widgets to PM for next version’s design.</p>
+            <p class="p-center-wrapper portfolio-title">
+              Understanding.
+            </p><br><br>
 
-                <h3 class="overview_subtitle">Facilitate Process with Communication</h3>
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">Closer cooperation with PM</span>
-                    </p>
-                    <p class="project-desc">Especially when coming up with new ideas, closer cooperate with PM to make sure if the problem exists and is suitable for the target user group. This step is crucial to make sure everyone in the team are on the same page.</p>
+            <p class="portfolio-subtitle">Survey.</p>
+            <p>​The research team spent three months conducting 2 NPS surveys. QB active users' survey aimed to understand users' satisfaction of all features. And to compare users' satisfaction with competitive products, another survey also conducted for QQ marketing users. </p><br>
+            <img style="width:80%" src="assets/img/tencent/understanding1.png" data-action="zoom"><br><br><br><br>
 
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">Asking about feedback can greatly facilitate the whole process</span>
-                    </p>
-                    <p class="project-desc">Whenever stucked by multiple designs, don't just list pros and cons and try to select one out individually. It’s better to draw different alternatives to get others’ feedback or use A / B testing to get users’ feedback. It will greatly facilitate the iteration process.</p>
+            <p class="portfolio-subtitle">Forum feedback.</p>
+            <p>To collect feedback for the major finding 1 in a short time, I went to the online QB BBS to collect users' comments regarding notifications for Jun 2018.</p><br>
+            <img style="width:80%" src="assets/img/tencent/understanding3.png" data-action="zoom"><br><br><br><br>
 
-                <h3 class="overview_subtitle">What I’m good at:</h3>
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">Coming up with new ideas</span>
-                    </p>
-                    <p class="project-desc">During my three months’ internship, I came up with new ideas for three projects. I love brainstorming new ideas using all kinds of technologies! For me, I feel excited to incorporate advanced technology into daily product to provide a little more intelligence and efficiency. </p>
+            <p class="portfolio-subtitle">Contextual inquiry.</p>
+            <p> For the finding 2, a UX researcher and I conducted 10 contextual inquiries to understand their use cases and pain points during their end-to-end process.</p><br>
+            <img style="width:80%" src="assets/img/tencent/understanding4.png" data-action="zoom"><br><br><br><br>
 
-                    <p class="left-vertical-line margin-top-2">
-                        <span class="key-word">My strength in technology</span>
-                    </p>
-                    <p class="project-desc">I really appreciate the opportunity to share my knowledge of AI technologies with others. During my internship, I wrote an article “A designer’s guide to machine learning” and conducted a tech talk for design team about machine learning products, which to some extent enhance a little bit of other designers' understanding and interests in machine learning. Moreover, after this internship, I have more passion for AI products and cannot wait to use my understanding of technologies to create AI products with great user experience!</p>
+            <p class="portfolio-subtitle">Feature hierarchy.</p>
+            <p>Based on the problem space - various features are for different contexts, I mapped all features to their suitable contexts. So how to determine what contexts to map? Whether more coarse-grained like working, entertainment or fine-grained like reading books, watching movies? To make it simple at this stage, I chose the biggest two contexts and categorized features to working and entertainment contexts.</p><br>
+            <img style="width:60%" src="assets/img/tencent/mindmap.png"><br><br><br><br><br>
+        
+            <p class="portfolio-subtitle">Personas.</p>
+            <p>Now it's time to define user groups under two contexts. But before I start, I conducted a quick <strong>data log analysis</strong> to make sure personas represents QB's target users. Data log analysis also helps us to determine our major user context - working: 
+            </p>
+            <br><br>
+            <img style="width:80%" src="assets/img/tencent/personas.png"><br><br><br><br><br><br>
 
+
+
+
+            <p class="p-center-wrapper portfolio-title">
+              Design process.
+            </p><br><br>
+
+            <p class="portfolio-subtitle">Design iterations.</p><br>
+            <p>The whole design process includes four design iterations. For each design iteration, I got feedback from other designers, and then talked to design lead about potential refinement and the next step’s design. After the 3rd round of iteration, I had a meeting with design lead and product manager lead, that’s when we brought up with tons of ideas together and determined the final iteration of design.</p><br><br>
+            <img style="width:100%" src="assets/img/tencent/iteration_1.png" data-action="zoom">
+            <img style="width:100%" src="assets/img/tencent/iteration_2.png" data-action="zoom"><br><br><br><br><br><br>
+
+            <p class="portfolio-subtitle">Iteration 4 - Do not disturb mode & Feature personalization.</p><br>
+            <img style="width:80%" src="assets/img/tencent/iteration4.png" data-action="zoom"><br><br><br>
+            <p>Based on the feedback session with product manager lead and design lead, I got 2 main challenges for the do not disturb mode, so I refined the "do not disturb mode". In addition, we transferred 'minimalism mode' to 'AI + Function' to provide personalization of functions. Following are 4 major refinements:</p><br><br><br><br>
+
+
+
+            <p><strong>Do not disturb mode.</strong></p>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p>
+                    Normally for automatic mode switch, users need intermittent time slots (morning and afternoon) instead of one continuous time slot. (As users can still get notification during lunch time). But for the two time slots, if we provide complete customization, is it too much for users to start? How to balance between complete customization and easy interaction?
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Customize two time slots instead of one time slot.
+                </p>
+              </div>
+            </div><br>
+            <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted" data-action="zoom">
+                <source src="assets/img/tencent/refine1.mp4" />
+            </video><br><br><br><br><br><br>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p>
+                    Do not disturb mode button in the main menu has lower priority compared to other control buttons. Can the switch button in main menu be lighter?
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Lighten do not disturb mode button in the main menu.
+                </p>
+              </div>
             </div>
+            <img style="width:100%" src="assets/img/tencent/refine2.png" data-action="zoom"><br><br><br><br><br><br>
+
+            
+            <p><strong>Feature personalization.</strong></p>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p>
+                    The concept of minimalism mode is to provide a bundle of features for people who prefer simple UI. But from the research, users all mentioned 'irrelevant features', so can we extend the user group to all users and incorporate more flexibility in customization?
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Feature personalization concept.
+                </p>
+              </div>
+            </div>
+            <img style="width:100%" src="assets/img/tencent/refine3.png" data-action="zoom"><br><br><br><br><br><br>
+
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p>
+                    Right now users customize functions at the setup page. But from the research, 60% users will close the setup page. Can we consider to recommend functions when users using it?
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="quote" data-aos="fade-up" data-aos-duration="1500">
+                  Where to start?
+                </p>
+              </div>
+            </div>
+            <img style="width:100%" src="assets/img/tencent/refine4.png" data-action="zoom"><br><br><br><br><br><br>
+
+
+
+
+             <p class="p-center-wrapper portfolio-title">
+              Final design.
+            </p><br><br>
+
+              <p class="portfolio-subtitle">Visual design.</p>
+                <img style="width:80%" src="assets/img/tencent/visual design.png" data-action="zoom"><br><br><br><br><br><br>
+              
+
+              <p class="portfolio-subtitle">Feature personalization.</p><br>
+                <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                    <source src="assets/img/tencent/functionality guide.mp4" />
+                </video><br><br><br><br>
+
+                <p class="portfolio-subtitle">Do not disturb mode.</p><br>
+                <img style="width:100%" src="assets/img/tencent/do not disturb.png" data-action="zoom"><br><br><br><br><br><br><br><br>
+            
+                <p><strong>I joined 4 projects for total during my internship, Following is my another project's final design. As the layout and word length may change if I translate Chinese to English, I only show the Chinese version here. But annotations are provided below:</strong></p>
+
+                <br><br><br>
+                <p class="portfolio-subtitle">Bookmark and note redesign.</p><br><br>
+                <p>
+                    <strong>Bookmark Tag</strong><br>
+                    Center place for people to organize bookmarks using tag structure instead of folder hierarchy to simplify adding, searching experience.
+                </p><br>
+                <img style="width:100%" src="assets/img/tencent/collection1.png" data-action="zoom"><br><br>
+                <img style="width:100%" src="assets/img/tencent/collection2.png" data-action="zoom"><br><br>
+                <img style="width:100%" src="assets/img/tencent/collection3.png" data-action="zoom"><br><br>
+                <img style="width:100%" src="assets/img/tencent/collection.gif" data-action="zoom">
+                <br><br><br><br><br><br><br>
+
+                <p>
+                    <strong>Edit Reading Mode</strong><br>
+                    Under reading mode, multiple customizations are provided. Users can easily change their preferred font size, background color, or highlight some sentences in the article.
+                </p><br>
+                <video style="width:100%" autoplay="autoplay" loop="loop" muted="muted">
+                    <source src="assets/img/tencent/notes.mp4" />
+                </video><br><br><br><br><br><br><br>
+
+
+
+
+
+                <p class="p-center-wrapper portfolio-title">
+                  What I learned.
+                </p><br><br>
+
+                <p class="portfolio-subtitle">Business Side.</p>
+                <p>
+                    <strong>Balancing between business needs and users’ needs</strong><br>
+                    User-centered design. It’s true, but in real-world we need to balance with business needs. Such as from users’ needs, providing less functions can simplify workload and enhance efficiency. But more functions can increase user retention from business target. How to solve this conflict? This is where UX designer is needed to solve the problem and come up with new ideas! With keeping in mind both users’ needs and business target constraints.
+                </p><br><br>
+
+                <p>
+                    <strong>Incorporate implementation cost and design values into consideration</strong><br>
+                    Considering implementation effort is already a natural process during my design process, but what’s more, good designer should try to simplify solution as much as possible, especially under constraints like time or implementation costs. For example, when I redesigned game center, considering the ddl for rapid releasing, instead of incorporating something new at the first version, it’s better to optimize whole flow but use existing widgets at first. And then I also presented the expected widgets to PM for next version’s design.
+                </p><br><br><br><br>
+
+                <p class="portfolio-subtitle">Facilitate process with communication.</p>
+                <p>
+                    <strong>Closer cooperation with PM.</strong><br>
+                    Especially when coming up with new ideas, closer cooperate with PM to make sure if the problem exists and is suitable for the target user group. This step is crucial to make sure everyone in the team are on the same page.
+                </p><br><br>
+
+
+                <p>
+                    <strong>Asking about feedback can greatly facilitate the whole process.</strong><br>
+                    Whenever stucked by multiple designs, don't just list pros and cons and try to select one out individually. It’s better to draw different alternatives to get others’ feedback or use A / B testing to get users’ feedback. It will greatly facilitate the iteration process.
+                </p><br><br><br><br>
+
+                <p class="portfolio-subtitle">What I’m good at:</p>
+                <p>
+                    <strong>Coming up with new ideas</strong><br>
+                    During my three months’ internship, I came up with new ideas for three projects. I love brainstorming new ideas using all kinds of technologies! For me, I feel excited to incorporate advanced technology into daily product to provide a little more intelligence and efficiency. 
+                </p><br><br>
+
+                <p>
+                    <strong>My strength in technology</strong><br>
+                    I really appreciate the opportunity to share my knowledge of AI technologies with others. During my internship, I wrote an article “A designer’s guide to machine learning” and conducted a tech talk for design team about machine learning products, which to some extent enhance a little bit of other designers' understanding and interests in machine learning. Moreover, after this internship, I have more passion for AI products and cannot wait to use my understanding of technologies to create AI products with great user experience!
+                </p><br><br><br><br><br><br><br><br>
+
 
 
         </div>
+
     </div>
 
 
-    <div class="bottom-nav">
-        <!--<div class="bottom-nav-a nav-left">
-            <a href="facebook.html" class="nav-active">PREVIOUS PROJECT: FACEBOOK INTERNSHIP</a>
-        </div>-->
-        <div class="bottom-nav-a nav-left">
-            <a href="facebook.html" class="nav-active">PREVIOUS PROJECT: FACEBOOK INTERNSHIP</a>
-        </div>
-        <div class="bottom-nav-a nav-right">
-            <a href="google exercise.html" class="nav-active">NEXT PROJECT: GOOGLE DESIGN CHALLENGE</a>
-        </div>
+    <div class="bottom-nav col-centered">
+        <div class="row no-gutters">
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="home depot.html">
+            <div class="bottom-nav-block-left" id="associatetasking-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Previous
+                    </h5>
+                    <h4>
+                        Associate tasking
+                    </h4>
+                </div>
+            </div>
+          </a>
+          <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12" href="Align.html">
+            <div class="bottom-nav-block-right" id="align-nav">
+                <div class="bottom-nav-inblock">
+                    <h5>
+                        Next
+                    </h5>
+                    <h4>
+                        Align
+                    </h4>
+                </div>
+            </div>
+          </a>
+<!--         <div class="bottom-nav-a-white nav-right">
+            <a href="home depot.html" class="nav-active">NEXT PROJECT: ASSOCIATE TASKING</a>
+        </div> -->
     </div>
 </div>
 </body>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/transition.js"></script>
+<script src="assets/js/main.js"></script>
 <script src="assets/js/project.js"></script>
 <script src="assets/js/zoom.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/aos.js"></script>
 <script>$(function(){setTimeout(()=>{$('.video').css('margin-left', -($('.video').width() - $('.top-img').width())/2)}, 10)})</script>
 </html>
 
