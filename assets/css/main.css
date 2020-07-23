@@ -70,13 +70,15 @@ a:focus{
 	text-decoration:none;
 	font-family: aktiv-grotesk,Helvetica,sans-serif;
 	font-weight: 700;
-	font-size: 12px;
+	/*font-size: 12px;*/
+	font-size: 1.46vh;
 	text-transform: uppercase;
 	letter-spacing: .2em;
 	transition: all .5s ease;
 }
 .proj-button{
-	padding: 15px;
+	/*padding: 15px;*/
+	padding: 1.827vh;
 }
 #about-button-text{
 	color:#000;
@@ -85,7 +87,8 @@ a:focus{
 	color: #fff;
 }
 .button-arrow {
-	margin-left: 10px;
+	/*margin-left: 10px;*/
+	margin-left: 1.218vh;
 	transition: all .5s ease;
 }
 #about-button-arrow{
@@ -109,7 +112,8 @@ a:focus{
 	transition: all .5s ease;
 }
 .button:hover .button-arrow{
-	margin-left: 30px;
+	/*margin-left: 30px;*/
+	margin-left: 3.654vh;
 	transition: all .5s ease;
 }
 
@@ -178,17 +182,22 @@ a:focus{
 	position:absolute;
 	left:0;
 	right:0;
-	bottom:30px;
-	width:80px;
-	height:20px;
+	/*bottom:30px;*/
+	bottom: 3.654vh;
+	/*width:80px;*/
+	width: 9.744vh;
+	/*height:20px;*/
+	height: 2.436vh;
 	margin:auto;
 	animation:bounce 3s infinite ease-in-out;
 }
 .link-bottom:after,.link-bottom:before{
 	content:'';
 	position:absolute;
-	width:40px;
-	height:2px;
+	/*width:40px;*/
+	width: 4.872vh;
+	/*height:2px;*/
+	height: 0.2436vh;
 	/*background:#eee;*/
 	background: #fff;
 	opacity: 50%;
@@ -198,12 +207,14 @@ a:focus{
 }
 
 .link-bottom:before{
-	margin-left:-38px;
+	/*margin-left:-38px;*/
+	margin-left: -4.6285vh;
 	-webkit-transform:rotate(25deg);
 	transform:rotate(25deg)
 }
 .link-bottom:after{
-	margin-left:-2px;
+	/*margin-left:-2px;*/
+	margin-left: -0.2436vh;
 	-webkit-transform:rotate(-25deg);
 	transform:rotate(-25deg)
 }
@@ -211,15 +222,18 @@ a:focus{
 .link-bottom:hover:after, .link-bottom:hover:before{
 	background: #fff;
 	opacity: 100%;
-	width: 50px;
+	/*width: 50px;*/
+	width: 6.09vh;
 	/*stroke-width: 4;*/
 	transition: all .5s ease;
 }
 .link-bottom:hover:after{
-	margin-left: -2px;
+	/*margin-left: -2px;*/
+	margin-left: -0.2436vh;
 }
 .link-bottom:hover:before{
-	margin-left: -45px;
+	/*margin-left: -45px;*/
+	margin-left: -5.48vh;
 }
 
 
@@ -255,7 +269,8 @@ a:focus{
   flex-wrap: wrap;
   box-sizing: border-box;
   position: relative;
-  max-width: 1400px;
+  /*max-width: 1400px;*/
+  max-width: 170.5vh;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   flex-direction: row;
@@ -270,10 +285,17 @@ a:focus{
     display: flex;
     width: 50%;
     /*height: 550px;*/
-    min-height: 523px;
+    /*min-height: 523px;*/
+    min-height: 63.7vh;
     border: 0;
     border-radius: 0; 
 }
+@media screen and (max-width: 768px){
+    .card{
+        width: 100%;
+    }
+}
+
 /*.card:nth-child(odd){
 	padding-right: 7px;
 }
@@ -284,13 +306,16 @@ a:focus{
 .card-block {
 	display: flex;
     width: 100%;
-    height: 550px;
+    /*height: 550px;*/
+    height: 67vh;
     position: relative;
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
     /*padding: 70px;*/
-    padding: 70px 150px 70px 150px;
+    /*padding: 70px 150px 70px 150px;*/
+    /*padding: 8.526vh 18.27vh 8.526vh 18.27vh;*/
+    padding: 4.86vw 10.4vw 4.86vw 10.4vw;
     /*text-align: center; */
     background-position: center;
     -webkit-filter: grayscale(100%);
@@ -305,7 +330,8 @@ a:focus{
 }
 
 .card-title-block {
-	padding-bottom: 250px;
+	/*padding-bottom: 250px;*/
+	padding-bottom: 30.45vh;
 	width: 100%;
 	position: relative;
 	z-index: 1;
@@ -555,7 +581,8 @@ a:focus{
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 800;
-	font-size: 60px;
+	/*font-size: 60px;*/
+	font-size: 7.3vh;
 	text-align: center;
 	padding-top: 15vh;
 	margin-bottom: 3vh;
@@ -566,7 +593,8 @@ a:focus{
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 700;
-	font-size: 25px;
+	font-size: 3vh;
+	/*font-size: 25px;*/
 /*	text-align: center;*/
 	margin-bottom: 1.5vh;
 }
@@ -574,7 +602,8 @@ a:focus{
 .nav-title a{
 	font-family: aktiv-grotesk,Helvetica,sans-serif;
 	font-weight: 700;
-	font-size: 12px;
+	/*font-size: 12px;*/
+	font-size: 1.46vh;
 	text-transform: uppercase;
 	letter-spacing: .2em;
 	color:#fff;
@@ -588,7 +617,8 @@ a:focus{
 
 .nav-title a:hover{
 	opacity: 100%;
-	font-size: 14px;
+	/*font-size: 14px;*/
+	font-size: 1.7vh;
 	transition: all .5s ease;
 }
 
@@ -596,7 +626,8 @@ a:focus{
 .card-title {
 	font-family: aktiv-grotesk,Helvetica,sans-serif;
 	font-weight: 700;
-	font-size:12px;
+	/*font-size:12px;*/
+	font-size: 1.46vh;
 	text-transform: uppercase;
 	letter-spacing: .2em;
 	opacity: 50%;
@@ -608,9 +639,12 @@ a:focus{
 	/*font-family: proxima-nova, sans-serif;*/
 	font-style: normal;
 	font-weight: 700;
-	font-size: 30px;
-	margin-top: 30px;
-	margin-bottom: 20px;
+	/*font-size: 30px;*/
+	font-size: 3.654vh;
+	/*margin-top: 30px;*/
+	margin-top: 3.654vh;
+	/*margin-bottom: 20px;*/
+	margin-bottom: 2.436vh;
 	transition: all .5s ease;
 }
 
@@ -630,7 +664,8 @@ a:focus{
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 400;
-	font-size:15px;
+	/*font-size:15px;*/
+	font-size: 1.827vh;
 	color: rgba(255, 255, 255, 0.5);
 	line-height: 1.8;
 }
@@ -640,7 +675,8 @@ a:focus{
 
 .about-text a:hover{
 	opacity: 100%;
-	font-size: 17px;
+	/*font-size: 17px;*/
+	font-size: 2.07vh;
 	transition: all .5s ease;
 }
 
@@ -649,7 +685,8 @@ a:focus{
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 800;
-	font-size: 45px;
+	/*font-size: 45px;*/
+	font-size: 5.48vh;
 	margin-bottom: 3vh;
 	line-height: 0.85;
 }
@@ -659,7 +696,8 @@ a:focus{
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: 500;
-	font-size:15px;
+	/*font-size:15px;*/
+	font-size: 1.827vh;
 	color: #000;
 	/*color: rgba(0,0,0, 0.5);*/
 	line-height: 1.8;
@@ -669,7 +707,8 @@ a:focus{
 	font-family: proxima-nova, sans-serif;
 	font-style: normal;
 	font-weight: 400;
-	font-size:12px;
+	/*font-size:12px;*/
+	font-size: 1.46vh;
 	color: rgba(0,0,0, 0.5);
 	line-height: 1.8;
 	text-align: center;
@@ -689,11 +728,13 @@ a:focus{
 }
 
 .footer-icons i {
-	padding: 12px 12px 0px 12px;
+	/*padding: 12px 12px 0px 12px;*/
+	padding: 1.46vh 1.46vh 0vh 1.46vh;
 }
 
 #infinity {
-	max-width: 800px;
+	/*max-width: 800px;*/
+	max-width: 97.44vh;
 	/*height: 450px;*/
 	display: block;
 	margin-right: auto;
