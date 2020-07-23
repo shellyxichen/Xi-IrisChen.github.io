@@ -47,7 +47,7 @@ a:focus{
 
 .button {
 	position:relative;
-	width:30%;
+	width:25%;
 	text-align:center;
 	display:table;
 	transition: all .5s ease;
@@ -105,7 +105,7 @@ a:focus{
 	color: #fff;
 }
 .button:hover{
-	width: 38%;
+	width: 33%;
 	transition: all .5s ease;
 }
 .button:hover .button-arrow{
@@ -694,7 +694,7 @@ a:focus{
 
 #infinity {
 	max-width: 800px;
-	height: 450px;
+	/*height: 450px;*/
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
