@@ -1,35 +1,1305 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
-        <script type="text/javascript">
-            window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
-              heap.load("3026647544");
-        </script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-128514351-1');
-        </script>
-		<title>Shelly Chen's Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/main.css">
-		<!-- <link rel="stylesheet" href="assets/css/project_socialeyes.css"> -->
-		<link rel="stylesheet" href="assets/css/zoom.css">
-    <link rel="stylesheet" href="assets/css/aos.css">
-</head>
-
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelly Chen</title>
+    
+    <!-- Force HTTPS Redirect -->
+    <script>
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-128514351-1');
+    </script>
     <script type="text/javascript">
-        window.location.href = "https://www.figma.com/proto/kq6mJ6edQqNG4blEzOpTXC/Portfolio?page-id=22%3A66&node-id=22-257&viewport=131%2C-144%2C0.23&t=xcL6YopAFgNE2L2E-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=22%3A257&hide-ui=1";
+        window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+        heap.load("3026647544");
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #000000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Subtle animated starfield background (behind everything) */
+        #bgStarsCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        /* Slight vignette to keep it minimal + readable */
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(1200px 800px at 70% 30%, rgba(84, 69, 255, 0.08), rgba(0, 0, 0, 0) 60%),
+                radial-gradient(900px 700px at 25% 75%, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0) 55%),
+                radial-gradient(1200px 900px at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65) 75%),
+                radial-gradient(1400px 1100px at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85) 100%);
+        }
+
+        /* Subtle blue drift across the screen */
+        .bg-vignette::before {
+            content: "";
+            position: absolute;
+            inset: -25%;
+            pointer-events: none;
+            opacity: 0.32;
+            filter: blur(34px);
+            mix-blend-mode: screen;
+            background:
+                radial-gradient(700px 520px at 15% 35%, rgba(84, 69, 255, 0.18), rgba(0, 0, 0, 0) 65%),
+                radial-gradient(520px 420px at 85% 70%, rgba(84, 69, 255, 0.10), rgba(0, 0, 0, 0) 60%);
+            transform: translate3d(-10%, -6%, 0);
+            animation: bgBlueDrift 26s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgBlueDrift {
+            0%   { transform: translate3d(-12%, -8%, 0); }
+            100% { transform: translate3d(10%, 9%, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-vignette::before {
+                animation: none;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none; /* Firefox */
+            position: relative;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        .container {
+            display: flex;
+            min-height: 300vh;
+            width: 100%;
+        }
+        
+        /* Left Side - Scrollable Content */
+        .left-side {
+            width: 38.2%;
+            min-height: 300vh;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        .section {
+            height: 100vh;
+            min-height: 100vh;
+            padding: 80px 200px 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        
+        /* Pill Styles */
+        .pill-stack {
+            position: fixed;
+            top: 60px;
+            left: 60px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        :root {
+            --pill-safe-y: 0px;          /* computed in JS */
+            --pill-fade-height: 80px;   /* tweak: longer/shorter fade */
+        }
+
+        /* Prevent any scrolling text from visually overlapping the pill area */
+        .top-fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 38.2%;
+            height: calc(var(--pill-safe-y) + var(--pill-fade-height));
+            pointer-events: none;
+            z-index: 999; /* below pills (1000), above scrolling content */
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0px,
+                rgba(0, 0, 0, 1) var(--pill-safe-y),
+                rgba(0, 0, 0, 0) calc(var(--pill-safe-y) + var(--pill-fade-height))
+            );
+        }
+        
+        .pill-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+        }
+        
+        .pill {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 400;
+            width: fit-content;
+            white-space: nowrap;
+            transition: opacity 0.2s ease, width 0.2s ease, transform 0.2s ease;
+        }
+        
+        .pill-primary {
+            background: white;
+            color: #1a1147;
+            transform: rotate(-2deg);
+        }
+        
+        .pill-accent {
+            background: white;
+            color: #3e27b3;
+            transform: rotate(2deg);
+        }
+        
+        .section-description {
+            font-size: 18px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        /* Project Items */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            opacity: 1;
+            transition: opacity 0.18s ease;
+            will-change: opacity;
+        }
+        
+        .project-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            padding: 16px 0;
+        }
+        
+        .project-title {
+            font-size: 18px;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        .project-item:hover .project-title {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
+        }
+        
+        .project-meta {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+        
+        .project-link {
+            color: inherit;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+        
+        .project-item:hover .project-link {
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+        
+        /* Right Side - Fixed Hero */
+        .right-side {
+            width: 61.8%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 60px;
+            padding-left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            overflow: visible;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            text-align: left;
+            z-index: 2;
+            position: relative;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hero-content.hidden {
+            opacity: 0;
+        }
+        
+        .hero-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 650px;
+        }
+        
+        /* Media Preview */
+        .media-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            background: transparent;
+            z-index: 5;
+            padding: 0;
+        }
+        
+        .media-preview.active {
+            opacity: 1;
+        }
+        
+        .media-preview video {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);  
+            /* width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;  */
+        }
+        
+        /* Horizon specific styles with layered image and video */
+        .media-preview-container {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-preview img.device-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+        
+        .media-preview video.overlay-video {
+            position: absolute;
+            top: 5%;
+            left: 12.5%;
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .media-preview.active video.overlay-video {
+            opacity: 1;
+        }
+        
+        /* Sequential video container for messenger stories */
+        .sequential-videos {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sequential-videos video {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sequential-videos video.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        /* Full height media preview for specific items */
+        #preview-messenger-stories video,
+        #preview-ig-broadcast video,
+        #preview-messenger-broadcast video,
+        #preview-craft video,
+        #preview-template video {
+            max-height: 100vh;
+            height: 100%;
+            width: auto;
+            max-width: none;
+            object-fit: contain;
+        }
+        
+        /* Slightly smaller for messenger stories */
+        #preview-messenger-stories video {
+            max-height: 80vh;
+            height: 80%;
+        }
+        
+        /* 80% size and top aligned for messenger broadcast */
+        #preview-messenger-broadcast {
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        #preview-messenger-broadcast video {
+            max-height: 90vh;
+            height: 85%;
+        }
+        
+        /* 90% size and top aligned for ig broadcast */
+        #preview-ig-broadcast {
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        #preview-ig-broadcast video {
+            max-height: 90vh;
+            height: 90%;
+        }
+        
+        #preview-messenger-stories,
+        #preview-ig-broadcast,
+        #preview-messenger-broadcast,
+        #preview-craft,
+        #preview-template {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Override alignment for messenger broadcast and ig broadcast */
+        #preview-messenger-broadcast,
+        #preview-ig-broadcast {
+            align-items: flex-start;
+        }
+        
+        /* Smaller centered video for 101 */
+        #preview-101 {
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        #preview-101 video {
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        #preview-messenger-stories .sequential-videos {
+            max-height: 100vh;
+            height: 100%;
+        }
+        
+        /* Smaller centered video for Kaizen */
+        #preview-kaizen {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-kaizen video {
+            max-width: 70%;
+            max-height: 70%;
+        }
+        
+        /* Smaller centered image for Stargazer */
+        #preview-stargazer {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-stargazer img {
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Smaller centered image for Guide */
+        #preview-guide {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-guide img {
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Video overlay text */
+        .video-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Audiowide', cursive;
+            font-size: 48px;
+            color: white;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        /* Hover description text below media */
+        .media-description {
+            position: absolute;
+            top: calc(100vh - 140px);
+            left: 50%;
+            transform: translateX(-50%);
+            /* max-width: 700px; */
+            width: 60%;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .media-preview.active .media-description {
+            opacity: 1;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+        
+        .scroll-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+        
+        .scroll-dot.active {
+            background: rgba(255, 255, 255, 0.5);
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-side {
+                width: 100%;
+            }
+            
+            .right-side {
+                width: 100%;
+                height: 50vh;
+                position: relative;
+                right: auto;
+                top: auto;
+            }
+            
+            .hero-title {
+                font-size: 24px;
+            }
+            
+            .media-preview-container {
+                max-width: 90%;
+                max-height: 90%;
+            }
+
+            .top-fade-overlay {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .media-preview video.overlay-video {
+                /* Slightly adjust positioning for smaller screens if needed */
+                top: 5%;
+                left: 12.5%;
+                width: 75%;
+                height: 75%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bgStarsCanvas" aria-hidden="true"></canvas>
+    <div class="bg-vignette" aria-hidden="true"></div>
+
+    <!-- Fixed Pill Stack -->
+    <div class="pill-stack" id="pillStack">
+        <div class="pill-container">
+            <span class="pill pill-primary" id="pill1">Shipped</span>
+            <span class="pill pill-accent" id="pill2">Products</span>
+        </div>
+    </div>
+
+    <!-- Fades/blocks content before it reaches the pill stack -->
+    <div class="top-fade-overlay" id="topFadeOverlay" aria-hidden="true"></div>
+    
+    <div class="scroll-container" id="scrollContainer">
+    <div class="container">
+        <!-- Left Side - Scrollable Content -->
+        <div class="left-side">
+            <!-- Section 1: Shipped Products -->
+            <section class="section" data-section="0">
+                <div class="project-list">
+                    <div class="project-item" data-video="horizon">
+                        <h2 class="project-title" data-text="Horizon website redesign"><a href="https://horizon.meta.com/" target="_blank" class="project-link">Horizon website</a> redesign</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="vr-feed">
+                        <h2 class="project-title" data-text="VR + mobile feed redesign"><a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">VR + mobile feed</a> redesign</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="messenger-stories">
+                        <h2 class="project-title" data-text="Messenger stories"><a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger stories</a></h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="ig-broadcast">
+                        <h2 class="project-title" data-text="IG broadcast channel"><a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">IG broadcast channel</a></h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="messenger-broadcast">
+                        <h2 class="project-title" data-text="Messenger broadcast channel"><a href="https://www.theverge.com/2023/10/18/23922888/facebook-broadcast-channels-instagram-whatsapp" target="_blank" class="project-link">Messenger broadcast channel</a></h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 2: Craft & Delight -->
+            <section class="section" data-section="1">
+                <div class="project-list">
+                    <div class="project-item" data-video="craft">
+                        <h2 class="project-title" data-text="Craft, motion, and delight through Origami prototypes.">Craft, motion, and delight through Origami prototypes.</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="kaizen">
+                        <h2 class="project-title" data-text="Kaizen and craft programs."><a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen</a> and <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">craft</a> programs.</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 3: Vibe Coding -->
+            <section class="section" data-section="2">
+                <div class="project-list">
+                    <div class="project-item" data-video="stargazer">
+                        <h2 class="project-title" data-text="Founded and led Stargazer program">Founded and led Stargazer program</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="template">
+                        <h2 class="project-title" data-text="Built reusable Horizon template using Cursor + Xcode">Built reusable Horizon template using Cursor + Xcode</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="guide">
+                        <h2 class="project-title" data-text="Authored starter guides for Metaverse designers">Authored <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">starter guides</a> for Metaverse designers</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="101">
+                        <h2 class="project-title" data-text="Weekly office hours on prompting"><a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=lg9qltr1VliwndBH-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Weekly office hours</a> on prompting</h2>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    </div>
+    
+    <!-- Right Side - Fixed Hero + Media -->
+    <div class="right-side">
+        <div class="hero-content">
+            <h1 class="hero-title">Shelly Chen</h1>
+            <p class="hero-subtitle">Designer focused on craft, delight, and shipping products at scale.</p>
+        </div>
+        
+        <!-- Media Previews -->
+        <div class="media-preview" id="preview-horizon">
+            <div class="media-preview-container">
+                <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
+                <video src="assets/2026/horizon.mp4" class="overlay-video" loop muted playsinline></video>
+            </div>
+            <div class="media-description">Led Horizon website redesign for Connect 2025 launch.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-vr-feed">
+            <video src="assets/2026/vr_feed.mov" loop muted playsinline></video>
+            <div class="media-description">Shipped VR and mobile feed redesigns, announced at Connect 2025.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-messenger-stories">
+            <div class="sequential-videos">
+                <video src="assets/2026/stories1.mov" muted playsinline data-index="0"></video>
+                <video src="assets/2026/stories2.mov" muted playsinline data-index="1"></video>
+                <video src="assets/2026/stories3.mov" muted playsinline data-index="2"></video>
+                <video src="assets/2026/stories4.mov" muted playsinline data-index="3"></video>
+            </div>
+            <div class="media-description">Led Messenger Stories Craft Backlog, shipping 29 craft improvements.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-ig-broadcast">
+            <video src="assets/2026/ig_bc.mov" loop muted playsinline></video>
+            <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (CNBC, Yahoo News). Scaled 10M→124M DAU, 455M MAU.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-messenger-broadcast">
+            <video src="assets/2026/msgr_bc.mp4" loop muted playsinline></video>
+            <div class="media-description">Lead designer, owning end-to-end design for 20 key projects for Oct 2024 GTM (The Verge). Grew DAU 286K → 5M.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-craft">
+            <video src="assets/2026/craft.mov" loop muted playsinline></video>
+        </div>
+        
+        <div class="media-preview" id="preview-kaizen">
+            <video src="assets/2026/kaizen.mov" loop muted playsinline></video>
+            <div class="media-description">Led Kaizen for VR Feed, Messenger Stories Craft Backlog, CM Craft Backlog.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-stargazer">
+            <img src="assets/2026/stargazer.png" alt="Stargazer">
+            <div class="media-description">Org-wide education program to teach designers vibe coding.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-template">
+            <video src="assets/2026/template.mov" loop muted playsinline></video>
+        </div>
+        
+        <div class="media-preview" id="preview-guide">
+            <img src="assets/2026/guide.png" alt="Guide">
+        </div>
+        
+        <div class="media-preview" id="preview-101">
+            <video src="assets/2026/101.mp4" loop muted playsinline></video>
+            <div class="video-overlay-text">Vibe Coding 101</div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <button class="scroll-dot active" data-section="0" aria-label="Shipped Products"></button>
+        <button class="scroll-dot" data-section="1" aria-label="Craft & Delight"></button>
+        <button class="scroll-dot" data-section="2" aria-label="Vibe Coding"></button>
+    </div>
+    
+    <script>
+        // Hover interactions for project items
+        const projectItems = document.querySelectorAll('.project-item');
+        const projectItemsWithVideo = document.querySelectorAll('.project-item[data-video]');
+        const mediaPreviews = document.querySelectorAll('.media-preview');
+        const heroContent = document.querySelector('.hero-content');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        // Hide hero content and scroll indicator on any project item hover
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                heroContent.classList.add('hidden');
+                scrollIndicator.classList.add('hidden');
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                heroContent.classList.remove('hidden');
+                scrollIndicator.classList.remove('hidden');
+            });
+        });
+        
+        // Video preview interactions for items with data-video
+        projectItemsWithVideo.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const videoId = this.getAttribute('data-video');
+                const preview = document.getElementById(`preview-${videoId}`);
+                
+                if (preview) {
+                    // Hide all previews
+                    mediaPreviews.forEach(p => {
+                        p.classList.remove('active');
+                        const videos = p.querySelectorAll('video');
+                        videos.forEach(v => {
+                            v.pause();
+                            v.currentTime = 0;
+                            v.classList.remove('active');
+                        });
+                    });
+                    
+                    // Show and play current preview
+                    preview.classList.add('active');
+                    
+                    // Special handling for messenger-stories (sequential videos)
+                    if (videoId === 'messenger-stories') {
+                        const sequentialVideos = preview.querySelectorAll('video');
+                        let currentIndex = 0;
+                        
+                        const playNextVideo = () => {
+                            if (currentIndex < sequentialVideos.length) {
+                                // Hide all videos first
+                                sequentialVideos.forEach(v => v.classList.remove('active'));
+                                
+                                // Show and play current video
+                                const currentVideo = sequentialVideos[currentIndex];
+                                currentVideo.classList.add('active');
+                                currentVideo.play();
+                                
+                                // When current video ends, play next
+                                currentVideo.onended = () => {
+                                    currentIndex++;
+                                    if (currentIndex < sequentialVideos.length) {
+                                        playNextVideo();
+                                    } else {
+                                        // Loop back to first video
+                                        currentIndex = 0;
+                                        playNextVideo();
+                                    }
+                                };
+                            }
+                        };
+                        
+                        playNextVideo();
+                    } else {
+                        // Standard single video playback
+                        const video = preview.querySelector('video');
+                        if (video) {
+                            video.play();
+                        }
+                    }
+                }
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const videoId = this.getAttribute('data-video');
+                const preview = document.getElementById(`preview-${videoId}`);
+                
+                if (preview) {
+                    preview.classList.remove('active');
+                    const videos = preview.querySelectorAll('video');
+                    videos.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                        v.classList.remove('active');
+                        v.onended = null; // Remove event listener
+                    });
+                }
+            });
+        });
+        
+        // Scroll indicator and pill stack updates
+        const scrollContainer = document.getElementById('scrollContainer');
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+        const sections = document.querySelectorAll('.section');
+        const pill1 = document.getElementById('pill1');
+        const pill2 = document.getElementById('pill2');
+        const pillStack = document.getElementById('pillStack');
+        const topFadeOverlay = document.getElementById('topFadeOverlay');
+        
+        const pillContent = [
+            { primary: 'Shipped', accent: 'Products' },
+            { primary: 'Craft &', accent: 'Delight' },
+            { primary: 'Vibe', accent: 'Coding' }
+        ];
+        
+        let currentSection = 0;
+        
+        function updatePillContent(pillElement, newText) {
+            // Get current width
+            const currentWidth = pillElement.offsetWidth;
+            
+            // Set fixed width to current width
+            pillElement.style.width = currentWidth + 'px';
+            
+            // Fade out to 0.3
+            pillElement.style.opacity = '0.3';
+            
+            setTimeout(() => {
+                // Change content
+                pillElement.textContent = newText;
+                
+                // Get new width by temporarily removing fixed width
+                pillElement.style.width = 'fit-content';
+                const newWidth = pillElement.offsetWidth;
+                
+                // Set back to old width and force reflow
+                pillElement.style.width = currentWidth + 'px';
+                pillElement.offsetHeight; // Force reflow
+                
+                // Animate to new width
+                requestAnimationFrame(() => {
+                    pillElement.style.width = newWidth + 'px';
+                    pillElement.style.opacity = '1';
+                });
+                
+                // Remove fixed width after transition
+                setTimeout(() => {
+                    pillElement.style.width = 'fit-content';
+                }, 200);
+            }, 150);
+        }
+        
+        // Update active dot and pill stack on scroll
+        scrollContainer.addEventListener('scroll', function() {
+            const scrollPosition = scrollContainer.scrollTop;
+            const windowHeight = window.innerHeight;
+            const pillRect = pillStack ? pillStack.getBoundingClientRect() : null;
+            // Anything entering this zone should be fully invisible.
+            const pillSafeTop = pillRect ? pillRect.bottom + 24 : 0;
+            // Start fading out before we reach the pill zone.
+            const pillFadeBufferPx = 180;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                // Calculate opacity based on scroll position
+                const sectionMiddle = sectionTop + sectionHeight / 2;
+                const viewportCenter = scrollPosition + windowHeight / 2;
+                const distanceFromCenter = viewportCenter - sectionMiddle;
+                
+                let opacity;
+                if (distanceFromCenter > 0) {
+                    // Section is above center (scrolling out at top) - fade to 0 quickly
+                    const fadeRange = windowHeight * 0.15; // Faster fade (15% of viewport)
+                    opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
+                } else {
+                    // Section is below center (coming into view) - fade to 0.3 minimum
+                    const fadeRange = windowHeight * 0.4;
+                    opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
+                }
+                
+                // Apply opacity to project list
+                const projectList = section.querySelector('.project-list');
+                if (projectList) {
+                    // Hard-stop fade ONLY when this section is moving upward toward the pill area.
+                    // (Avoid dimming the initial, centered state.)
+                    let pillFactor = 1;
+                    if (distanceFromCenter > 0 && pillStack) {
+                        const listRect = projectList.getBoundingClientRect();
+                        const fadeStart = pillSafeTop + pillFadeBufferPx;
+                        pillFactor = listRect.top >= fadeStart
+                            ? 1
+                            : Math.max(
+                                0,
+                                Math.min(1, (listRect.top - pillSafeTop) / (fadeStart - pillSafeTop))
+                              );
+                    }
+
+                    const finalOpacity = opacity * pillFactor;
+                    projectList.style.opacity = finalOpacity;
+                    projectList.style.pointerEvents = finalOpacity < 0.05 ? 'none' : 'auto';
+                }
+                
+                if (scrollPosition >= sectionTop - windowHeight / 3 && 
+                    scrollPosition < sectionTop + sectionHeight - windowHeight / 3) {
+                    scrollDots.forEach(dot => dot.classList.remove('active'));
+                    scrollDots[index].classList.add('active');
+                    
+                    // Update pill stack content with smooth transition
+                    if (currentSection !== index) {
+                        currentSection = index;
+                        
+                        updatePillContent(pill1, pillContent[index].primary);
+                        updatePillContent(pill2, pillContent[index].accent);
+                    }
+                }
+            });
+        });
+        
+        // Click on dots to scroll
+        scrollDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const sectionIndex = parseInt(this.getAttribute('data-section'));
+                const sectionTop = sections[sectionIndex].offsetTop;
+                scrollContainer.scrollTo({ 
+                    top: sectionTop, 
+                    behavior: 'smooth' 
+                });
+            });
+        });
+        
+        // Initialize opacity on page load
+        function initializeOpacity() {
+            const scrollPosition = scrollContainer.scrollTop;
+            const windowHeight = window.innerHeight;
+            const pillRect = pillStack ? pillStack.getBoundingClientRect() : null;
+            const pillSafeTop = pillRect ? pillRect.bottom + 24 : 0;
+            const pillFadeBufferPx = 180;
+            
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionMiddle = sectionTop + sectionHeight / 2;
+                const viewportCenter = scrollPosition + windowHeight / 2;
+                const distanceFromCenter = viewportCenter - sectionMiddle;
+                
+                let opacity;
+                if (distanceFromCenter > 0) {
+                    // Section is above center (scrolling out at top) - fade to 0 quickly
+                    const fadeRange = windowHeight * 0.15;
+                    opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
+                } else {
+                    // Section is below center (coming into view) - fade to 0.3 minimum
+                    const fadeRange = windowHeight * 0.4;
+                    opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
+                }
+                
+                const projectList = section.querySelector('.project-list');
+                if (projectList) {
+                    let pillFactor = 1;
+                    if (distanceFromCenter > 0 && pillStack) {
+                        const listRect = projectList.getBoundingClientRect();
+                        const fadeStart = pillSafeTop + pillFadeBufferPx;
+                        pillFactor = listRect.top >= fadeStart
+                            ? 1
+                            : Math.max(
+                                0,
+                                Math.min(1, (listRect.top - pillSafeTop) / (fadeStart - pillSafeTop))
+                              );
+                    }
+
+                    const finalOpacity = opacity * pillFactor;
+                    projectList.style.opacity = finalOpacity;
+                    projectList.style.pointerEvents = finalOpacity < 0.05 ? 'none' : 'auto';
+                }
+            });
+        }
+        
+        // Call on load
+        initializeOpacity();
+
+        function updatePillSafeY() {
+            if (!pillStack) return;
+            const rect = pillStack.getBoundingClientRect();
+            const safeY = Math.max(0, rect.bottom + 24);
+            document.documentElement.style.setProperty('--pill-safe-y', `${safeY}px`);
+        }
+
+        updatePillSafeY();
+        window.addEventListener('resize', updatePillSafeY);
+    </script>
+
+    <script>
+        (function initStarfieldBackground() {
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const canvas = document.getElementById('bgStarsCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+            if (!ctx) return;
+
+            const state = {
+                dpr: 1,
+                w: 0,
+                h: 0,
+                stars: [],
+                trail: [],
+                mouse: { x: 0.5, y: 0.5, active: false, lastMoveAt: 0 },
+                comet: { x: 0, y: 0, vx: 0, vy: 0, initialized: false },
+                raf: 0,
+                lastT: 0
+            };
+
+            function clamp(v, min, max) {
+                return Math.max(min, Math.min(max, v));
+            }
+
+            function rgba(c, a) {
+                return `rgba(${c.r}, ${c.g}, ${c.b}, ${a})`;
+            }
+
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+                state.dpr = dpr;
+                state.w = Math.max(1, Math.floor(rect.width));
+                state.h = Math.max(1, Math.floor(rect.height));
+
+                canvas.width = Math.floor(state.w * dpr);
+                canvas.height = Math.floor(state.h * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                const area = state.w * state.h;
+                const targetCount = clamp(Math.floor(area / 14000), 70, 180);
+                state.stars = makeStars(targetCount);
+
+                if (!state.comet.initialized) {
+                    state.comet.x = state.w * 0.5;
+                    state.comet.y = state.h * 0.5;
+                    state.comet.initialized = true;
+                }
+            }
+
+            function makeStars(count) {
+                const stars = [];
+                for (let i = 0; i < count; i++) {
+                    const depth = Math.random(); // 0..1
+                    const size = 0.6 + Math.pow(depth, 1.7) * 1.4;
+                    const baseA = 0.08 + Math.random() * 0.25;
+                    const twinkle = 0.12 + Math.random() * 0.28;
+                    const speed = (0.6 + Math.random() * 1.2) * (0.08 + depth * 0.18);
+                    const hue = Math.random() < 0.12 ? 220 : (Math.random() < 0.20 ? 260 : 0);
+                    stars.push({
+                        x: Math.random(),
+                        y: Math.random(),
+                        depth,
+                        size,
+                        baseA,
+                        twinkle,
+                        phase: Math.random() * Math.PI * 2,
+                        speed,
+                        hue
+                    });
+                }
+                return stars;
+            }
+
+            function onPointerMove(e) {
+                if (prefersReducedMotion) return;
+                const x = 'clientX' in e ? e.clientX : 0;
+                const y = 'clientY' in e ? e.clientY : 0;
+                state.mouse.x = clamp(x / Math.max(1, state.w), 0, 1);
+                state.mouse.y = clamp(y / Math.max(1, state.h), 0, 1);
+                state.mouse.active = true;
+                state.mouse.lastMoveAt = performance.now();
+            }
+
+            function drawBackground(t) {
+                const dt = state.lastT ? Math.min(0.05, (t - state.lastT) / 1000) : 0.016;
+                state.lastT = t;
+
+                ctx.clearRect(0, 0, state.w, state.h);
+
+                // Mouse parallax (subtle)
+                const mx = (state.mouse.x - 0.5) * 2;
+                const my = (state.mouse.y - 0.5) * 2;
+
+                // Stars
+                ctx.save();
+                ctx.globalCompositeOperation = 'source-over';
+                for (const s of state.stars) {
+                    s.phase += dt * (0.55 + s.depth * 0.9);
+                    s.y += dt * s.speed * 0.02;
+                    if (s.y > 1.02) s.y = -0.02;
+
+                    const px = s.x * state.w + mx * (10 * (0.25 + s.depth)) ;
+                    const py = s.y * state.h + my * (8 * (0.25 + s.depth));
+
+                    const tw = Math.sin(s.phase) * 0.5 + 0.5;
+                    const a = s.baseA + tw * s.twinkle;
+
+                    ctx.beginPath();
+                    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+                    if (s.hue === 0) {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${a.toFixed(4)})`;
+                    } else if (s.hue === 220) {
+                        ctx.fillStyle = `rgba(150, 190, 255, ${(a * 0.95).toFixed(4)})`;
+                    } else {
+                        ctx.fillStyle = `rgba(190, 160, 255, ${(a * 0.85).toFixed(4)})`;
+                    }
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                // Comet (only when user is actively moving)
+                if (!prefersReducedMotion && state.mouse.active) {
+                    const sinceMove = t - state.mouse.lastMoveAt;
+                    const cometVisible = sinceMove < 1200;
+
+                    const tx = state.mouse.x * state.w;
+                    const ty = state.mouse.y * state.h;
+                    const ease = 1 - Math.pow(0.001, dt); // framerate independent-ish
+
+                    const px = state.comet.x;
+                    const py = state.comet.y;
+                    state.comet.x += (tx - state.comet.x) * (0.22 * ease + 0.06);
+                    state.comet.y += (ty - state.comet.y) * (0.22 * ease + 0.06);
+
+                    const vx = state.comet.x - px;
+                    const vy = state.comet.y - py;
+
+                    const speed = Math.sqrt(vx * vx + vy * vy);
+                    const intensity = clamp(speed / 18, 0, 1) * (cometVisible ? 1 : 0);
+
+                    if (intensity > 0.01) {
+                        state.trail.push({ x: state.comet.x, y: state.comet.y, t });
+                        const cutoff = t - 680; // ms
+                        while (state.trail.length && state.trail[0].t < cutoff) state.trail.shift();
+
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'lighter';
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+
+                        // Tail stroke (polyline, fading)
+                        for (let i = 1; i < state.trail.length; i++) {
+                            const a0 = (i - 1) / state.trail.length;
+                            const a1 = i / state.trail.length;
+                            const p0 = state.trail[i - 1];
+                            const p1 = state.trail[i];
+
+                            const alpha = (0.05 + 0.24 * (1 - a1)) * intensity;
+                            const width = 1 + (1 - a1) * 5 * intensity;
+
+                            ctx.strokeStyle = `rgba(150, 190, 255, ${alpha.toFixed(4)})`;
+                            ctx.lineWidth = width;
+                            ctx.shadowColor = 'rgba(120, 170, 255, 0.45)';
+                            ctx.shadowBlur = 14 * intensity;
+
+                            ctx.beginPath();
+                            ctx.moveTo(p0.x, p0.y);
+                            ctx.lineTo(p1.x, p1.y);
+                            ctx.stroke();
+                        }
+
+                        // Head glow
+                        ctx.shadowColor = 'rgba(180, 210, 255, 0.65)';
+                        ctx.shadowBlur = 24 * intensity;
+                        ctx.fillStyle = `rgba(235, 245, 255, ${(0.22 + 0.55 * intensity).toFixed(4)})`;
+                        ctx.beginPath();
+                        ctx.arc(state.comet.x, state.comet.y, 2.2 + 2.6 * intensity, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Tiny highlight
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${(0.35 * intensity).toFixed(4)})`;
+                        ctx.beginPath();
+                        ctx.arc(state.comet.x - 2, state.comet.y - 2, 1.2 + 0.8 * intensity, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.restore();
+                    } else if (!cometVisible) {
+                        // Slowly clear trail when idle
+                        if (state.trail.length) state.trail.splice(0, Math.max(1, Math.floor(state.trail.length * 0.12)));
+                    }
+                }
+            }
+
+            function renderOnce() {
+                // Static, minimal background for reduced motion
+                ctx.clearRect(0, 0, state.w, state.h);
+                ctx.save();
+                ctx.globalCompositeOperation = 'source-over';
+                for (const s of state.stars) {
+                    const px = s.x * state.w;
+                    const py = s.y * state.h;
+                    const a = s.baseA + 0.08;
+                    ctx.beginPath();
+                    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${a.toFixed(4)})`;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function tick(t) {
+                drawBackground(t);
+                state.raf = requestAnimationFrame(tick);
+            }
+
+            // Init
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('pointermove', onPointerMove, { passive: true });
+
+            if (prefersReducedMotion) {
+                renderOnce();
+                return;
+            }
+
+            state.raf = requestAnimationFrame(tick);
+        })();
     </script>
 </body>
 </html>
-
