@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="force-cursor">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelly Chen</title>
+    <title>Shelly Chen - Option 2: Reset Hover State</title>
     
     <!-- Force HTTPS Redirect -->
     <script>
         if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
             location.replace('https:' + window.location.href.substring(window.location.protocol.length));
         }
+    </script>
+
+    <!-- Ensure custom cursor re-applies on refresh/tab focus -->
+    <script>
+        (function ensureCursorPaints() {
+            const root = document.documentElement;
+            function refreshCursor() {
+                root.classList.remove('force-cursor');
+                void root.offsetHeight; // force style recalc / repaint
+                root.classList.add('force-cursor');
+            }
+
+            root.classList.add('force-cursor');
+            window.addEventListener('pageshow', refreshCursor);
+            window.addEventListener('focus', refreshCursor);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) refreshCursor();
+            });
+        })();
     </script>
     
     <!-- Google Fonts -->
@@ -35,6 +54,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html.force-cursor,
+        html.force-cursor * {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CradialGradient id='starGlow'%3E%3Cstop offset='0%25' style='stop-color:rgb(240,210,255);stop-opacity:1'/%3E%3Cstop offset='40%25' style='stop-color:rgb(170,175,255);stop-opacity:0.8'/%3E%3Cstop offset='100%25' style='stop-color:rgb(100,140,255);stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='16' fill='url(%23starGlow)'/%3E%3Ccircle cx='20' cy='20' r='4.5' fill='rgb(245,220,255)' opacity='1'/%3E%3C/svg%3E") 20 20, auto !important;
         }
         
         body {
@@ -78,12 +102,12 @@
             position: absolute;
             inset: -25%;
             pointer-events: none;
-            opacity: 0.32;
+            opacity: 0.55;
             filter: blur(34px);
             mix-blend-mode: screen;
             background:
-                radial-gradient(700px 520px at 15% 35%, rgba(84, 69, 255, 0.18), rgba(0, 0, 0, 0) 65%),
-                radial-gradient(520px 420px at 85% 70%, rgba(84, 69, 255, 0.10), rgba(0, 0, 0, 0) 60%);
+                radial-gradient(700px 520px at 15% 35%, rgba(84, 69, 255, 0.32), rgba(0, 0, 0, 0) 65%),
+                radial-gradient(520px 420px at 85% 70%, rgba(84, 69, 255, 0.24), rgba(0, 0, 0, 0) 60%);
             transform: translate3d(-10%, -6%, 0);
             animation: bgBlueDrift 26s ease-in-out infinite alternate;
         }
@@ -115,14 +139,14 @@
         
         .container {
             display: flex;
-            min-height: 300vh;
+            min-height: 400vh;
             width: 100%;
         }
         
         /* Left Side - Scrollable Content */
         .left-side {
             width: 38.2%;
-            min-height: 300vh;
+            min-height: 400vh;
             position: relative;
             z-index: 10;
             pointer-events: auto;
@@ -131,7 +155,7 @@
         .section {
             height: 100vh;
             min-height: 100vh;
-            padding: 80px 200px 80px 60px;
+            padding: 60px 200px 80px 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -139,36 +163,20 @@
             scroll-snap-stop: always;
         }
         
+        .section:first-child {
+            padding-top: 60px;
+        }
+        
         /* Pill Styles */
         .pill-stack {
-            position: fixed;
-            top: 60px;
-            left: 60px;
+            position: relative;
+            margin-bottom: 40px;
             z-index: 1000;
             pointer-events: none;
+            transition: opacity 0.18s ease;
+            will-change: opacity;
         }
 
-        :root {
-            --pill-safe-y: 0px;          /* computed in JS */
-            --pill-fade-height: 80px;   /* tweak: longer/shorter fade */
-        }
-
-        /* Prevent any scrolling text from visually overlapping the pill area */
-        .top-fade-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 38.2%;
-            height: calc(var(--pill-safe-y) + var(--pill-fade-height));
-            pointer-events: none;
-            z-index: 999; /* below pills (1000), above scrolling content */
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 1) 0px,
-                rgba(0, 0, 0, 1) var(--pill-safe-y),
-                rgba(0, 0, 0, 0) calc(var(--pill-safe-y) + var(--pill-fade-height))
-            );
-        }
         
         .pill-container {
             display: flex;
@@ -220,7 +228,6 @@
         }
         
         .project-item {
-            cursor: pointer;
             transition: all 0.3s ease;
             pointer-events: auto;
             padding: 16px 0;
@@ -234,7 +241,8 @@
             transition: all 0.3s ease;
         }
         
-        .project-item:hover .project-title {
+        .project-item:hover .project-title,
+        .project-item.active .project-title {
             color: rgba(255, 255, 255, 1);
             text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
         }
@@ -252,9 +260,22 @@
             transition: text-decoration 0.3s ease;
         }
         
-        .project-item:hover .project-link {
+        .project-item:hover .project-link,
+        .project-item.active .project-link {
             text-decoration: underline;
             text-underline-offset: 6px;
+        }
+        
+        /* Links in media descriptions should be underlined */
+        .media-description .project-link {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .media-description .project-link:hover {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
         }
         
         /* Right Side - Fixed Hero */
@@ -273,18 +294,6 @@
             overflow: visible;
             z-index: 1;
             pointer-events: none;
-        }
-        
-        .hero-content {
-            text-align: left;
-            z-index: 2;
-            position: relative;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        
-        .hero-content.hidden {
-            opacity: 0;
         }
         
         .hero-title {
@@ -325,16 +334,16 @@
             opacity: 1;
         }
         
+        .media-preview.fading-out {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
         .media-preview video {
             max-width: 95%;
             max-height: 95%;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);  
-            /* width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 0;
-            box-shadow: none;  */
         }
         
         /* Horizon specific styles with layered image and video */
@@ -527,7 +536,6 @@
             top: calc(100vh - 140px);
             left: 50%;
             transform: translateX(-50%);
-            /* max-width: 700px; */
             width: 60%;
             text-align: center;
             font-size: 16px;
@@ -541,6 +549,95 @@
         
         .media-preview.active .media-description {
             opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Hover hint - prominent pulsing circle with star theme */
+        .hover-hint-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 500;
+        }
+        
+        .hover-hint-overlay.visible {
+            opacity: 1;
+        }
+        
+        /* Smaller pulsing circle - concentrated on first item */
+        .spotlight {
+            position: absolute;
+            left: 12%;
+            top: 50%;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 245, 255, 0.75) 0%,
+                rgba(250, 235, 255, 0.6) 15%,
+                rgba(235, 220, 255, 0.45) 30%,
+                rgba(200, 190, 255, 0.25) 50%,
+                transparent 70%
+            );
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: circlePulse 2s ease-in-out infinite;
+            transform: translate(-50%, -50%);
+            box-shadow: 
+                0 0 20px rgba(250, 235, 255, 0.4),
+                0 0 35px rgba(200, 190, 255, 0.25);
+        }
+        
+        @keyframes circlePulse {
+            0%, 100% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.45);
+            }
+            50% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+        
+        /* Floating star particles - matching cursor palette */
+        .star-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(245, 220, 255, 1);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatStar 2.5s ease-in-out infinite;
+            box-shadow: 
+                0 0 6px rgba(245, 220, 255, 0.9),
+                0 0 12px rgba(170, 175, 255, 0.6),
+                0 0 20px rgba(100, 140, 255, 0.4);
+        }
+        
+        .star-particle:nth-child(2) { animation-delay: 0.5s; }
+        .star-particle:nth-child(3) { animation-delay: 1s; }
+        .star-particle:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes floatStar {
+            0% { 
+                opacity: 0;
+                transform: translate(0, 0) scale(0.2);
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% { 
+                opacity: 0;
+                transform: translate(var(--float-x), var(--float-y)) scale(1.2);
+            }
         }
         
         /* Scroll Indicator */
@@ -567,7 +664,6 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            cursor: pointer;
             transition: all 0.3s ease;
             pointer-events: auto;
         }
@@ -605,14 +701,10 @@
                 max-height: 90%;
             }
 
-            .top-fade-overlay {
-                width: 100%;
-            }
         }
         
         @media (max-width: 768px) {
             .media-preview video.overlay-video {
-                /* Slightly adjust positioning for smaller screens if needed */
                 top: 5%;
                 left: 12.5%;
                 width: 75%;
@@ -624,62 +716,87 @@
 <body>
     <canvas id="bgStarsCanvas" aria-hidden="true"></canvas>
     <div class="bg-vignette" aria-hidden="true"></div>
-
-    <!-- Fixed Pill Stack -->
-    <div class="pill-stack" id="pillStack">
-        <div class="pill-container">
-            <span class="pill pill-primary" id="pill1">Shipped</span>
-            <span class="pill pill-accent" id="pill2">Products</span>
-        </div>
+    
+    <!-- Hover Hint - Smaller Circle Focused on First Item -->
+    <div class="hover-hint-overlay" id="hoverHintOverlay">
+        <div class="spotlight"></div>
+        <div class="star-particle" style="left: 12%; top: 45%; --float-x: -25px; --float-y: -35px;"></div>
+        <div class="star-particle" style="left: 18%; top: 50%; --float-x: 40px; --float-y: -10px;"></div>
+        <div class="star-particle" style="left: 6%; top: 50%; --float-x: -40px; --float-y: 15px;"></div>
+        <div class="star-particle" style="left: 12%; top: 55%; --float-x: 15px; --float-y: 35px;"></div>
     </div>
-
-    <!-- Fades/blocks content before it reaches the pill stack -->
-    <div class="top-fade-overlay" id="topFadeOverlay" aria-hidden="true"></div>
     
     <div class="scroll-container" id="scrollContainer">
     <div class="container">
         <!-- Left Side - Scrollable Content -->
         <div class="left-side">
-            <!-- Section 1: Shipped Products -->
+            <!-- Section 0: Hero -->
             <section class="section" data-section="0">
+                <h1 class="hero-title">Shelly Chen</h1>
+                <p class="hero-subtitle">Designer focused on craft, delight, and shipping products at scale.</p>
+            </section>
+            
+            <!-- Section 1: Shipped Products -->
+            <section class="section" data-section="1">
+                <div class="pill-stack" id="pillStack">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1">Shipped</span>
+                        <span class="pill pill-accent" id="pill2">Products</span>
+                    </div>
+                </div>
+                
                 <div class="project-list">
                     <div class="project-item" data-video="horizon">
-                        <h2 class="project-title" data-text="Horizon website redesign"><a href="https://horizon.meta.com/" target="_blank" class="project-link">Horizon website</a> redesign</h2>
+                        <h2 class="project-title" data-text="Horizon website redesign">Horizon website redesign</h2>
                     </div>
                     
                     <div class="project-item" data-video="vr-feed">
-                        <h2 class="project-title" data-text="VR + mobile feed redesign"><a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">VR + mobile feed</a> redesign</h2>
+                        <h2 class="project-title" data-text="VR + mobile feed redesign">VR + mobile feed redesign</h2>
                     </div>
                     
                     <div class="project-item" data-video="messenger-stories">
-                        <h2 class="project-title" data-text="Messenger stories"><a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger stories</a></h2>
+                        <h2 class="project-title" data-text="Messenger stories">Messenger stories</h2>
                     </div>
                     
                     <div class="project-item" data-video="ig-broadcast">
-                        <h2 class="project-title" data-text="IG broadcast channel"><a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">IG broadcast channel</a></h2>
+                        <h2 class="project-title" data-text="IG broadcast channel">IG broadcast channel</h2>
                     </div>
                     
                     <div class="project-item" data-video="messenger-broadcast">
-                        <h2 class="project-title" data-text="Messenger broadcast channel"><a href="https://www.theverge.com/2023/10/18/23922888/facebook-broadcast-channels-instagram-whatsapp" target="_blank" class="project-link">Messenger broadcast channel</a></h2>
+                        <h2 class="project-title" data-text="Messenger broadcast channel">Messenger broadcast channel</h2>
                     </div>
                 </div>
             </section>
             
             <!-- Section 2: Craft & Delight -->
-            <section class="section" data-section="1">
+            <section class="section" data-section="2">
+                <div class="pill-stack" id="pillStack2">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1-section2">Craft &</span>
+                        <span class="pill pill-accent" id="pill2-section2">Delight</span>
+                    </div>
+                </div>
+                
                 <div class="project-list">
                     <div class="project-item" data-video="craft">
                         <h2 class="project-title" data-text="Craft, motion, and delight through Origami prototypes.">Craft, motion, and delight through Origami prototypes.</h2>
                     </div>
                     
                     <div class="project-item" data-video="kaizen">
-                        <h2 class="project-title" data-text="Kaizen and craft programs."><a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen</a> and <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">craft</a> programs.</h2>
+                        <h2 class="project-title" data-text="Kaizen and craft programs.">Kaizen and craft programs.</h2>
                     </div>
                 </div>
             </section>
             
             <!-- Section 3: Vibe Coding -->
-            <section class="section" data-section="2">
+            <section class="section" data-section="3">
+                <div class="pill-stack" id="pillStack3">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1-section3">Vibe</span>
+                        <span class="pill pill-accent" id="pill2-section3">Coding</span>
+                    </div>
+                </div>
+                
                 <div class="project-list">
                     <div class="project-item" data-video="stargazer">
                         <h2 class="project-title" data-text="Founded and led Stargazer program">Founded and led Stargazer program</h2>
@@ -690,11 +807,11 @@
                     </div>
                     
                     <div class="project-item" data-video="guide">
-                        <h2 class="project-title" data-text="Authored starter guides for Metaverse designers">Authored <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">starter guides</a> for Metaverse designers</h2>
+                        <h2 class="project-title" data-text="Authored starter guides for Metaverse designers">Authored starter guides for Metaverse designers</h2>
                     </div>
                     
                     <div class="project-item" data-video="101">
-                        <h2 class="project-title" data-text="Weekly office hours on prompting"><a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=lg9qltr1VliwndBH-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Weekly office hours</a> on prompting</h2>
+                        <h2 class="project-title" data-text="Weekly office hours on prompting">Weekly office hours on prompting</h2>
                     </div>
                 </div>
             </section>
@@ -702,25 +819,20 @@
     </div>
     </div>
     
-    <!-- Right Side - Fixed Hero + Media -->
+    <!-- Right Side - Fixed Media -->
     <div class="right-side">
-        <div class="hero-content">
-            <h1 class="hero-title">Shelly Chen</h1>
-            <p class="hero-subtitle">Designer focused on craft, delight, and shipping products at scale.</p>
-        </div>
-        
         <!-- Media Previews -->
         <div class="media-preview" id="preview-horizon">
             <div class="media-preview-container">
                 <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
                 <video src="assets/2026/horizon.mp4" class="overlay-video" loop muted playsinline></video>
             </div>
-            <div class="media-description">Led Horizon website redesign for Connect 2025 launch.</div>
+            <div class="media-description">Led Horizon website redesign for <a href="https://horizon.meta.com/" target="_blank" class="project-link">Connect 2025 launch</a>.</div>
         </div>
         
         <div class="media-preview" id="preview-vr-feed">
             <video src="assets/2026/vr_feed.mov" loop muted playsinline></video>
-            <div class="media-description">Shipped VR and mobile feed redesigns, announced at Connect 2025.</div>
+            <div class="media-description">Shipped VR and mobile feed redesigns, announced at <a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">Connect 2025</a>.</div>
         </div>
         
         <div class="media-preview" id="preview-messenger-stories">
@@ -730,17 +842,17 @@
                 <video src="assets/2026/stories3.mov" muted playsinline data-index="2"></video>
                 <video src="assets/2026/stories4.mov" muted playsinline data-index="3"></video>
             </div>
-            <div class="media-description">Led Messenger Stories Craft Backlog, shipping 29 craft improvements.</div>
+            <div class="media-description">Led <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, shipping 29 craft improvements.</div>
         </div>
         
         <div class="media-preview" id="preview-ig-broadcast">
             <video src="assets/2026/ig_bc.mov" loop muted playsinline></video>
-            <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (CNBC, Yahoo News). Scaled 10M→124M DAU, 455M MAU.</div>
+            <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (<a href="https://www.cnbctv18.com/technology/now-connect-with-your-favourite-creators-on-instagram-broadcast-channels-16944171.htm" target="_blank" class="project-link">CNBC</a>, <a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">Yahoo News</a>). Scaled 10M→124M DAU, 455M MAU.</div>
         </div>
         
         <div class="media-preview" id="preview-messenger-broadcast">
             <video src="assets/2026/msgr_bc.mp4" loop muted playsinline></video>
-            <div class="media-description">Lead designer, owning end-to-end design for 20 key projects for Oct 2024 GTM (The Verge). Grew DAU 286K → 5M.</div>
+            <div class="media-description">Lead designer, owning end-to-end design for 20 key projects for Oct 2024 GTM (<a href="https://www.theverge.com/2023/10/18/23922888/facebook-broadcast-channels-instagram-whatsapp" target="_blank" class="project-link">The Verge</a>). Grew DAU 286K → 5M.</div>
         </div>
         
         <div class="media-preview" id="preview-craft">
@@ -749,7 +861,7 @@
         
         <div class="media-preview" id="preview-kaizen">
             <video src="assets/2026/kaizen.mov" loop muted playsinline></video>
-            <div class="media-description">Led Kaizen for VR Feed, Messenger Stories Craft Backlog, CM Craft Backlog.</div>
+            <div class="media-description">Led <a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen for VR Feed</a>, <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">CM Craft Backlog</a>.</div>
         </div>
         
         <div class="media-preview" id="preview-stargazer">
@@ -763,181 +875,272 @@
         
         <div class="media-preview" id="preview-guide">
             <img src="assets/2026/guide.png" alt="Guide">
+            <div class="media-description">Published <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">four starter guides</a> to easily start vibe coding.</div>
         </div>
         
         <div class="media-preview" id="preview-101">
             <video src="assets/2026/101.mp4" loop muted playsinline></video>
-            <div class="video-overlay-text">Vibe Coding 101</div>
+            <div class="video-overlay-text"><a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=2PIYE5MhEEzYbBE4-1&scaling=scale-down&content-scaling=fixed" target="_blank" style="color: white; text-decoration: underline; pointer-events: auto;">Vibe Coding 101</a></div>
         </div>
     </div>
     
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
-        <button class="scroll-dot active" data-section="0" aria-label="Shipped Products"></button>
-        <button class="scroll-dot" data-section="1" aria-label="Craft & Delight"></button>
-        <button class="scroll-dot" data-section="2" aria-label="Vibe Coding"></button>
+        <button class="scroll-dot active" data-section="0" aria-label="Hero"></button>
+        <button class="scroll-dot" data-section="1" aria-label="Shipped Products"></button>
+        <button class="scroll-dot" data-section="2" aria-label="Craft & Delight"></button>
+        <button class="scroll-dot" data-section="3" aria-label="Vibe Coding"></button>
     </div>
     
     <script>
-        // Hover interactions for project items
+        // OPTION 2: Reset hover state when scrolling between sections + hover hint
+        
         const projectItems = document.querySelectorAll('.project-item');
         const projectItemsWithVideo = document.querySelectorAll('.project-item[data-video]');
         const mediaPreviews = document.querySelectorAll('.media-preview');
-        const heroContent = document.querySelector('.hero-content');
         const scrollIndicator = document.querySelector('.scroll-indicator');
+        const hoverHintOverlay = document.getElementById('hoverHintOverlay');
         
-        // Hide hero content and scroll indicator on any project item hover
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                heroContent.classList.add('hidden');
-                scrollIndicator.classList.add('hidden');
+        let currentActivePreview = null;
+        let fadeOutTimeout = null;
+        let lastActiveSection = 0;
+        let hoveredSections = new Set(); // Track which sections have been hovered
+        let hasUserEverHovered = false; // Track if user has hovered on any project item
+        let hintTimeout = null;
+        let recurringHintTimeout = null;
+        
+        // Helper function to activate a preview
+        function activatePreview(videoId) {
+            const preview = document.getElementById(`preview-${videoId}`);
+            
+            if (!preview) return;
+            
+            // Clear any pending fade-out timeout
+            if (fadeOutTimeout) {
+                clearTimeout(fadeOutTimeout);
+                fadeOutTimeout = null;
+            }
+            
+            // If there's a currently active preview that's different, fade it out
+            if (currentActivePreview && currentActivePreview !== preview) {
+                const oldPreview = currentActivePreview;
+                const oldVideos = oldPreview.querySelectorAll('video');
+                
+                oldVideos.forEach(v => {
+                    v.pause();
+                    v.onended = null;
+                });
+                
+                oldPreview.classList.add('fading-out');
+                oldPreview.classList.remove('active');
+                
+                setTimeout(() => {
+                    oldPreview.classList.remove('fading-out');
+                    oldVideos.forEach(v => {
+                        v.currentTime = 0;
+                        v.classList.remove('active');
+                    });
+                }, 300);
+            }
+            
+            // Show and play current preview
+            preview.classList.add('active');
+            currentActivePreview = preview;
+            
+            // Special handling for messenger-stories (sequential videos)
+            if (videoId === 'messenger-stories') {
+                const sequentialVideos = preview.querySelectorAll('video');
+                let currentIndex = 0;
+                
+                const playNextVideo = () => {
+                    if (currentIndex < sequentialVideos.length) {
+                        sequentialVideos.forEach(v => v.classList.remove('active'));
+                        
+                        const currentVideo = sequentialVideos[currentIndex];
+                        currentVideo.classList.add('active');
+                        currentVideo.play();
+                        
+                        currentVideo.onended = () => {
+                            currentIndex++;
+                            if (currentIndex < sequentialVideos.length) {
+                                playNextVideo();
+                            } else {
+                                currentIndex = 0;
+                                playNextVideo();
+                            }
+                        };
+                    }
+                };
+                
+                playNextVideo();
+            } else {
+                const video = preview.querySelector('video');
+                if (video) {
+                    video.play();
+                }
+            }
+        }
+        
+        // Helper function to reset all previews
+        function resetAllPreviews() {
+            mediaPreviews.forEach(preview => {
+                const videos = preview.querySelectorAll('video');
+                
+                videos.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                    v.onended = null;
+                    v.classList.remove('active');
+                });
+                
+                preview.classList.remove('active', 'fading-out');
             });
             
-            item.addEventListener('mouseleave', function() {
-                heroContent.classList.remove('hidden');
-                scrollIndicator.classList.remove('hidden');
-            });
-        });
+            // Remove active class from all project items
+            projectItemsWithVideo.forEach(item => item.classList.remove('active'));
+            
+            currentActivePreview = null;
+        }
+        
+        // Show hover hint with visual effects
+        function showHoverHint(section, sectionIndex) {
+            // Don't show hint if user has already hovered on any section
+            if (hasUserEverHovered) {
+                return;
+            }
+            
+            // Check if this section has already been hovered
+            const sectionId = `section-${sectionIndex}`;
+            const hasInteractedWithSection = hoveredSections.has(sectionId);
+            
+            if (!hasInteractedWithSection && section) {
+                // Find the first project item in the section
+                const firstItem = section.querySelector('.project-item[data-video]');
+                if (firstItem) {
+                    // Calculate position relative to viewport
+                    const itemRect = firstItem.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    
+                    // Calculate percentage position (center of the first item)
+                    const topPercent = ((itemRect.top + itemRect.height / 2) / viewportHeight * 100);
+                    
+                    // If already visible, fade out first, then reposition and fade in
+                    const isCurrentlyVisible = hoverHintOverlay.classList.contains('visible');
+                    
+                    if (isCurrentlyVisible) {
+                        // Fade out
+                        hoverHintOverlay.classList.remove('visible');
+                        
+                        // Wait for fade out, then reposition and fade in
+                        setTimeout(() => {
+                            // Update spotlight position
+                            const spotlight = hoverHintOverlay.querySelector('.spotlight');
+                            if (spotlight) {
+                                spotlight.style.top = `${topPercent}%`;
+                            }
+                            
+                            // Update star particles positions around the spotlight
+                            const starParticles = hoverHintOverlay.querySelectorAll('.star-particle');
+                            if (starParticles.length >= 4) {
+                                starParticles[0].style.top = `${topPercent - 5}%`;
+                                starParticles[1].style.top = `${topPercent}%`;
+                                starParticles[2].style.top = `${topPercent}%`;
+                                starParticles[3].style.top = `${topPercent + 5}%`;
+                            }
+                            
+                            // Fade back in
+                            hoverHintOverlay.classList.add('visible');
+                        }, 600); // Match the CSS transition time
+                    } else {
+                        // Not currently visible, just position and show
+                        const spotlight = hoverHintOverlay.querySelector('.spotlight');
+                        if (spotlight) {
+                            spotlight.style.top = `${topPercent}%`;
+                        }
+                        
+                        // Update star particles positions around the spotlight
+                        const starParticles = hoverHintOverlay.querySelectorAll('.star-particle');
+                        if (starParticles.length >= 4) {
+                            starParticles[0].style.top = `${topPercent - 5}%`;
+                            starParticles[1].style.top = `${topPercent}%`;
+                            starParticles[2].style.top = `${topPercent}%`;
+                            starParticles[3].style.top = `${topPercent + 5}%`;
+                        }
+                        
+                        hoverHintOverlay.classList.add('visible');
+                    }
+                }
+                
+                // Auto-hide after 6 seconds
+                if (hintTimeout) clearTimeout(hintTimeout);
+                hintTimeout = setTimeout(() => {
+                    hideHoverHint();
+                }, 6000);
+                
+                // Set up recurring hint if no interaction (show again after 10 seconds)
+                if (recurringHintTimeout) clearTimeout(recurringHintTimeout);
+                recurringHintTimeout = setTimeout(() => {
+                    // Only show again if user hasn't interacted with any section at all
+                    if (!hasUserEverHovered && !hoveredSections.has(sectionId)) {
+                        showHoverHint(section, sectionIndex);
+                    }
+                }, 10000);
+            }
+        }
+        
+        // Hide hover hint
+        function hideHoverHint() {
+            hoverHintOverlay.classList.remove('visible');
+            if (hintTimeout) {
+                clearTimeout(hintTimeout);
+                hintTimeout = null;
+            }
+        }
+        
+        // Mark current section as interacted
+        function markSectionAsHovered(sectionIndex) {
+            const sectionId = `section-${sectionIndex}`;
+            hoveredSections.add(sectionId);
+            
+            // Mark that user has hovered on any section (disables all future hints)
+            hasUserEverHovered = true;
+            
+            // Clear recurring hint for this section
+            if (recurringHintTimeout) {
+                clearTimeout(recurringHintTimeout);
+                recurringHintTimeout = null;
+            }
+            
+            // Hide the hint immediately
+            hideHoverHint();
+        }
         
         // Video preview interactions for items with data-video
         projectItemsWithVideo.forEach(item => {
             item.addEventListener('mouseenter', function() {
                 const videoId = this.getAttribute('data-video');
-                const preview = document.getElementById(`preview-${videoId}`);
+                activatePreview(videoId);
                 
-                if (preview) {
-                    // Hide all previews
-                    mediaPreviews.forEach(p => {
-                        p.classList.remove('active');
-                        const videos = p.querySelectorAll('video');
-                        videos.forEach(v => {
-                            v.pause();
-                            v.currentTime = 0;
-                            v.classList.remove('active');
-                        });
-                    });
-                    
-                    // Show and play current preview
-                    preview.classList.add('active');
-                    
-                    // Special handling for messenger-stories (sequential videos)
-                    if (videoId === 'messenger-stories') {
-                        const sequentialVideos = preview.querySelectorAll('video');
-                        let currentIndex = 0;
-                        
-                        const playNextVideo = () => {
-                            if (currentIndex < sequentialVideos.length) {
-                                // Hide all videos first
-                                sequentialVideos.forEach(v => v.classList.remove('active'));
-                                
-                                // Show and play current video
-                                const currentVideo = sequentialVideos[currentIndex];
-                                currentVideo.classList.add('active');
-                                currentVideo.play();
-                                
-                                // When current video ends, play next
-                                currentVideo.onended = () => {
-                                    currentIndex++;
-                                    if (currentIndex < sequentialVideos.length) {
-                                        playNextVideo();
-                                    } else {
-                                        // Loop back to first video
-                                        currentIndex = 0;
-                                        playNextVideo();
-                                    }
-                                };
-                            }
-                        };
-                        
-                        playNextVideo();
-                    } else {
-                        // Standard single video playback
-                        const video = preview.querySelector('video');
-                        if (video) {
-                            video.play();
-                        }
-                    }
-                }
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                const videoId = this.getAttribute('data-video');
-                const preview = document.getElementById(`preview-${videoId}`);
+                // Remove active class from all project items
+                projectItemsWithVideo.forEach(i => i.classList.remove('active'));
                 
-                if (preview) {
-                    preview.classList.remove('active');
-                    const videos = preview.querySelectorAll('video');
-                    videos.forEach(v => {
-                        v.pause();
-                        v.currentTime = 0;
-                        v.classList.remove('active');
-                        v.onended = null; // Remove event listener
-                    });
-                }
+                // Add active class to currently hovered item
+                this.classList.add('active');
+                
+                // Mark the current section as hovered
+                markSectionAsHovered(lastActiveSection);
             });
         });
         
-        // Scroll indicator and pill stack updates
+        // Scroll indicator updates
         const scrollContainer = document.getElementById('scrollContainer');
         const scrollDots = document.querySelectorAll('.scroll-dot');
         const sections = document.querySelectorAll('.section');
-        const pill1 = document.getElementById('pill1');
-        const pill2 = document.getElementById('pill2');
-        const pillStack = document.getElementById('pillStack');
-        const topFadeOverlay = document.getElementById('topFadeOverlay');
         
-        const pillContent = [
-            { primary: 'Shipped', accent: 'Products' },
-            { primary: 'Craft &', accent: 'Delight' },
-            { primary: 'Vibe', accent: 'Coding' }
-        ];
-        
-        let currentSection = 0;
-        
-        function updatePillContent(pillElement, newText) {
-            // Get current width
-            const currentWidth = pillElement.offsetWidth;
-            
-            // Set fixed width to current width
-            pillElement.style.width = currentWidth + 'px';
-            
-            // Fade out to 0.3
-            pillElement.style.opacity = '0.3';
-            
-            setTimeout(() => {
-                // Change content
-                pillElement.textContent = newText;
-                
-                // Get new width by temporarily removing fixed width
-                pillElement.style.width = 'fit-content';
-                const newWidth = pillElement.offsetWidth;
-                
-                // Set back to old width and force reflow
-                pillElement.style.width = currentWidth + 'px';
-                pillElement.offsetHeight; // Force reflow
-                
-                // Animate to new width
-                requestAnimationFrame(() => {
-                    pillElement.style.width = newWidth + 'px';
-                    pillElement.style.opacity = '1';
-                });
-                
-                // Remove fixed width after transition
-                setTimeout(() => {
-                    pillElement.style.width = 'fit-content';
-                }, 200);
-            }, 150);
-        }
-        
-        // Update active dot and pill stack on scroll
+        // Update active dot on scroll
         scrollContainer.addEventListener('scroll', function() {
             const scrollPosition = scrollContainer.scrollTop;
             const windowHeight = window.innerHeight;
-            const pillRect = pillStack ? pillStack.getBoundingClientRect() : null;
-            // Anything entering this zone should be fully invisible.
-            const pillSafeTop = pillRect ? pillRect.bottom + 24 : 0;
-            // Start fading out before we reach the pill zone.
-            const pillFadeBufferPx = 180;
             
             sections.forEach((section, index) => {
                 const sectionTop = section.offsetTop;
@@ -950,35 +1153,23 @@
                 
                 let opacity;
                 if (distanceFromCenter > 0) {
-                    // Section is above center (scrolling out at top) - fade to 0 quickly
-                    const fadeRange = windowHeight * 0.15; // Faster fade (15% of viewport)
+                    const fadeRange = windowHeight * 0.15;
                     opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
                 } else {
-                    // Section is below center (coming into view) - fade to 0.3 minimum
                     const fadeRange = windowHeight * 0.4;
                     opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
                 }
                 
-                // Apply opacity to project list
+                const pillStack = section.querySelector('.pill-stack');
                 const projectList = section.querySelector('.project-list');
+                
+                if (pillStack) {
+                    pillStack.style.opacity = opacity;
+                }
+                
                 if (projectList) {
-                    // Hard-stop fade ONLY when this section is moving upward toward the pill area.
-                    // (Avoid dimming the initial, centered state.)
-                    let pillFactor = 1;
-                    if (distanceFromCenter > 0 && pillStack) {
-                        const listRect = projectList.getBoundingClientRect();
-                        const fadeStart = pillSafeTop + pillFadeBufferPx;
-                        pillFactor = listRect.top >= fadeStart
-                            ? 1
-                            : Math.max(
-                                0,
-                                Math.min(1, (listRect.top - pillSafeTop) / (fadeStart - pillSafeTop))
-                              );
-                    }
-
-                    const finalOpacity = opacity * pillFactor;
-                    projectList.style.opacity = finalOpacity;
-                    projectList.style.pointerEvents = finalOpacity < 0.05 ? 'none' : 'auto';
+                    projectList.style.opacity = opacity;
+                    projectList.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
                 }
                 
                 if (scrollPosition >= sectionTop - windowHeight / 3 && 
@@ -986,12 +1177,24 @@
                     scrollDots.forEach(dot => dot.classList.remove('active'));
                     scrollDots[index].classList.add('active');
                     
-                    // Update pill stack content with smooth transition
-                    if (currentSection !== index) {
-                        currentSection = index;
+                    // OPTION 2 LOGIC: Reset all previews when entering a new section
+                    if (lastActiveSection !== index) {
+                        lastActiveSection = index;
+                        resetAllPreviews();
                         
-                        updatePillContent(pill1, pillContent[index].primary);
-                        updatePillContent(pill2, pillContent[index].accent);
+                        // Show hover hint when entering a project section (not hero)
+                        if (index > 0) {
+                            setTimeout(() => {
+                                showHoverHint(section, index);
+                            }, 1500);
+                        } else {
+                            hideHoverHint();
+                            // Clear recurring hint when on hero section
+                            if (recurringHintTimeout) {
+                                clearTimeout(recurringHintTimeout);
+                                recurringHintTimeout = null;
+                            }
+                        }
                     }
                 }
             });
@@ -1013,9 +1216,6 @@
         function initializeOpacity() {
             const scrollPosition = scrollContainer.scrollTop;
             const windowHeight = window.innerHeight;
-            const pillRect = pillStack ? pillStack.getBoundingClientRect() : null;
-            const pillSafeTop = pillRect ? pillRect.bottom + 24 : 0;
-            const pillFadeBufferPx = 180;
             
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
@@ -1026,48 +1226,28 @@
                 
                 let opacity;
                 if (distanceFromCenter > 0) {
-                    // Section is above center (scrolling out at top) - fade to 0 quickly
                     const fadeRange = windowHeight * 0.15;
                     opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
                 } else {
-                    // Section is below center (coming into view) - fade to 0.3 minimum
                     const fadeRange = windowHeight * 0.4;
                     opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
                 }
                 
+                const pillStack = section.querySelector('.pill-stack');
                 const projectList = section.querySelector('.project-list');
+                
+                if (pillStack) {
+                    pillStack.style.opacity = opacity;
+                }
+                
                 if (projectList) {
-                    let pillFactor = 1;
-                    if (distanceFromCenter > 0 && pillStack) {
-                        const listRect = projectList.getBoundingClientRect();
-                        const fadeStart = pillSafeTop + pillFadeBufferPx;
-                        pillFactor = listRect.top >= fadeStart
-                            ? 1
-                            : Math.max(
-                                0,
-                                Math.min(1, (listRect.top - pillSafeTop) / (fadeStart - pillSafeTop))
-                              );
-                    }
-
-                    const finalOpacity = opacity * pillFactor;
-                    projectList.style.opacity = finalOpacity;
-                    projectList.style.pointerEvents = finalOpacity < 0.05 ? 'none' : 'auto';
+                    projectList.style.opacity = opacity;
+                    projectList.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
                 }
             });
         }
         
-        // Call on load
         initializeOpacity();
-
-        function updatePillSafeY() {
-            if (!pillStack) return;
-            const rect = pillStack.getBoundingClientRect();
-            const safeY = Math.max(0, rect.bottom + 24);
-            document.documentElement.style.setProperty('--pill-safe-y', `${safeY}px`);
-        }
-
-        updatePillSafeY();
-        window.addEventListener('resize', updatePillSafeY);
     </script>
 
     <script>
@@ -1124,11 +1304,12 @@
             function makeStars(count) {
                 const stars = [];
                 for (let i = 0; i < count; i++) {
-                    const depth = Math.random(); // 0..1
-                    const size = 0.6 + Math.pow(depth, 1.7) * 1.4;
+                    const depth = Math.random();
+                    const size = 0.9 + Math.pow(depth, 1.7) * 2.1;
                     const baseA = 0.08 + Math.random() * 0.25;
                     const twinkle = 0.12 + Math.random() * 0.28;
-                    const speed = (0.6 + Math.random() * 1.2) * (0.08 + depth * 0.18);
+                    const speedY = (0.6 + Math.random() * 1.2) * (0.08 + depth * 0.18);
+                    const speedX = (Math.random() - 0.5) * 0.015 * (0.3 + depth * 0.7);
                     const hue = Math.random() < 0.12 ? 220 : (Math.random() < 0.20 ? 260 : 0);
                     stars.push({
                         x: Math.random(),
@@ -1138,7 +1319,8 @@
                         baseA,
                         twinkle,
                         phase: Math.random() * Math.PI * 2,
-                        speed,
+                        speedY,
+                        speedX,
                         hue
                     });
                 }
@@ -1161,20 +1343,19 @@
 
                 ctx.clearRect(0, 0, state.w, state.h);
 
-                // Mouse parallax (subtle)
-                const mx = (state.mouse.x - 0.5) * 2;
-                const my = (state.mouse.y - 0.5) * 2;
-
-                // Stars
                 ctx.save();
                 ctx.globalCompositeOperation = 'source-over';
                 for (const s of state.stars) {
                     s.phase += dt * (0.55 + s.depth * 0.9);
-                    s.y += dt * s.speed * 0.02;
+                    s.y += dt * s.speedY * 0.02;
+                    s.x += dt * s.speedX;
+                    
                     if (s.y > 1.02) s.y = -0.02;
+                    if (s.x > 1.02) s.x = -0.02;
+                    if (s.x < -0.02) s.x = 1.02;
 
-                    const px = s.x * state.w + mx * (10 * (0.25 + s.depth)) ;
-                    const py = s.y * state.h + my * (8 * (0.25 + s.depth));
+                    const px = s.x * state.w;
+                    const py = s.y * state.h;
 
                     const tw = Math.sin(s.phase) * 0.5 + 0.5;
                     const a = s.baseA + tw * s.twinkle;
@@ -1192,14 +1373,13 @@
                 }
                 ctx.restore();
 
-                // Comet (only when user is actively moving)
                 if (!prefersReducedMotion && state.mouse.active) {
                     const sinceMove = t - state.mouse.lastMoveAt;
                     const cometVisible = sinceMove < 1200;
 
                     const tx = state.mouse.x * state.w;
                     const ty = state.mouse.y * state.h;
-                    const ease = 1 - Math.pow(0.001, dt); // framerate independent-ish
+                    const ease = 1 - Math.pow(0.001, dt);
 
                     const px = state.comet.x;
                     const py = state.comet.y;
@@ -1214,7 +1394,7 @@
 
                     if (intensity > 0.01) {
                         state.trail.push({ x: state.comet.x, y: state.comet.y, t });
-                        const cutoff = t - 680; // ms
+                        const cutoff = t - 680;
                         while (state.trail.length && state.trail[0].t < cutoff) state.trail.shift();
 
                         ctx.save();
@@ -1222,20 +1402,31 @@
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
 
-                        // Tail stroke (polyline, fading)
                         for (let i = 1; i < state.trail.length; i++) {
                             const a0 = (i - 1) / state.trail.length;
                             const a1 = i / state.trail.length;
                             const p0 = state.trail[i - 1];
                             const p1 = state.trail[i];
 
-                            const alpha = (0.05 + 0.24 * (1 - a1)) * intensity;
-                            const width = 1 + (1 - a1) * 5 * intensity;
+                            const alpha = (0.08 + 0.38 * (1 - a1)) * intensity;
+                            const width = 1.2 + (1 - a1) * 6 * intensity;
 
-                            ctx.strokeStyle = `rgba(150, 190, 255, ${alpha.toFixed(4)})`;
+                            const progress = 1 - a1;
+                            const r = Math.floor(100 + progress * 140);
+                            const g = Math.floor(140 + progress * 70);
+                            const b = 255;
+
+                            const gradient = ctx.createLinearGradient(p0.x, p0.y, p1.x, p1.y);
+                            gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${(alpha * 0.9).toFixed(4)})`);
+                            gradient.addColorStop(1, `rgba(${Math.floor(r * 0.8)}, ${Math.floor(g * 0.85)}, ${b}, ${alpha.toFixed(4)})`);
+                            
+                            ctx.strokeStyle = gradient;
                             ctx.lineWidth = width;
-                            ctx.shadowColor = 'rgba(120, 170, 255, 0.45)';
-                            ctx.shadowBlur = 14 * intensity;
+                            
+                            const glowR = Math.floor(100 + progress * 100);
+                            const glowG = Math.floor(140 + progress * 50);
+                            ctx.shadowColor = `rgba(${glowR}, ${glowG}, 255, ${(0.6 + progress * 0.2).toFixed(2)})`;
+                            ctx.shadowBlur = (18 + progress * 8) * intensity;
 
                             ctx.beginPath();
                             ctx.moveTo(p0.x, p0.y);
@@ -1243,31 +1434,14 @@
                             ctx.stroke();
                         }
 
-                        // Head glow
-                        ctx.shadowColor = 'rgba(180, 210, 255, 0.65)';
-                        ctx.shadowBlur = 24 * intensity;
-                        ctx.fillStyle = `rgba(235, 245, 255, ${(0.22 + 0.55 * intensity).toFixed(4)})`;
-                        ctx.beginPath();
-                        ctx.arc(state.comet.x, state.comet.y, 2.2 + 2.6 * intensity, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        // Tiny highlight
-                        ctx.shadowBlur = 0;
-                        ctx.fillStyle = `rgba(255, 255, 255, ${(0.35 * intensity).toFixed(4)})`;
-                        ctx.beginPath();
-                        ctx.arc(state.comet.x - 2, state.comet.y - 2, 1.2 + 0.8 * intensity, 0, Math.PI * 2);
-                        ctx.fill();
-
                         ctx.restore();
                     } else if (!cometVisible) {
-                        // Slowly clear trail when idle
                         if (state.trail.length) state.trail.splice(0, Math.max(1, Math.floor(state.trail.length * 0.12)));
                     }
                 }
             }
 
             function renderOnce() {
-                // Static, minimal background for reduced motion
                 ctx.clearRect(0, 0, state.w, state.h);
                 ctx.save();
                 ctx.globalCompositeOperation = 'source-over';
@@ -1288,7 +1462,6 @@
                 state.raf = requestAnimationFrame(tick);
             }
 
-            // Init
             resize();
             window.addEventListener('resize', resize, { passive: true });
             window.addEventListener('pointermove', onPointerMove, { passive: true });
