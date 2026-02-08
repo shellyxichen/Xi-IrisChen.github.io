@@ -1,0 +1,195 @@
+/*.top-nav {
+	position: fixed;
+    width: 800px;
+    height: 15%;
+    top: calc( 5% - 22px );
+    left: calc( 50% - 400px);
+    display: block;
+}*/
+
+#project-main {
+    background: #FFF;
+    padding: 0px;
+    color: #71CBE2;
+    padding-top: 68px;
+}
+.project-narrow-content {
+    position: relative;
+}
+a:hover {
+    border-bottom-color: transparent;
+    color:#71CBE2;
+}
+
+/*.top-nav .logo {
+    width: 4em;
+    height: 2em;
+    background: url(../../images/logo_dark.png) no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.top-nav .nav {
+    width: 320px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 35px;
+}
+.top-nav .nav a {
+    position: relative;
+    float: left;
+    list-style: none;
+    font-size: 17px;
+    padding: 0;
+    margin: 0 15px;
+    cursor: pointer;
+    color: #6a6a6a;
+    background-size: cover;
+    background: linear-gradient(45deg,#8A2387,#E94057, #F27121,white,white);
+    background-size: 400% 100%;
+    background-position: 100% 0;
+    border-bottom: dotted 0px;
+    -webkit-background-clip: text;
+    transition: all 0.5s;
+}
+.top-nav .nav a:hover{
+	color: #000000;
+    background-size: cover;
+	background: linear-gradient(45deg,#8A2387,#E94057, #F27121,white,white);
+	background-size: 400% 100%;
+	background-position: 0 0;
+	-webkit-background-clip: text;
+	transition: all 0.5s;
+}
+.nav a::after{
+	position: absolute;
+    bottom: -14px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 0px;
+	background: linear-gradient(90deg,#8A2387,#E94057, #F27121);
+	transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+*/
+
+
+
+#aboutProfile img{
+    width: 20%;
+	/*float: right;
+	width: 25%;*/
+}
+#aboutProfile_text {
+    margin-top: 20px;
+	/*width: 70%;
+	float: left;*/
+}
+#aboutProfile h2 {
+    font-size: 1.25rem;
+    color: #000110;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 2.2rem;
+    position: relative;
+    background-image: linear-gradient(to right, transparent 50%, #71CBE2 50%);
+    background-origin: 0;
+    background-size: 200% 30%;
+    background-repeat: repeat-x;
+    background-position: -100% 80%;
+    transition: background-position 0.8s ease-out;
+}
+
+#aboutProfile h3{
+	font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+#aboutProfile h4{
+	font-size: 0.75rem;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 23px;
+}
+#aboutProfile h4 strong{
+	font-weight: 500;
+}
+
+#aboutProfile h5{
+    font-size: 0.70rem;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 19px;
+}
+/*#aboutProfile p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    color: #3c3c3c;
+}*/
+p.aboutme {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    color: #3c3c3c;
+}
+
+p.quote{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5rem;
+    color: #3c3c3c;
+}
+
+#hobbies h3{
+	font-size: ;
+}
+#hobbies h4{
+	font-size: 1.1em;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 23px;
+}
+#hobbies h4 strong{
+	font-weight: 500;
+}
+
+span.key-word {
+    margin-left: 20px;
+    font-size: 1.2rem;
+    color: #000110;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+img.hover-img {
+    position: fixed;
+    width: 23% !important;
+    left: 57%;
+    top: 0;
+    bottom: 0;
+}
+.hide {
+    display: none;
+    position: absolute !important;
+    bottom: unset !important;
+}
+
+
+@media screen and (max-width:415px){
+    #project-main{
+        border:0 !important;
+        margin-top: 0px !important;
+        padding-top: 70px !important;
+        margin-bottom: 0 !important;
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+    #project-page {
+        width: 100%;
+        padding: 0;
+    }
+}

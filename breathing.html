@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breathing</title>
+    <link rel="stylesheet" href="assets/css/breathing.css" />
+  </head>
+  <body>
+    <div class="entrance-overlay" id="entranceOverlay">
+      <div class="entrance-text">
+        <p>What does it mean to 'do nothing'?</p>
+        <p>Just simply breathe.</p>
+      </div>
+    </div>
+
+    <a href="index.html" class="home-button" aria-label="Back to home" title="Back to home">
+      <img src="assets/2026/icon/home.png" alt="Home" class="home-default">
+      <img src="assets/2026/icon/home_hover.png" alt="Home" class="home-hover">
+    </a>
+
+    <main class="layout">
+      <div class="session-bar" id="sessionBar" aria-hidden="true">
+        <div class="session-bar__fill" id="sessionBarFill"></div>
+      </div>
+      <div class="visual-stage" aria-hidden="true">
+        <div class="halo-wrap">
+          <div class="halo" id="halo"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-row">
+          <label for="modeSelect">Mode</label>
+          <select id="modeSelect" disabled>
+            <option value="box">Box Breathing (4-4-4-4)</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="timerSelect">Timer</label>
+          <select id="timerSelect">
+            <option value="30" selected>00:30</option>
+            <option value="60">01:00</option>
+            <option value="120">02:00</option>
+            <option value="180">03:00</option>
+            <option value="300">05:00</option>
+            <option value="600">10:00</option>
+            <option value="infinity">Infinity</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <button class="primary" id="startBtn">Start</button>
+          <button id="stopBtn" disabled>Stop</button>
+        </div>
+
+      </div>
+
+      <div class="status">
+        <div class="phase" id="phaseText">Loading...</div>
+        <div class="timer" id="timerText"></div>
+      </div>
+    </main>
+    <script src="assets/js/breathing.js"></script>
+  </body>
+</html>

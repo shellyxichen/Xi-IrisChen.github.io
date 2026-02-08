@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
+        <script type="text/javascript">
+            window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+              heap.load("3026647544");
+        </script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-128514351-1');
+        </script>
+<title>InfNote</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/project.css">
+<link rel="stylesheet" href="assets/css/zoom.css">
+<style>
+    .top-img, .bottom-nav, .select:before { background-color:#7481E5; }
+    .float-nav { background-color:rgba(116, 129, 229, 0.9); }
+    .select { color: #7481E5 !important; }
+    .left-vertical-line {border-left-color: #7481E5; }
+    @media screen and (max-width: 480px) { .bottom-nav > .nav-left { background: #7EC8DC; } .bottom-nav > .nav-right { background: #FAAB73;}}
+</style>
+</head>
+
+<body>
+<div id="project-page">
+    <div class="top-nav">
+        <a href="index.html"><div class="logo"></div></a>
+        <div class="nav">
+            <a href="index.html#sixth" class="nav-active">WORK</a>
+            <a href="about.html">ABOUT</a>
+            <a href="assets/Resume_Xi Chen.pdf" target="_blank">RESUME</a>
+        </div>
+    </div>
+    <div class="float-nav"></div>
+
+    <span class="project-nav-toggle"><i></i></span>
+    <aside class="project-aside">
+        <div class="project-aside-container">
+      <!-- <button onclick="location.href='index.html#second'" type="button" class="back-btn">Back</button> -->
+            <nav class="project-main-menu">
+                <ul class="menu-ul">
+                    <li><a href="#overview" class="sub pT">OVERVIEW</a></li>
+                    <li><a href="#problem" class="sub pT">PROBLEM</a></li>
+                    <li><a href="#solution" class="sub pT">SOLUTION</a></li>
+                    <li><a href="#design" class="sub pT">FINAL DESIGN</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div id="project-main">
+        <div class="top-img" style="background-image:url(assets/img/infnote/overview.png);"></div>
+        <div class="project-narrow-content" >
+            <div id="overview">
+                <h2 class="page-header bT">OVERVIEW</h2>
+                <hr><br><br>
+                <p class="project-desc">​<strong>This is a project marks the beginning of my freelance designer career. Thanks Haoqian Zhang for inviting me to join this project! I’m the only designer in this project and finished designing iOS App and website. Right now we have finished version 1.0 and just submitted our app to iOS App Store.</strong></p><br><br><br>
+                <p class="project-desc">​The target for this project to use decentralization to provide safe and free online communication, and also complete transparency for users’ posts and comments.</p>
+                <img style = "width:100%" src="assets/img/infnote/target.png">
+            </div><br><br><br><br>
+
+            <div id="problem">
+                <h2 class="page-header bT">PROBLEM SPACE</h2> 
+                <hr>
+                <p class="project-desc">​Online forum is a place aims for safe and open discussion where users can reflect and express what they care about in their daily lives. Right now, most websites store all users’ data in a centered place, which is easy to be censored or filtered. So it happens when government will censor content that is “controversial”.</p>
+                <p class="project-desc">​Instead of storing data in a centered place, could we decentralize users’ data (including posts, comments or every actions that will be recorded) that make sure it cannot be filtered or deleted and provide a complete transparent online environment?</p><br>
+                <img style = "width:100%" src="assets/img/infnote/decentralize.png">
+            </div><br><br><br>
+
+            <div id="solution">
+                <h2 class="page-header bT">SOLUTION</h2> 
+                <hr>
+
+                <h3 class="overview_subtitle">Advantages of blockchain based forum compared with traditional forums</h3><br><br>
+                <img style = "width:100%" src="assets/img/infnote/freely.png"><br><br><br>
+                <img style = "width:100%" src="assets/img/infnote/safety.png"><br><br><br><br>
+
+                <h3 class="overview_subtitle">Apart from advantages, is there any challenges? </h3><br><br>
+                <p class="left-vertical-line margin-top-1">
+                    <span class="key-word">Biggest Challenge - Complicated Username</span>
+                </p>
+                <p class="project-desc">​As decentralized means system cannot use compare logic for creating a username, users can only be recognized by a random generated long string instead of a prefered username. So how can user login? Traditionally, users need to remember the long string of public address or scan a paper QR code for private key. But is there any other solutions?</p>
+
+                <p class="left-vertical-line margin-top-1">
+                    <span class="key-word">Our Solution</span>
+                </p>
+                <p class="project-desc">​Support users store private key and public address to iCloud. And everytime users try to login, app will automatically get data from icloud. </p><br>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img style = "width:80%" src="assets/img/infnote/login_before.gif"><br>
+                        <h4 class="mini-title">BEFORE</h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img style = "width:80%" src="assets/img/infnote/login_after.gif"><br>
+                        <h4 class="mini-title">AFTER</h4>
+                    </div>
+                </div>
+
+                <br><br><br><br>
+
+                <p class="left-vertical-line margin-top-1">
+                    <span class="key-word">Challenge 2 - Huge effort of “like” function</span>
+                </p>
+                <p class="project-desc">​As blockchain can only add content instead of revising later, system cannot change the number of how many people ‘like’ the post but add a new ‘like’ action to database. So the implementation effort of “like” function is pretty high. So besides how many ‘replies’ posts have, is there any other features that can prioritize posts?</p>
+
+                <p class="left-vertical-line margin-top-1">
+                    <span class="key-word">Our Solution</span>
+                </p>
+                <img style = "width:100%" src="assets/img/infnote/top.png" data-action="zoom"><br>
+            </div><br><br>
+
+            <div id="design">
+                <h2 class="page-header bT">FINAL DESIGN</h2> 
+                <hr>
+
+                <h3 class="overview_subtitle">Key Features</h3>
+                <img style = "width:100%" src="assets/img/infnote/follow.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/hierarchy.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/new post.png" data-action="zoom"><br>
+
+                <br><br>
+                <h3 class="overview_subtitle">Interface Design</h3>
+                <img style = "width:100%" src="assets/img/infnote/design1.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/design2.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/design3.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/design4.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/design5.png" data-action="zoom"><br>
+                <img style = "width:100%" src="assets/img/infnote/design6.png" data-action="zoom"><br>
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="bottom-nav-a nav-left">
+            <a href="InsVoice.html" class="nav-active">PREVIOUS PROJECT: INSVOICE</a>
+        </div>
+        <div class="bottom-nav-a nav-right">
+            <a href="Social Eyes.html" class="nav-active">NEXT PROJECT: SOCIAL EYES</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/transition.js"></script>
+<script src="assets/js/project.js"></script>
+<script src="assets/js/zoom.js"></script>
+</html>
+
