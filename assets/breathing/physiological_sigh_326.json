@@ -1,0 +1,14 @@
+{
+  "id": "physiological_sigh_326",
+  "displayName": "3-2-6 Physiological Sigh",
+  "loop": true,
+  "phases": [
+    { "type": "inhale", "durationSec": 3 },
+    { "type": "hold", "durationSec": 2 },
+    { "type": "exhale", "durationSec": 6 }
+  ],
+  "options": {
+    "ujjayiAvailable": false,
+    "ambientDefaultOn": false
+  }
+}

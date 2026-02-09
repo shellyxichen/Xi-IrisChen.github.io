@@ -32,8 +32,12 @@
       <div class="controls">
         <div class="control-row">
           <label for="modeSelect">Mode</label>
-          <select id="modeSelect" disabled>
-            <option value="box">Box Breathing (4-4-4-4)</option>
+          <select id="modeSelect">
+            <option value="box">4–4–4–4 · Box</option>
+            <option value="box_8888">8–8–8–8 · Box</option>
+            <option value="coherent_55">5–5 · Coherent</option>
+            <option value="relax_478">4–7–8 · Relax</option>
+            <option value="physiological_sigh_326">3–2–6 · Sigh</option>
           </select>
         </div>
 
@@ -59,6 +63,7 @@
 
       <div class="status">
         <div class="phase" id="phaseText">Loading...</div>
+        <div class="mode-description" id="modeDescription"></div>
         <div class="timer" id="timerText"></div>
       </div>
     </main>

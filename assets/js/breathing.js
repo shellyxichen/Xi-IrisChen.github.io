@@ -1,6 +1,8 @@
 (() => {
   const state = {
     spec: null,
+    modeId: "",
+    specsByModeId: {},
     running: false,
     startTime: 0,
     sessionDurationSec: null,
@@ -12,11 +14,29 @@
     lastBeatIndex: ""
   };
 
+  const modeSpecPaths = {
+    box: "assets/breathing/box.json",
+    box_8888: "assets/breathing/box_8888.json",
+    relax_478: "assets/breathing/relax_478.json",
+    coherent_55: "assets/breathing/coherent_55.json",
+    physiological_sigh_326: "assets/breathing/physiological_sigh_326.json"
+  };
+
+  const modeDescriptions = {
+    box: "A steady, balanced rhythm to ground your attention.",
+    box_8888: "A slower, deeper version for sustained calm.",
+    coherent_55: "A smooth, continuous breath with no pauses, supporting balance and heart-rate variability.",
+    relax_478: "Longer exhales to gently quiet the nervous system, often used for rest and sleep.",
+    physiological_sigh_326:
+      "A double inhale followed by a long release, helping the body settle into rapid calm."
+  };
+
   const elements = {
     modeSelect: document.getElementById("modeSelect"),
     startBtn: document.getElementById("startBtn"),
     stopBtn: document.getElementById("stopBtn"),
     phaseText: document.getElementById("phaseText"),
+    modeDescription: document.getElementById("modeDescription"),
     timerText: document.getElementById("timerText"),
     halo: document.getElementById("halo"),
     timerSelect: document.getElementById("timerSelect"),
@@ -64,25 +84,28 @@
   };
 
   function init() {
-    fetch("assets/breathing/box.json")
-      .then((res) => res.json())
-      .then((spec) => {
-        state.spec = spec;
+    elements.modeSelect.disabled = true;
+    loadModeSpecs()
+      .then(() => {
+        const initialMode = state.specsByModeId[elements.modeSelect.value] ? elements.modeSelect.value : "box";
+        elements.modeSelect.value = initialMode;
+        setMode(initialMode);
+        elements.modeSelect.disabled = false;
         renderIdle();
       })
       .catch(() => {
-        elements.phaseText.textContent = "Unable to load breathing spec";
+        elements.phaseText.textContent = "Unable to load breathing modes";
       });
 
     elements.startBtn.addEventListener("click", startSession);
     elements.stopBtn.addEventListener("click", stopSession);
+    elements.modeSelect.addEventListener("change", (event) => {
+      setMode(event.target.value);
+    });
     elements.timerSelect.addEventListener("change", (event) => {
       state.sessionDurationSec = parseTimerValue(event.target.value);
       if (state.running) {
-        state.startTime = performance.now();
-        state.sessionEndTime = getSessionEndTime(state.startTime, state.sessionDurationSec);
-        state.lastPhaseIndex = -1;
-        setSessionBarVisible(Boolean(state.sessionDurationSec));
+        resetRunningSessionTiming();
       }
     });
 
@@ -94,6 +117,51 @@
 
     state.sessionDurationSec = parseTimerValue(elements.timerSelect.value);
     setSessionBarVisible(false);
+  }
+
+  function loadModeSpecs() {
+    const requests = Object.entries(modeSpecPaths).map(([modeId, path]) =>
+      fetch(path)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load mode: ${modeId}`);
+          }
+          return response.json();
+        })
+        .then((spec) => ({ modeId, spec }))
+    );
+
+    return Promise.all(requests).then((entries) => {
+      entries.forEach(({ modeId, spec }) => {
+        state.specsByModeId[modeId] = spec;
+      });
+    });
+  }
+
+  function setMode(modeId) {
+    const nextSpec = state.specsByModeId[modeId];
+    if (!nextSpec) return;
+    state.modeId = modeId;
+    state.spec = nextSpec;
+    renderModeDescription(!state.running);
+    if (state.running) {
+      resetRunningSessionTiming();
+    }
+  }
+
+  function renderModeDescription(isVisible) {
+    if (!elements.modeDescription) return;
+    const description = modeDescriptions[state.modeId] || "";
+    elements.modeDescription.textContent = description;
+    elements.modeDescription.classList.toggle("is-faded", !isVisible || !description);
+  }
+
+  function resetRunningSessionTiming() {
+    state.startTime = performance.now();
+    state.sessionEndTime = getSessionEndTime(state.startTime, state.sessionDurationSec);
+    state.lastPhaseIndex = -1;
+    state.lastBeatIndex = "";
+    setSessionBarVisible(Boolean(state.sessionDurationSec));
   }
 
   function bindAudioPrewarm() {
@@ -227,6 +295,7 @@
 
   function startSession() {
     if (!state.spec || state.running) return;
+    renderModeDescription(false);
     ensureAudioContext();
     const beginSession = () => {
       if (state.running) return;
@@ -271,6 +340,7 @@
   function renderIdle() {
     elements.phaseText.textContent = "";
     elements.timerText.textContent = "";
+    renderModeDescription(true);
     state.tempScalar = 0;
     setHalo(0.3, 0.2, 0);
     setAmbient(0, 0.1);
