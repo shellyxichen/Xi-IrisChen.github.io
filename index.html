@@ -497,18 +497,18 @@
             align-items: flex-start;
         }
         
-        /* Smaller centered video for 101 */
-        #preview-101 {
+        /* Smaller centered video for Breathe */
+        #preview-breathe {
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
         
-        #preview-101 video {
-            max-width: 70%;
-            max-height: 70%;
-            border-radius: 12px;
+        #preview-breathe video {
+            max-width: 45%;
+            max-height: calc(100vh - 320px);
+            border-radius: 48px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
         }
         
         #preview-messenger-stories .sequential-videos {
@@ -534,19 +534,6 @@
         }
         
         #preview-stargazer img {
-            max-width: 70%;
-            max-height: 70%;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        /* Smaller centered image for Guide */
-        #preview-guide {
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #preview-guide img {
             max-width: 70%;
             max-height: 70%;
             border-radius: 12px;
@@ -1035,20 +1022,16 @@
                 </div>
                 
                 <div class="project-list">
-                    <div class="project-item" data-video="stargazer">
-                        <h2 class="project-title" data-text="Founded and led Stargazer program">Founded and led Stargazer program</h2>
+                    <div class="project-item" data-video="breathe">
+                        <h2 class="project-title" data-text="Breathe — a multimodal breathing companion">Breathe — a multimodal breathing companion</h2>
                     </div>
                     
                     <div class="project-item" data-video="template">
                         <h2 class="project-title" data-text="Built reusable Horizon template using Cursor + Xcode">Built reusable Horizon template using Cursor + Xcode</h2>
                     </div>
                     
-                    <div class="project-item" data-video="guide">
-                        <h2 class="project-title" data-text="Authored starter guides for Metaverse designers">Authored starter guides for Metaverse designers</h2>
-                    </div>
-                    
-                    <div class="project-item" data-video="101">
-                        <h2 class="project-title" data-text="Weekly office hours on prompting">Weekly office hours on prompting</h2>
+                    <div class="project-item" data-video="stargazer">
+                        <h2 class="project-title" data-text="Founded Stargazer, an org-wide vibe coding program">Founded Stargazer, an org-wide vibe coding program</h2>
                     </div>
                 </div>
             </section>
@@ -1112,23 +1095,18 @@
             <div class="media-description">Led <a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen for VR Feed</a>, <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">CM Craft Backlog</a>.</div>
         </div>
         
-        <div class="media-preview" id="preview-stargazer">
-            <img src="assets/2026/stargazer.png" alt="Stargazer">
-            <div class="media-description">Org-wide education program to teach designers vibe coding.</div>
+        <div class="media-preview" id="preview-breathe">
+            <video src="assets/2026/breathe_demo.mp4" loop muted playsinline></video>
+            <div class="media-description">A cross-platform breathing companion built with vibe coding, with haptic and breath-guiding audio cues across <a href="https://github.com/shellyxichen/Breathe" target="_blank" rel="noopener noreferrer" class="project-link">iOS</a>, <a href="breathing.html" class="project-link">web</a>, and Meta Ray Ban Display Glass.</div>
         </div>
         
         <div class="media-preview" id="preview-template">
             <video src="assets/2026/template.mov" loop muted playsinline></video>
         </div>
         
-        <div class="media-preview" id="preview-guide">
-            <img src="assets/2026/guide.png" alt="Guide">
-            <div class="media-description">Published <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">four starter guides</a> to easily start vibe coding.</div>
-        </div>
-        
-        <div class="media-preview" id="preview-101">
-            <video src="assets/2026/101.mp4" loop muted playsinline></video>
-            <div class="video-overlay-text"><a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=2PIYE5MhEEzYbBE4-1&scaling=scale-down&content-scaling=fixed" target="_blank" style="color: white; text-decoration: underline;">Vibe Coding 101</a></div>
+        <div class="media-preview" id="preview-stargazer">
+            <img src="assets/2026/stargazer.png" alt="Stargazer">
+            <div class="media-description">Org-wide education program to teach designers vibe coding. Published <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">starter guides</a> and hosted weekly office hours, including <a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=2PIYE5MhEEzYbBE4-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Vibe Coding 101</a>.</div>
         </div>
     </div>
     
