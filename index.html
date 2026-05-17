@@ -368,7 +368,7 @@
         
         .media-preview.active {
             opacity: 1;
-            pointer-events: auto;
+            pointer-events: none;
         }
         
         .media-preview.fading-out {
@@ -695,15 +695,45 @@
         }
         
         .scroll-dot {
+            position: relative;
             width: 6px;
             height: 6px;
+            padding: 0;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            transition: all 0.3s ease;
+            appearance: none;
+            cursor: pointer;
+            transition: background 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
             pointer-events: auto;
         }
-        
+
+        .scroll-dot::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28px;
+            height: 14px;
+            transform: translate(-50%, -50%);
+        }
+
+        .scroll-dot:focus-visible {
+            outline: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .scroll-dot:hover:not(.active),
+            .scroll-dot:focus-visible:not(.active) {
+                background: rgba(255, 255, 255, 0.4);
+            }
+
+            .scroll-dot.active:hover,
+            .scroll-dot.active:focus-visible {
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+
         .scroll-dot.active {
             background: rgba(255, 255, 255, 0.5);
             height: 20px;
@@ -1056,28 +1086,28 @@
         <div class="media-preview" id="preview-horizon">
             <div class="media-preview-container">
                 <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
-                <video src="assets/2026/horizon.mp4" class="overlay-video" loop muted playsinline></video>
+                <video src="assets/2026/horizon.mp4?v=20260516c" class="overlay-video" loop muted playsinline preload="auto"></video>
             </div>
             <div class="media-description">Led Horizon website redesign for <a href="https://horizon.meta.com/" target="_blank" class="project-link">Connect 2025 launch</a>.</div>
         </div>
         
         <div class="media-preview" id="preview-vr-feed">
-            <video src="assets/2026/vr_feed.mov" loop muted playsinline></video>
+            <video src="assets/2026/vr_feed.mp4" loop muted playsinline></video>
             <div class="media-description">Shipped VR and mobile feed redesigns, announced at <a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">Connect 2025</a>.</div>
         </div>
         
         <div class="media-preview" id="preview-messenger-stories">
             <div class="sequential-videos">
-                <video src="assets/2026/stories1.mov" muted playsinline data-index="0"></video>
-                <video src="assets/2026/stories2.mov" muted playsinline data-index="1"></video>
-                <video src="assets/2026/stories3.mov" muted playsinline data-index="2"></video>
-                <video src="assets/2026/stories4.mov" muted playsinline data-index="3"></video>
+                <video src="assets/2026/stories1.mp4" muted playsinline data-index="0"></video>
+                <video src="assets/2026/stories2.mp4" muted playsinline data-index="1"></video>
+                <video src="assets/2026/stories3.mp4" muted playsinline data-index="2"></video>
+                <video src="assets/2026/stories4.mp4" muted playsinline data-index="3"></video>
             </div>
             <div class="media-description">Led <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, shipping 29 craft improvements.</div>
         </div>
         
         <div class="media-preview" id="preview-ig-broadcast">
-            <video src="assets/2026/ig_bc.mov" loop muted playsinline></video>
+            <video src="assets/2026/ig_bc.mp4" loop muted playsinline></video>
             <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (<a href="https://www.cnbctv18.com/technology/now-connect-with-your-favourite-creators-on-instagram-broadcast-channels-16944171.htm" target="_blank" class="project-link">CNBC</a>, <a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">Yahoo News</a>). Scaled 10M→124M DAU, 455M MAU.</div>
         </div>
         
@@ -1087,11 +1117,11 @@
         </div>
         
         <div class="media-preview" id="preview-craft">
-            <video src="assets/2026/craft.mov" loop muted playsinline></video>
+            <video src="assets/2026/craft.mp4" loop muted playsinline></video>
         </div>
         
         <div class="media-preview" id="preview-kaizen">
-            <video src="assets/2026/kaizen.mov" loop muted playsinline></video>
+            <video src="assets/2026/kaizen.mp4" loop muted playsinline></video>
             <div class="media-description">Led <a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen for VR Feed</a>, <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">CM Craft Backlog</a>.</div>
         </div>
         
@@ -1101,7 +1131,7 @@
         </div>
         
         <div class="media-preview" id="preview-template">
-            <video src="assets/2026/template.mov" loop muted playsinline></video>
+            <video src="assets/2026/template.mp4" loop muted playsinline></video>
         </div>
         
         <div class="media-preview" id="preview-stargazer">
@@ -1143,6 +1173,19 @@
         let hasUserEverHovered = false; // Track if user has hovered on any project item
         let hintTimeout = null;
         let recurringHintTimeout = null;
+
+        function playVideoSafely(video) {
+            if (!video) return;
+
+            try {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            } catch (error) {
+                // Ignore unsupported media errors so hover interactions stay responsive.
+            }
+        }
         
         // Helper function to activate a preview
         function activatePreview(videoId) {
@@ -1193,7 +1236,7 @@
                         
                         const currentVideo = sequentialVideos[currentIndex];
                         currentVideo.classList.add('active');
-                        currentVideo.play();
+                        playVideoSafely(currentVideo);
                         
                         currentVideo.onended = () => {
                             currentIndex++;
@@ -1211,7 +1254,7 @@
             } else {
                 const video = preview.querySelector('video');
                 if (video) {
-                    video.play();
+                    playVideoSafely(video);
                 }
             }
         }
