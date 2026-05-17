@@ -43,4 +43,4 @@ Contains assets used by the old portfolio pages:
 - assets/2026/ - Current project assets
 - assets/css/playground.css - Playground styles
 - assets/js/playground.js - Playground functionality
-- assets/Resume_Shelly Chen.pdf - Resume (linked from main page)
+- assets/Resume_Shelly_Chen.pdf - Resume (linked from main page)
