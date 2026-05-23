@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelly Chen</title>
+    <title>Shelly Chen — Option 2</title>
     
     <!-- Force HTTPS Redirect -->
     <script>
@@ -159,7 +159,7 @@
         .section {
             height: 100vh;
             min-height: 100vh;
-            padding: 60px 200px 80px 60px;
+            padding: 60px 60px 80px 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -169,6 +169,34 @@
         
         .section:first-child {
             padding-top: 60px;
+        }
+        
+        .section--catalog {
+            min-height: 100vh;
+            height: 100vh;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        
+        .project-list--catalog {
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+        
+        .project-list--catalog::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .project-list--catalog::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+        
+        .section--catalog .project-item {
+            padding: 12px 0;
         }
         
         /* Pill Styles */
@@ -215,10 +243,22 @@
         
         .section-description {
             font-size: 18px;
-            line-height: 1.4;
-            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.35);
             margin-bottom: 20px;
             font-weight: 400;
+            /* letter-spacing: -0.02em; */
+            transition: opacity 0.18s ease;
+            will-change: opacity;
+        }
+        
+        .section-description--mobile {
+            display: none;
+        }
+        
+        .section-description .project-link {
+            text-decoration: underline;
+            text-underline-offset: 4px;
         }
         
         /* Project Items */
@@ -232,20 +272,37 @@
         }
         
         .project-item {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
             transition: all 0.3s ease;
             pointer-events: auto;
-            padding: 16px 0;
+            padding: 8px 0;
+        }
+        
+        .project-index {
+            flex: 0 0 28px;
+            font-size: 18px;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            font-variant-numeric: tabular-nums;
+            transition: all 0.3s ease;
         }
         
         .project-title {
+            flex: 1;
+            min-width: 0;
             font-size: 18px;
             line-height: 1.3;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 400;
             transition: all 0.3s ease;
         }
         
+        .project-item:hover .project-index,
         .project-item:hover .project-title,
+        .project-item.active .project-index,
         .project-item.active .project-title {
             color: rgba(255, 255, 255, 1);
             text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
@@ -301,18 +358,344 @@
             pointer-events: none;
         }
         
+        .section[data-section="0"] {
+            perspective: 1000px;
+        }
+
+        .hero-title,
+        .hero-headline,
+        .hero-belief-copy {
+            transform-origin: center center;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .section[data-section="0"] {
+                perspective: none;
+            }
+
+            .section[data-section="0"] .hero-title,
+            .section[data-section="0"] .hero-headline,
+            .hero-belief-copy {
+                will-change: auto;
+            }
+        }
+        
         .hero-title {
             font-size: 24px;
             font-weight: 400;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
             letter-spacing: -0.02em;
         }
+
+        .hero-title__label {
+            display: inline-block;
+            transition: color 0.6s ease, text-shadow 0.6s ease;
+        }
+
+        .hero-title__label--glow {
+            animation: heroNameGlow 2s ease-in-out forwards;
+        }
+
+        @keyframes heroNameGlow {
+            0% {
+                color: #fff;
+                text-shadow: none;
+            }
+            30% {
+                color: rgb(248, 228, 255);
+                text-shadow:
+                    0 0 10px rgba(245, 220, 255, 0.4),
+                    0 0 22px rgba(170, 175, 255, 0.22);
+            }
+            55% {
+                color: rgb(228, 232, 255);
+                text-shadow:
+                    0 0 14px rgba(170, 175, 255, 0.35),
+                    0 0 26px rgba(100, 140, 255, 0.12);
+            }
+            100% {
+                color: #fff;
+                text-shadow: none;
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .hero-title__label:hover:not(.hero-title__label--glow),
+            .hero-title__label:focus-visible:not(.hero-title__label--glow) {
+                text-shadow:
+                    0 0 12px rgba(245, 220, 255, 0.35),
+                    0 0 24px rgba(170, 175, 255, 0.2);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-title__label--glow {
+                animation: none;
+            }
+        }
+
+        .hero-star-burst {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 15;
+            overflow: visible;
+        }
+
+        .hero-burst-star {
+            position: fixed;
+            margin: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            background: rgba(248, 228, 255, 1);
+            box-shadow:
+                0 0 8px rgba(245, 220, 255, 0.95),
+                0 0 18px rgba(170, 175, 255, 0.55),
+                0 0 32px rgba(100, 140, 255, 0.25);
+            animation: heroNameStarBurst var(--burst-dur, 6s) forwards;
+            /* spread to sky | one continuous drizzle down */
+            animation-timing-function:
+                cubic-bezier(0.18, 0.88, 0.28, 1),
+                cubic-bezier(0.52, 0.06, 0.48, 0.94);
+            will-change: transform, opacity;
+        }
+
+        /* Center → spread → tiny sparkle hold at crest → drizzle to ground */
+        @keyframes heroNameStarBurst {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.05) rotate(0deg);
+            }
+            32% {
+                opacity: 1;
+                transform: translate(var(--crest-x), var(--crest-y)) scale(1.08) rotate(calc(var(--rot, 0deg) * 0.3));
+            }
+            38% {
+                opacity: 1;
+                transform: translate(var(--crest-x), var(--crest-y)) scale(0.96) rotate(calc(var(--rot, 0deg) * 0.4));
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--fall-x), var(--fall-y)) scale(0.26) rotate(var(--rot, 0deg));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-burst-star {
+                animation: none;
+            }
+        }
+
+        .finale-heart {
+            display: inline-block;
+            color: #fff;
+            cursor: default;
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        .finale-heart--glow {
+            animation: finaleHeartGlow 1.6s ease-in-out forwards;
+        }
+
+        @keyframes finaleHeartGlow {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 transparent);
+            }
+            35% {
+                transform: scale(1.12);
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 transparent);
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .finale-heart:hover:not(.finale-heart--glow),
+            .finale-heart:focus-visible:not(.finale-heart--glow) {
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.65));
+            }
+        }
+
+        .finale-burst-heart {
+            position: fixed;
+            margin: 0;
+            pointer-events: none;
+            line-height: 1;
+            user-select: none;
+            color: #fff;
+            opacity: 0;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
+            animation: finaleHeartFloat var(--life, 2.2s) cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        /* Pop in → float up with gentle sway → fade */
+        @keyframes finaleHeartFloat {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+            }
+            18% {
+                opacity: var(--peak-opacity, 1);
+                transform: translate(calc(var(--sway) * 0.18), -10px) scale(1.1) rotate(calc(var(--rot) * 0.18));
+            }
+            80% {
+                opacity: var(--peak-opacity, 1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--sway), calc(var(--rise) * -1)) scale(0.85) rotate(var(--rot));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .finale-heart--glow {
+                animation: none;
+            }
+            .finale-burst-heart {
+                animation: none;
+            }
+        }
         
-        .hero-subtitle {
+        .hero-headline {
+            font-size: 18px;
+            line-height: 1.8;
+            color: white;
+            max-width: 650px;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+        
+        .hero-subtitle--mobile {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 650px;
+            margin-top: 16px;
+        }
+        
+        .hero-belief-stage,
+        .catalog-context-stage {
+            --belief-stage-duration: 0.9s;
+            --belief-stage-ease: ease-in-out;
+        }
+        
+        .hero-belief-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 60px;
+            /* Text starts at viewport horizontal center (left column is 38.2%) */
+            padding-left: calc(50vw - 40.2vw);
+            opacity: 0;
+            transition: opacity var(--belief-stage-duration) var(--belief-stage-ease);
+            pointer-events: none;
+            z-index: 4;
+        }
+        
+        .hero-belief-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 450px;
+        }
+        
+        .hero-belief-text,
+        .catalog-context-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.35);
+            font-weight: 400;
+            text-align: left;
+            margin: 0;
+        }
+
+        .hero-belief-text .emphasis,
+        .catalog-context-text .emphasis {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        .catalog-context-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 60px;
+            padding-left: calc(50vw - 40.2vw);
+            opacity: 0;
+            transition: opacity var(--belief-stage-duration) var(--belief-stage-ease);
+            pointer-events: none;
+            z-index: 4;
+        }
+        
+        .catalog-context-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 450px;
+        }
+        
+        .right-side.hero-mode .hero-belief-stage {
+            opacity: 1;
+        }
+        
+        .right-side.hero-mode .catalog-context-stage {
+            opacity: 0;
+        }
+        
+        .right-side.hero-mode .media-preview {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        
+        .right-side.catalog-idle-mode .hero-belief-stage {
+            opacity: 0;
+        }
+        
+        .right-side.catalog-idle-mode .catalog-context-stage.is-active {
+            opacity: 1;
+        }
+        
+        .right-side.catalog-idle-mode .catalog-context-stage:not(.is-active) {
+            opacity: 0;
+        }
+        
+        .right-side.catalog-idle-mode:not(.preview-hover) .media-preview {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        
+        .right-side.catalog-idle-mode.preview-hover .catalog-context-stage {
+            opacity: 0 !important;
+        }
+        
+        .right-side.catalog-idle-mode.preview-hover .media-preview.active {
+            opacity: 1 !important;
+        }
+        
+        .finale-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0 6px;
+            margin-top: 8px;
+        }
+        
+        .finale-sep {
+            color: rgba(255, 255, 255, 0.35);
             font-size: 18px;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 650px;
+            user-select: none;
         }
         
         /* Playground link styling - matches hero-subtitle with underline */
@@ -376,44 +759,18 @@
             transition: opacity 0.4s ease;
         }
         
-        .media-preview video {
+        .media-preview > video,
+        .media-preview.active > video {
             max-width: 95%;
-            max-height: 95%;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);  
-        }
-        
-        /* Horizon specific styles with layered image and video */
-        .media-preview-container {
-            position: relative;
-            max-width: 95%;
-            max-height: 95%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .media-preview img.device-image {
-            max-width: 100%;
-            max-height: 100%;
+            max-height: 90vh;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            display: block;
-        }
-        
-        .media-preview video.overlay-video {
-            position: absolute;
-            top: 5%;
-            left: 12.5%;
-            width: 75%;
-            height: 75%;
             object-fit: contain;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
         
-        .media-preview.active video.overlay-video {
-            opacity: 1;
+        .media-preview {
+            align-items: center;
+            justify-content: center;
         }
         
         /* Sequential video container for messenger stories */
@@ -443,9 +800,9 @@
         
         /* Full height media preview for specific items */
         #preview-messenger-stories video,
+        #preview-craft-backlog video,
         #preview-ig-broadcast video,
         #preview-messenger-broadcast video,
-        #preview-craft video,
         #preview-template video {
             max-height: 100vh;
             height: 100%;
@@ -455,9 +812,16 @@
         }
         
         /* Slightly smaller for messenger stories */
-        #preview-messenger-stories video {
+        #preview-messenger-stories video,
+        #preview-craft-backlog video {
             max-height: 80vh;
             height: 80%;
+        }
+        
+        #preview-messenger-stories .sequential-videos,
+        #preview-craft-backlog .sequential-videos {
+            max-height: 100vh;
+            height: 100%;
         }
         
         /* 80% size and top aligned for messenger broadcast */
@@ -469,6 +833,20 @@
         #preview-messenger-broadcast video {
             max-height: 90vh;
             height: 85%;
+        }
+        
+        /* Early access — top aligned, same sizing as messenger broadcast */
+        #preview-early-access {
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        #preview-early-access video {
+            max-height: 90vh;
+            height: 85%;
+            width: auto;
+            max-width: none;
+            object-fit: contain;
         }
         
         /* 90% size and top aligned for ig broadcast */
@@ -483,61 +861,239 @@
         }
         
         #preview-messenger-stories,
+        #preview-craft-backlog,
         #preview-ig-broadcast,
         #preview-messenger-broadcast,
-        #preview-craft,
+        #preview-early-access,
         #preview-template {
             align-items: center;
             justify-content: center;
         }
         
-        /* Override alignment for messenger broadcast and ig broadcast */
+        /* Override alignment for messenger broadcast, ig broadcast, early access */
         #preview-messenger-broadcast,
-        #preview-ig-broadcast {
+        #preview-ig-broadcast,
+        #preview-early-access {
             align-items: flex-start;
         }
         
-        /* Smaller centered video for Breathe */
-        #preview-breathe {
+        /* Horizon laptop device frame (from index.html) */
+        #preview-horizon-website .media-preview-container {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        #preview-breathe video {
-            max-width: 45%;
-            max-height: calc(100vh - 320px);
+        #preview-horizon-website img.device-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+        
+        #preview-horizon-website video.overlay-video {
+            position: absolute;
+            top: 5%;
+            left: 12.5%;
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: none;
+            max-height: none;
+        }
+        
+        #preview-horizon-website.active video.overlay-video {
+            opacity: 1;
+        }
+        
+        /* Wearable — blurred street bg + centered UI mock (1433×700, video 600×576) */
+        .media-preview.preview--wearable {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-breathe .media-preview-container {
+            position: relative;
+            display: block;
+            height: calc(100vh - 200px);
+            aspect-ratio: 1433 / 700;
+            max-width: 95%;
+        }
+        
+        #preview-breathe img.device-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        #preview-breathe .device-screen {
+            position: absolute;
+            top: 8.86%;
+            left: 29.05%;
+            width: 41.87%;
+            height: 82.29%;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #preview-breathe.active .device-screen {
+            opacity: 1;
+        }
+        
+        #preview-breathe video.overlay-video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            box-shadow: none;
+            max-width: none;
+            max-height: none;
+        }
+        
+        /* iOS — opaque iPhone frame; video sits inside the screen cutout */
+        .media-preview.preview--iphone {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-preview.preview--iphone .media-preview-container {
+            position: relative;
+            display: block;
+            width: min(42%, calc((100vh - 160px) * 354 / 711));
+            height: auto;
+            aspect-ratio: 354 / 711;
+            flex: 0 0 auto;
+        }
+        
+        .media-preview.preview--iphone .device-image {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            pointer-events: none;
+            -webkit-user-select: none;
+            user-select: none;
+            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.55))
+                    drop-shadow(0 0 1px rgba(255, 255, 255, 0.18));
+        }
+        
+        .media-preview.preview--iphone .device-screen {
+            position: absolute;
+            top: 2.67%;
+            left: 6.50%;
+            right: 6.22%;
+            bottom: 2.53%;
+            z-index: 1;
+            overflow: hidden;
+            background: #000;
+            border-radius: 10% / 5%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .media-preview.preview--iphone.active .device-screen {
+            opacity: 1;
+        }
+        
+        .media-preview.preview--iphone .overlay-video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: none;
+            max-height: none;
+        }
+        
+        /* Android — transparent frame; image overlays the video */
+        .media-preview.preview--android {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-preview.preview--android .media-preview-container {
+            position: relative;
+            display: block;
+            width: min(42%, calc((100vh - 160px) * 1027 / 2132));
+            height: auto;
+            aspect-ratio: 1027 / 2132;
+            flex: 0 0 auto;
+        }
+        
+        .media-preview.preview--android .device-screen {
+            position: absolute;
+            top: 2.81%;
+            left: 5.74%;
+            right: 6.13%;
+            bottom: 2.67%;
+            z-index: 1;
+            overflow: hidden;
+            background: #000;
+            border-radius: 9% / 4.5%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .media-preview.preview--android.active .device-screen {
+            opacity: 1;
+        }
+        
+        .media-preview.preview--android .device-image {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            pointer-events: none;
+            -webkit-user-select: none;
+            user-select: none;
+            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.6))
+                    drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.22));
+        }
+        
+        .media-preview.preview--android .overlay-video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: none;
+            max-height: none;
+        }
+        
+        .media-preview.preview--phone video {
+            max-width: 42%;
+            max-height: calc(100vh - 280px);
             border-radius: 48px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             object-fit: contain;
         }
         
-        #preview-messenger-stories .sequential-videos {
-            max-height: 100vh;
-            height: 100%;
-        }
-        
-        /* Smaller centered video for Kaizen */
-        #preview-kaizen {
+        .media-preview.preview--phone {
             align-items: center;
             justify-content: center;
-        }
-        
-        #preview-kaizen video {
-            max-width: 70%;
-            max-height: 70%;
-        }
-        
-        /* Smaller centered image for Stargazer */
-        #preview-stargazer {
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #preview-stargazer img {
-            max-width: 70%;
-            max-height: 70%;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         
         /* Video overlay text */
@@ -572,11 +1128,45 @@
             text-align: center;
             font-size: 16px;
             line-height: 1.4;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.5);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
             z-index: 10;
+        }
+
+        /* Stack mock + caption so long copy never overlaps the device */
+        .media-preview:has(.media-description) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 32px 24px 40px;
+            box-sizing: border-box;
+        }
+
+        .media-preview:has(.media-description) .media-description {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            width: min(520px, 58%);
+            max-width: 90%;
+            flex-shrink: 0;
+        }
+
+        .media-preview:has(.media-description) > video {
+            max-height: calc(100vh - 240px);
+        }
+
+        .media-preview.preview--iphone:has(.media-description) .media-preview-container {
+            width: min(36%, calc((100vh - 280px) * 354 / 711));
+            max-height: calc(100vh - 280px);
+        }
+
+        #preview-breathe.media-preview:has(.media-description) .media-preview-container {
+            height: calc(100vh - 280px);
+            max-height: calc(100vh - 280px);
         }
         
         .media-preview.active .media-description {
@@ -799,6 +1389,7 @@
                 position: fixed;
                 right: 0;
                 top: 0;
+                padding: 0;
                 background: rgba(0, 0, 0, 0.95);
                 opacity: 0;
                 pointer-events: none;
@@ -860,15 +1451,57 @@
             .project-item:active {
                 opacity: 0.7;
             }
+            
+            .hero-subtitle--mobile {
+                display: flex;
+            }
+            
+            .hero-belief-stage {
+                display: none;
+            }
+            
+            .catalog-context-stage {
+                display: none;
+            }
+            
+            .section-description--mobile {
+                display: block;
+            }
+            
+            .right-side.hero-mode .media-preview.active,
+            .right-side.catalog-idle-mode .media-preview.active {
+                opacity: 1 !important;
+            }
 
         }
         
         @media (max-width: 768px) {
-            .media-preview video.overlay-video {
-                top: 5%;
-                left: 12.5%;
-                width: 75%;
-                height: 75%;
+            .media-preview.preview--iphone .media-preview-container {
+                width: min(78%, calc((100vh - 160px) * 354 / 711));
+            }
+            
+            .media-preview.preview--android .media-preview-container {
+                width: min(78%, calc((100vh - 160px) * 1027 / 2132));
+            }
+            
+            #preview-breathe .media-preview-container {
+                max-width: 78%;
+            }
+            
+            .media-preview.preview--iphone .device-screen {
+                top: 2.67%;
+                left: 6.50%;
+                right: 6.22%;
+                bottom: 2.53%;
+                border-radius: 10% / 5%;
+            }
+            
+            .media-preview.preview--android .device-screen {
+                top: 2.81%;
+                left: 5.74%;
+                right: 6.13%;
+                bottom: 2.67%;
+                border-radius: 9% / 4.5%;
             }
             
             .section {
@@ -878,9 +1511,20 @@
             .media-description {
                 width: 80%;
                 font-size: 14px;
-                top: auto;
-                bottom: 40px;
-                transform: translateX(-50%);
+            }
+
+            .media-preview:has(.media-description) .media-description {
+                width: min(100%, 360px);
+            }
+
+            .media-preview.preview--iphone:has(.media-description) .media-preview-container {
+                width: min(72%, calc((100vh - 300px) * 354 / 711));
+                max-height: calc(100vh - 300px);
+            }
+
+            #preview-breathe.media-preview:has(.media-description) .media-preview-container {
+                height: calc(100vh - 300px);
+                max-height: calc(100vh - 300px);
             }
             
             .mobile-close-btn {
@@ -950,6 +1594,11 @@
             .entrance-text {
                 animation: none;
             }
+            
+            .hero-belief-stage,
+            .catalog-context-stage {
+                --belief-stage-duration: 0.25s;
+            }
         }
     </style>
 </head>
@@ -970,6 +1619,7 @@
 
     <canvas id="bgStarsCanvas" aria-hidden="true"></canvas>
     <div class="bg-vignette" aria-hidden="true"></div>
+    <div id="heroStarBurst" class="hero-star-burst" aria-hidden="true"></div>
     
     <!-- Hover Hint - Smaller Circle Focused on First Item -->
     <div class="hover-hint-overlay" id="hoverHintOverlay">
@@ -986,89 +1636,102 @@
         <div class="left-side">
             <!-- Section 0: Hero -->
             <section class="section" data-section="0">
-                <h1 class="hero-title">Shelly Chen</h1>
-                <p class="hero-subtitle">Designer focused on craft, delight, and shipping products at scale.</p>
+                <h1 class="hero-title"><span class="hero-title__label" tabindex="0">Shelly Chen</span></h1>
+                <p class="hero-headline">AI-native product designer crafting delightful interactions for new technologies ✨</p>
+                <div class="hero-subtitle hero-subtitle--mobile">
+                    <!-- <p class="hero-belief-text">'The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.'</p> -->
+                    <p class="hero-belief-text">I believe in the power of calm technology — products that quietly weave into everyday life and bring small moments of joy.</p>
+                    <p class="hero-belief-text">I'm inspired to craft experiences that feel <span class="emphasis">simpler, softer, and more human</span> — make using technology as refreshing as taking a walk in the woods.</p>
+                </div>
             </section>
             
-            <!-- Section 1: Shipped Products -->
-            <section class="section" data-section="1">
+            <!-- Section 1: Messenger · Instagram -->
+            <section class="section section--catalog" data-section="1">
                 <div class="pill-stack" id="pillStack">
                     <div class="pill-container">
-                        <span class="pill pill-primary" id="pill1">Shipped</span>
-                        <span class="pill pill-accent" id="pill2">Products</span>
+                        <span class="pill pill-primary">Messenger</span>
+                        <span class="pill pill-accent">Instagram</span>
                     </div>
                 </div>
-                
-                <div class="project-list">
-                    <div class="project-item" data-video="horizon">
-                        <h2 class="project-title" data-text="Horizon website redesign">Horizon website redesign</h2>
+                <div class="project-list project-list--catalog" id="projectListSocial">
+                    <div class="project-item" data-video="member-participation-hub">
+                        <span class="project-index">01</span>
+                        <h2 class="project-title">Channel participation hub</h2>
                     </div>
-                    
-                    <div class="project-item" data-video="vr-feed">
-                        <h2 class="project-title" data-text="VR + mobile feed redesign">VR + mobile feed redesign</h2>
+                    <div class="project-item" data-video="spotlight">
+                        <span class="project-index">02</span>
+                        <h2 class="project-title">Spotlight</h2>
                     </div>
-                    
-                    <div class="project-item" data-video="messenger-stories">
-                        <h2 class="project-title" data-text="Messenger stories">Messenger stories</h2>
+                    <div class="project-item" data-video="early-access">
+                        <span class="project-index">03</span>
+                        <h2 class="project-title">Early access</h2>
                     </div>
-                    
-                    <div class="project-item" data-video="ig-broadcast">
-                        <h2 class="project-title" data-text="IG broadcast channel">IG broadcast channel</h2>
+                    <div class="project-item" data-video="view-story-from-thread">
+                        <span class="project-index">04</span>
+                        <h2 class="project-title">View story from chat</h2>
                     </div>
-                    
-                    <div class="project-item" data-video="messenger-broadcast">
-                        <h2 class="project-title" data-text="Messenger broadcast channel">Messenger broadcast channel</h2>
+                    <div class="project-item" data-video="notes-midcard">
+                        <span class="project-index">05</span>
+                        <h2 class="project-title">Notes in stories</h2>
+                    </div>
+                    <div class="project-item" data-video="mention">
+                        <span class="project-index">06</span>
+                        <h2 class="project-title">@mention</h2>
+                    </div>
+                    <div class="project-item" data-video="inbox-tray">
+                        <span class="project-index">07</span>
+                        <h2 class="project-title">Stories in inbox</h2>
+                    </div>
+                    <div class="project-item" data-video="craft-backlog">
+                        <span class="project-index">08</span>
+                        <h2 class="project-title">Craft roadmap</h2>
                     </div>
                 </div>
             </section>
             
-            <!-- Section 2: Craft & Delight -->
-            <section class="section" data-section="2">
+            <!-- Section 2: Spatial · AI-Native -->
+            <section class="section section--catalog" data-section="2">
                 <div class="pill-stack" id="pillStack2">
                     <div class="pill-container">
-                        <span class="pill pill-primary" id="pill1-section2">Craft &</span>
-                        <span class="pill pill-accent" id="pill2-section2">Delight</span>
+                        <span class="pill pill-primary">Spatial</span>
+                        <span class="pill pill-accent">AI-Native</span>
                     </div>
                 </div>
-                
-                <div class="project-list">
-                    <div class="project-item" data-video="craft">
-                        <h2 class="project-title" data-text="Craft, motion, and delight through Origami prototypes">Craft, motion, and delight through Origami prototypes</h2>
+                <!-- <div class="section-description section-description--mobile catalog-context-copy">
+                    <p class="hero-belief-text">I redesigned Horizon discovery across VR, mobile, and web: <span class="emphasis">unveiled at Connect 2025</span>.</p>
+                    <p class="hero-belief-text">Lately, I'm empowering <span class="emphasis">Metaverse and WhatsApp designers</span> to prototype — building the <span class="emphasis">templates, skills, and guides</span>.</p>
+                </div> -->
+                <div class="project-list project-list--catalog" id="projectListSpatial">
+                    <div class="project-item" data-video="vr-feed">
+                        <span class="project-index">01</span>
+                        <h2 class="project-title">VR feed</h2>
                     </div>
-                    
-                    <div class="project-item" data-video="kaizen">
-                        <h2 class="project-title" data-text="Kaizen and craft programs">Kaizen and craft programs</h2>
+                    <div class="project-item" data-video="phoenix">
+                        <span class="project-index">02</span>
+                        <h2 class="project-title">Phoenix discovery (<a href="https://silver-sunflower-424143.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-link">proto</a>)</h2>
                     </div>
-                </div>
-            </section>
-            
-            <!-- Section 3: Vibe Coding -->
-            <section class="section" data-section="3">
-                <div class="pill-stack" id="pillStack3">
-                    <div class="pill-container">
-                        <span class="pill pill-primary" id="pill1-section3">Vibe</span>
-                        <span class="pill pill-accent" id="pill2-section3">Coding</span>
+                    <div class="project-item" data-video="horizon-website">
+                        <span class="project-index">03</span>
+                        <h2 class="project-title">Horizon website</h2>
                     </div>
-                </div>
-                
-                <div class="project-list">
+                    <div class="project-item" data-video="horizon-template">
+                        <span class="project-index">04</span>
+                        <h2 class="project-title">Horizon prototyping template</h2>
+                    </div>
+                    <div class="project-item" data-video="wa-template">
+                        <span class="project-index">05</span>
+                        <h2 class="project-title">WhatsApp prototyping template</h2>
+                    </div>
                     <div class="project-item" data-video="breathe">
-                        <h2 class="project-title" data-text="Just Breathe - a multimodal breathing companion">Just Breathe - a multimodal breathing companion</h2>
-                    </div>
-                    
-                    <div class="project-item" data-video="template">
-                        <h2 class="project-title" data-text="Built reusable Horizon template using Cursor + Xcode">Built reusable Horizon template using Cursor + Xcode</h2>
-                    </div>
-                    
-                    <div class="project-item" data-video="stargazer">
-                        <h2 class="project-title" data-text="Founded Stargazer, an org-wide vibe coding program">Founded Stargazer, an org-wide vibe coding program</h2>
+                        <span class="project-index">06</span>
+                        <h2 class="project-title">Just breathe (<a href="breathing.html" class="project-link">proto</a>)</h2>
                     </div>
                 </div>
             </section>
             
-            <!-- Section 4: Footer -->
-            <section class="section" data-section="4">
-                <h1 class="hero-title">Crafted with Cursor + 🤍</h1>
+            <!-- Section 3: Finale -->
+            <section class="section" data-section="3">
+                <h1 class="hero-title">Crafted with Cursor + <span class="finale-heart" tabindex="0" aria-label="heart">♥</span></h1>
                 <p>
                     <a href="assets/Resume_Shelly_Chen.pdf" class="footer-link" target="_blank" rel="noopener noreferrer">Resume</a>
                 </p>
@@ -1078,75 +1741,144 @@
     </div>
     
     <!-- Right Side - Fixed Media -->
-    <div class="right-side">
+    <div class="right-side hero-mode" id="rightSide">
         <!-- Mobile close button -->
         <button class="mobile-close-btn" id="mobileCloseBtn" style="display: none;">×</button>
         
-        <!-- Media Previews -->
-        <div class="media-preview" id="preview-horizon">
-            <div class="media-preview-container">
-                <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
-                <video src="assets/2026/horizon.mp4?v=20260516c" class="overlay-video" loop muted playsinline preload="auto"></video>
+        <div class="hero-belief-stage" id="heroBeliefStage">
+            <div class="hero-belief-copy">
+                <!-- <p class="hero-belief-text">'The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.'</p> -->
+                <p class="hero-belief-text">I believe in the power of calm technology — products that quietly weave into everyday life and bring small moments of joy.</p>
+                <p class="hero-belief-text">I'm inspired to craft experiences that feel <span class="emphasis">simpler, softer, and more human</span> — make using technology as refreshing as taking a walk in the woods.</p>
             </div>
-            <div class="media-description">Led Horizon website redesign for <a href="https://horizon.meta.com/" target="_blank" class="project-link">Connect 2025 launch</a>.</div>
         </div>
         
-        <div class="media-preview" id="preview-vr-feed">
-            <video src="assets/2026/vr_feed.mp4" loop muted playsinline></video>
-            <div class="media-description">Shipped VR and mobile feed redesigns, announced at <a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">Connect 2025</a>.</div>
+        <div class="catalog-context-stage" data-catalog="1" id="catalogContext1">
+            <div class="catalog-context-copy">
+                <p class="hero-belief-text">I <span class="emphasis">founded and led</span> Broadcast Channels from <span class="emphasis">0→1</span>: designing the fan lounge interaction system that now reaches <span class="emphasis">hundreds of millions</span> of people.</p>
+                <p class="hero-belief-text">On Stories, I led consumption design: pushing <span class="emphasis">micro-animations</span> and <span class="emphasis">expressive motion</span> that feels alive.</p>
+            </div>
+        </div>
+        <div class="catalog-context-stage" data-catalog="2" id="catalogContext2">
+            <div class="catalog-context-copy">
+                <p class="hero-belief-text">I redesigned Horizon discovery across VR, mobile, and web: <span class="emphasis">unveiled at Connect 2025</span>.</p>
+                <p class="hero-belief-text">Lately, I'm empowering <span class="emphasis">Metaverse and WhatsApp designers</span> to prototype — building the <span class="emphasis">templates, skills, and guides</span>.</p>
+            </div>
         </div>
         
-        <div class="media-preview" id="preview-messenger-stories">
+        <!-- Media Previews — Social catalog -->
+        <div class="media-preview preview--iphone" id="preview-member-participation-hub">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/member-participation-hub.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+        </div>
+        <div class="media-preview preview--iphone" id="preview-spotlight">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/spotlight.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+        </div>
+        <div class="media-preview" id="preview-early-access">
+            <video src="assets/2026/proto/mp4/early-access.mp4" loop muted playsinline preload="metadata"></video>
+        </div>
+        <div class="media-preview preview--android" id="preview-view-story-from-thread">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/view-story-from-thread.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/android_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+        </div>
+        <div class="media-preview preview--iphone" id="preview-notes-midcard">
+            <div class="media-preview-container">
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/notes-midcard.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+            </div>
+        </div>
+        <div class="media-preview preview--iphone" id="preview-mention">
+            <div class="media-preview-container">
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/mention.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+            </div>
+        </div>
+        <div class="media-preview preview--android" id="preview-inbox-tray">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/inbox-tray.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/android_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+        </div>
+        <div class="media-preview" id="preview-craft-backlog">
             <div class="sequential-videos">
                 <video src="assets/2026/stories1.mp4" muted playsinline data-index="0"></video>
                 <video src="assets/2026/stories2.mp4" muted playsinline data-index="1"></video>
                 <video src="assets/2026/stories3.mp4" muted playsinline data-index="2"></video>
                 <video src="assets/2026/stories4.mp4" muted playsinline data-index="3"></video>
             </div>
-            <div class="media-description">Led <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, shipping 29 craft improvements.</div>
         </div>
         
-        <div class="media-preview" id="preview-ig-broadcast">
-            <video src="assets/2026/ig_bc.mp4" loop muted playsinline></video>
-            <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (<a href="https://www.cnbctv18.com/technology/now-connect-with-your-favourite-creators-on-instagram-broadcast-channels-16944171.htm" target="_blank" class="project-link">CNBC</a>, <a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">Yahoo News</a>). Scaled 10M→124M DAU, 455M MAU.</div>
+        <!-- Spatial · AI-Native catalog -->
+        <div class="media-preview" id="preview-vr-feed">
+            <video src="assets/2026/vr_feed.mp4" loop muted playsinline preload="metadata"></video>
         </div>
-        
-        <div class="media-preview" id="preview-messenger-broadcast">
-            <video src="assets/2026/msgr_bc.mp4" loop muted playsinline></video>
-            <div class="media-description">Lead designer, owning end-to-end design for 20 key projects for Oct 2024 GTM (<a href="https://www.theverge.com/2023/10/18/23922888/facebook-broadcast-channels-instagram-whatsapp" target="_blank" class="project-link">The Verge</a>). Grew DAU 286K → 5M.</div>
+        <div class="media-preview" id="preview-phoenix">
+            <video src="assets/2026/proto/mp4/phoenix.mp4" loop muted playsinline preload="metadata"></video>
+            <div class="media-description">Phoenix next gen discovery prototype — A-Frame, WebXR.</div>
         </div>
-        
-        <div class="media-preview" id="preview-craft">
-            <video src="assets/2026/craft.mp4" loop muted playsinline></video>
+        <div class="media-preview" id="preview-horizon-website">
+            <div class="media-preview-container">
+                <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
+                <video src="assets/2026/proto/mp4/horizon-website.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+            </div>
         </div>
-        
-        <div class="media-preview" id="preview-kaizen">
-            <video src="assets/2026/kaizen.mp4" loop muted playsinline></video>
-            <div class="media-description">Led <a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen for VR Feed</a>, <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">CM Craft Backlog</a>.</div>
+        <div class="media-preview preview--iphone" id="preview-horizon-template">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/horizon-template.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+            <div class="media-description">Founded Stargazer, an org-wide vibe-coding program with starter guides for prototyping and shipping code.</div>
         </div>
-        
-        <div class="media-preview" id="preview-breathe">
-            <video src="assets/2026/breathe_demo.mp4" loop muted playsinline></video>
-            <div class="media-description">A cross-platform breathing companion built with vibe coding, with haptic and breath-guiding audio cues across <a href="https://github.com/shellyxichen/Breathe" target="_blank" rel="noopener noreferrer" class="project-link">iOS</a>, <a href="breathing.html" class="project-link">web</a>, and Meta Ray Ban Display Glass.</div>
+        <div class="media-preview preview--iphone" id="preview-wa-template">
+            <div class="media-preview-container">
+                <div class="device-screen">
+                    <video src="assets/2026/proto/mp4/wa-template.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
+                </div>
+                <img src="assets/2026/iphone_device.png" alt="" class="device-image" aria-hidden="true">
+            </div>
+            <div class="media-description">Empowering hundreds of designers and XFNs to ship prototypes, with an org-wide contributor guide.</div>
         </div>
-        
-        <div class="media-preview" id="preview-template">
-            <video src="assets/2026/template.mp4" loop muted playsinline></video>
-        </div>
-        
-        <div class="media-preview" id="preview-stargazer">
-            <img src="assets/2026/stargazer.png" alt="Stargazer">
-            <div class="media-description">Org-wide education program to teach designers vibe coding. Published <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">starter guides</a> and hosted weekly office hours, including <a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=2PIYE5MhEEzYbBE4-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Vibe Coding 101</a>.</div>
+        <div class="media-preview preview--wearable" id="preview-breathe">
+            <div class="media-preview-container">
+                <img src="assets/2026/wearable_device.png" alt="" class="device-image" aria-hidden="true">
+                <div class="device-screen">
+                    <video class="overlay-video" loop muted playsinline preload="metadata">
+                        <source src="assets/2026/proto/mp4/breathe-rounded.webm" type="video/webm">
+                        <source src="assets/2026/proto/mp4/breathe.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="media-description">Multimodal breathing companion — iOS, web, Meta Ray-Ban Display.</div>
         </div>
     </div>
     
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
         <button class="scroll-dot active" data-section="0" aria-label="Hero"></button>
-        <button class="scroll-dot" data-section="1" aria-label="Shipped Products"></button>
-        <button class="scroll-dot" data-section="2" aria-label="Craft & Delight"></button>
-        <button class="scroll-dot" data-section="3" aria-label="Vibe Coding"></button>
-        <button class="scroll-dot" data-section="4" aria-label="Footer"></button>
+        <button class="scroll-dot" data-section="1" aria-label="Messenger and Instagram"></button>
+        <button class="scroll-dot" data-section="2" aria-label="Spatial and AI-Native"></button>
+        <button class="scroll-dot" data-section="3" aria-label="Finale"></button>
     </div>
     
     <!-- Bounce Chevron -->
@@ -1158,7 +1890,7 @@
     </div>
     
     <script>
-        // OPTION 2: Reset hover state when scrolling between sections + hover hint
+        // Option 2: prototype catalog — two sections, craft-backlog sequential
         
         const projectItems = document.querySelectorAll('.project-item');
         const projectItemsWithVideo = document.querySelectorAll('.project-item[data-video]');
@@ -1225,8 +1957,8 @@
             preview.classList.add('active');
             currentActivePreview = preview;
             
-            // Special handling for messenger-stories (sequential videos)
-            if (videoId === 'messenger-stories') {
+            // Sequential craft backlog (Messenger Stories)
+            if (videoId === 'craft-backlog') {
                 const sequentialVideos = preview.querySelectorAll('video');
                 let currentIndex = 0;
                 
@@ -1398,8 +2130,43 @@
                        ('ontouchstart' in window) || 
                        (navigator.maxTouchPoints > 0);
         
-        const rightSide = document.querySelector('.right-side');
+        const rightSide = document.getElementById('rightSide');
         const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        const catalogContextStages = document.querySelectorAll('.catalog-context-stage');
+        
+        function setActiveCatalogContext(sectionIndex) {
+            catalogContextStages.forEach((stage) => {
+                stage.classList.toggle('is-active', stage.getAttribute('data-catalog') === String(sectionIndex));
+            });
+        }
+        
+        function exitPreviewHover() {
+            if (!rightSide) return;
+            rightSide.classList.remove('preview-hover');
+            resetAllPreviews();
+        }
+        
+        function enterPreviewHover(videoId) {
+            if (!rightSide) return;
+            rightSide.classList.add('preview-hover');
+            activatePreview(videoId);
+        }
+        
+        function updateRightSideMode(sectionIndex) {
+            if (!rightSide) return;
+            
+            rightSide.classList.remove('hero-mode', 'catalog-idle-mode', 'preview-hover');
+            catalogContextStages.forEach((stage) => stage.classList.remove('is-active'));
+            
+            if (isMobile) return;
+            
+            if (sectionIndex === 0) {
+                rightSide.classList.add('hero-mode');
+            } else if (sectionIndex === 1 || sectionIndex === 2) {
+                rightSide.classList.add('catalog-idle-mode');
+                setActiveCatalogContext(sectionIndex);
+            }
+        }
         
         // Function to update mobile state
         function updateMobileState() {
@@ -1485,6 +2252,7 @@
         projectItemsWithVideo.forEach(item => {
             // Click handler (for mobile)
             item.addEventListener('click', function(e) {
+                if (e.target.closest('a.project-link')) return;
                 if (isMobile) {
                     e.preventDefault();
                     const videoId = this.getAttribute('data-video');
@@ -1496,7 +2264,12 @@
             item.addEventListener('mouseenter', function() {
                 if (!isMobile) {
                     const videoId = this.getAttribute('data-video');
-                    activatePreview(videoId);
+                    
+                    if (lastActiveSection === 1 || lastActiveSection === 2) {
+                        enterPreviewHover(videoId);
+                    } else {
+                        activatePreview(videoId);
+                    }
                     
                     // Remove active class from all project items
                     projectItemsWithVideo.forEach(i => i.classList.remove('active'));
@@ -1507,6 +2280,18 @@
                     // Mark the current section as hovered
                     markSectionAsHovered(lastActiveSection);
                 }
+            });
+            
+            item.addEventListener('mouseleave', function(e) {
+                if (isMobile) return;
+                if (lastActiveSection !== 1 && lastActiveSection !== 2) return;
+                
+                const related = e.relatedTarget;
+                if (related && related.closest && related.closest('.project-item[data-video]')) {
+                    return;
+                }
+                
+                exitPreviewHover();
             });
         });
         
@@ -1540,10 +2325,15 @@
                 }
                 
                 const pillStack = section.querySelector('.pill-stack');
+                const sectionDesc = section.querySelector('.section-description');
                 const projectList = section.querySelector('.project-list');
                 
                 if (pillStack) {
                     pillStack.style.opacity = opacity;
+                }
+                
+                if (sectionDesc) {
+                    sectionDesc.style.opacity = opacity;
                 }
                 
                 if (projectList) {
@@ -1559,7 +2349,8 @@
                     // OPTION 2 LOGIC: Reset all previews when entering a new section
                     if (lastActiveSection !== index) {
                         lastActiveSection = index;
-                        resetAllPreviews();
+                        exitPreviewHover();
+                        updateRightSideMode(index);
                         
                         // Hide mobile overlay when changing sections
                         if (isMobile) {
@@ -1576,8 +2367,8 @@
                             bounceChevron.classList.add('hidden');
                         }
                         
-                        // Show hover hint when entering a project section (not hero) - desktop only
-                        if (index > 0 && !isMobile) {
+                        // Show hover hint on catalog sections - desktop only
+                        if ((index === 1 || index === 2) && !isMobile) {
                             setTimeout(() => {
                                 showHoverHint(section, index);
                             }, 1500);
@@ -1627,10 +2418,15 @@
                 }
                 
                 const pillStack = section.querySelector('.pill-stack');
+                const sectionDesc = section.querySelector('.section-description');
                 const projectList = section.querySelector('.project-list');
                 
                 if (pillStack) {
                     pillStack.style.opacity = opacity;
+                }
+                
+                if (sectionDesc) {
+                    sectionDesc.style.opacity = opacity;
                 }
                 
                 if (projectList) {
@@ -1641,6 +2437,271 @@
         }
         
         initializeOpacity();
+        updateRightSideMode(lastActiveSection);
+        
+        window.addEventListener('resize', () => {
+            updateRightSideMode(lastActiveSection);
+        });
+
+        (function initHeroParallax() {
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const desktopLayoutQuery = window.matchMedia('(max-width: 1024px)');
+            if (reducedMotionQuery.matches) return;
+
+            const heroSection = document.querySelector('.section[data-section="0"]');
+            if (!heroSection) return;
+
+            const heroBeliefCopy = document.querySelector('#heroBeliefStage .hero-belief-copy');
+            const layers = [
+                {
+                    el: heroSection.querySelector('.hero-title'),
+                    translateX: 7, translateY: 7,
+                    rotateY: 2.2, rotateX: 1.6
+                },
+                {
+                    el: heroSection.querySelector('.hero-headline'),
+                    translateX: 12, translateY: 12,
+                    rotateY: 3, rotateX: 2.2
+                },
+                {
+                    el: heroBeliefCopy,
+                    translateX: -5, translateY: -5,
+                    rotateY: -2, rotateX: -1.5
+                }
+            ].filter((layer) => layer.el);
+
+            if (!layers.length) return;
+
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            let pointerInHero = false;
+
+            function heroParallaxActive() {
+                return lastActiveSection === 0 && !desktopLayoutQuery.matches;
+            }
+
+            function applyTransforms(nx, ny) {
+                for (const layer of layers) {
+                    const tx = nx * layer.translateX;
+                    const ty = ny * layer.translateY;
+                    const ry = nx * layer.rotateY;
+                    const rx = -ny * layer.rotateX;
+                    layer.el.style.transform =
+                        `rotateX(${rx}deg) rotateY(${ry}deg) translate3d(${tx}px, ${ty}px, 0)`;
+                }
+            }
+
+            function updatePointerTarget(e) {
+                const rect = heroSection.getBoundingClientRect();
+                const inHero =
+                    e.clientX >= rect.left && e.clientX <= rect.right &&
+                    e.clientY >= rect.top && e.clientY <= rect.bottom;
+
+                pointerInHero = inHero;
+                if (!inHero) {
+                    targetX = 0;
+                    targetY = 0;
+                    return;
+                }
+
+                targetX = (e.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
+                targetY = (e.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
+            }
+
+            document.addEventListener('pointermove', (e) => {
+                if (!heroParallaxActive()) {
+                    pointerInHero = false;
+                    targetX = 0;
+                    targetY = 0;
+                    return;
+                }
+                updatePointerTarget(e);
+            }, { passive: true });
+
+            function tick() {
+                const active = heroParallaxActive();
+                const goalX = active && pointerInHero ? targetX : 0;
+                const goalY = active && pointerInHero ? targetY : 0;
+                const ease = active ? 0.15 : 0.07;
+
+                currentX += (goalX - currentX) * ease;
+                currentY += (goalY - currentY) * ease;
+                applyTransforms(currentX, currentY);
+
+                requestAnimationFrame(tick);
+            }
+
+            requestAnimationFrame(tick);
+        })();
+
+        (function initHeroNameStarBurst() {
+            const label = document.querySelector('.hero-title__label');
+            const layer = document.getElementById('heroStarBurst');
+            if (!label || !layer) return;
+
+            const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!canHover || reducedMotion) return;
+
+            const SKY_FROM_TOP = 0.25;
+            const GROUND_FROM_TOP = 0.9;
+            const COOLDOWN_MS = 2500;
+            const GLOW_MS = 2000;
+            const STAR_COUNT = 20;
+            const EMIT_WINDOW_MS = 220;
+            let lastBurstAt = 0;
+            let glowTimer = null;
+
+            function startNameGlow() {
+                label.classList.remove('hero-title__label--glow');
+                void label.offsetWidth;
+                label.classList.add('hero-title__label--glow');
+                clearTimeout(glowTimer);
+                glowTimer = setTimeout(() => {
+                    label.classList.remove('hero-title__label--glow');
+                }, GLOW_MS);
+            }
+
+            function lerp(a, b, t) {
+                return a + (b - a) * t;
+            }
+
+            function createStar() {
+                const rect = label.getBoundingClientRect();
+                const vh = window.innerHeight;
+                const skyY = vh * SKY_FROM_TOP;
+                const groundY = vh * GROUND_FROM_TOP;
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height * 0.5;
+                const skySpread = Math.max(rect.width * 2.2, 160);
+
+                const star = document.createElement('span');
+                star.className = 'hero-burst-star';
+                const size = 4 + Math.random() * 4;
+                const angle = Math.random() * Math.PI * 2;
+                const reach = 0.55 + Math.random() * 0.45;
+
+                const apexX = originX + Math.cos(angle) * skySpread * reach;
+                const apexY = skyY + (Math.random() - 0.5) * vh * 0.05;
+                const crestX = lerp(originX, apexX, 0.9);
+                const crestY = lerp(originY, apexY, 0.9);
+                const fallX = apexX + (Math.random() - 0.5) * 48;
+                const fallY = groundY + Math.random() * 20;
+                const rot = (Math.random() - 0.5) * 30;             // ±15°
+                const dur = 7 + Math.random() * 3;                  // 7–10s
+
+                star.style.left = `${originX - size / 2}px`;
+                star.style.top = `${originY - size / 2}px`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.setProperty('--crest-x', `${crestX - originX}px`);
+                star.style.setProperty('--crest-y', `${crestY - originY}px`);
+                star.style.setProperty('--fall-x', `${fallX - originX}px`);
+                star.style.setProperty('--fall-y', `${fallY - originY}px`);
+                star.style.setProperty('--rot', `${rot}deg`);
+                star.style.setProperty('--burst-dur', `${dur}s`);
+                layer.appendChild(star);
+                star.addEventListener('animationend', () => star.remove(), { once: true });
+            }
+
+            function spawnBurst() {
+                const now = performance.now();
+                if (now - lastBurstAt < COOLDOWN_MS) return;
+                lastBurstAt = now;
+                startNameGlow();
+
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    const baseDelay = (i / STAR_COUNT) * EMIT_WINDOW_MS;
+                    const jitter = Math.random() * 60;
+                    setTimeout(createStar, baseDelay + jitter);
+                }
+            }
+
+            label.addEventListener('mouseenter', spawnBurst);
+            label.addEventListener('focus', () => {
+                if (label.matches(':focus-visible')) spawnBurst();
+            });
+        })();
+
+        (function initFinaleHeartBurst() {
+            const heart = document.querySelector('.finale-heart');
+            const layer = document.getElementById('heroStarBurst');
+            if (!heart || !layer) return;
+
+            const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!canHover || reducedMotion) return;
+
+            // Messenger-style cascade: emit hearts over time, each floats up & fades
+            const COOLDOWN_MS = 1500;
+            const GLOW_MS = 1400;
+            const HEART_COUNT = 22;
+            const EMIT_WINDOW_MS = 1100;
+            const HEART_GLYPH = '♥';
+            let lastBurstAt = 0;
+            let glowTimer = null;
+
+            function startHeartGlow() {
+                heart.classList.remove('finale-heart--glow');
+                void heart.offsetWidth;
+                heart.classList.add('finale-heart--glow');
+                clearTimeout(glowTimer);
+                glowTimer = setTimeout(() => {
+                    heart.classList.remove('finale-heart--glow');
+                }, GLOW_MS);
+            }
+
+            function createHeart() {
+                const rect = heart.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+
+                const particle = document.createElement('span');
+                particle.className = 'finale-burst-heart';
+                particle.textContent = HEART_GLYPH;
+
+                const size = 14 + Math.random() * 14;            // 14–28px
+                const rise = 180 + Math.random() * 140;          // 180–320px up
+                const sway = (Math.random() - 0.5) * 140;        // ±70px
+                const rot = (Math.random() - 0.5) * 50;          // ±25°
+                const life = 1.8 + Math.random() * 0.8;          // 1.8–2.6s
+                const peakOpacity = 0.75 + Math.random() * 0.25; // 0.75–1
+                const jitterX = (Math.random() - 0.5) * 18;
+                const jitterY = (Math.random() - 0.5) * 10;
+
+                particle.style.left = `${originX - size / 2 + jitterX}px`;
+                particle.style.top = `${originY - size / 2 + jitterY}px`;
+                particle.style.fontSize = `${size}px`;
+                particle.style.setProperty('--rise', `${rise}px`);
+                particle.style.setProperty('--sway', `${sway}px`);
+                particle.style.setProperty('--rot', `${rot}deg`);
+                particle.style.setProperty('--life', `${life}s`);
+                particle.style.setProperty('--peak-opacity', peakOpacity.toFixed(2));
+
+                layer.appendChild(particle);
+                particle.addEventListener('animationend', () => particle.remove(), { once: true });
+            }
+
+            function spawnBurst() {
+                const now = performance.now();
+                if (now - lastBurstAt < COOLDOWN_MS) return;
+                lastBurstAt = now;
+                startHeartGlow();
+
+                for (let i = 0; i < HEART_COUNT; i++) {
+                    const baseDelay = (i / HEART_COUNT) * EMIT_WINDOW_MS;
+                    const jitter = Math.random() * 80;
+                    setTimeout(createHeart, baseDelay + jitter);
+                }
+            }
+
+            heart.addEventListener('mouseenter', spawnBurst);
+            heart.addEventListener('focus', () => {
+                if (heart.matches(':focus-visible')) spawnBurst();
+            });
+        })();
     </script>
 
     <script>
