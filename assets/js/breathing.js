@@ -35,6 +35,16 @@
     tintOpacity: 0.1
   };
   const ENTRY_CUE_DURATION_MS = 4000;
+  const ORDERED_MODE_IDS = [
+    "box",
+    "box_8888",
+    "coherent_55",
+    "relax_478",
+    "physiological_sigh_326"
+  ];
+  const TIMER_OPTIONS_SEC = [30, 60, 120, 180, 300, 600, "infinity"];
+  const DEFAULT_TIMER_SEC = 120;
+  const SOUND_MUTED_KEY = "justBreathe.soundMuted";
   const MODE_BACKGROUND_SIGNATURES = {
     box: {
       tempBias: -0.04,
@@ -73,30 +83,36 @@
   const elements = {
     layout: document.querySelector(".layout"),
     entranceOverlay: document.getElementById("entranceOverlay"),
-    modeSelect: document.getElementById("modeSelect"),
-    startBtn: document.getElementById("startBtn"),
-    stopBtn: document.getElementById("stopBtn"),
+    modeBlock: document.getElementById("modeBlock"),
+    modeSubtitle: document.getElementById("modeSubtitle"),
     modeDescription: document.getElementById("modeDescription"),
-    timerSelect: document.getElementById("timerSelect"),
+    modeDots: document.getElementById("modeDots"),
+    projectNote: document.getElementById("projectNote"),
+    cornerRight: document.getElementById("cornerRight"),
+    soundToggle: document.getElementById("soundToggle"),
     sessionBar: document.getElementById("sessionBar"),
     sessionBarFill: document.getElementById("sessionBarFill"),
     haloCanvas: document.getElementById("haloCanvas"),
     haloText: document.getElementById("haloText"),
+    haloStartLabel: document.getElementById("haloStartLabel"),
     haloLabel: document.getElementById("haloLabel"),
     haloCountdown: document.getElementById("haloCountdown")
   };
 
   if (
     !elements.layout ||
-    !elements.modeSelect ||
-    !elements.startBtn ||
-    !elements.stopBtn ||
+    !elements.modeBlock ||
+    !elements.modeSubtitle ||
     !elements.modeDescription ||
-    !elements.timerSelect ||
+    !elements.modeDots ||
+    !elements.projectNote ||
+    !elements.cornerRight ||
+    !elements.soundToggle ||
     !elements.sessionBar ||
     !elements.sessionBarFill ||
     !elements.haloCanvas ||
     !elements.haloText ||
+    !elements.haloStartLabel ||
     !elements.haloLabel ||
     !elements.haloCountdown
   ) {
@@ -136,7 +152,16 @@
     currentModeBackgroundSignature: { ...DEFAULT_MODE_BACKGROUND_SIGNATURE },
     modeSignatureRafId: null,
     modeDescriptionTimeoutId: null,
-    entryAmbientAttempted: false
+    entryAmbientAttempted: false,
+    pressScaleAmount: 0,
+    pressGlowBoost: 0,
+    pressRimAmount: 0,
+    pressRafId: null,
+    soundMuted: true,
+    audioUnlocked: false,
+    swipeStartX: 0,
+    swipeStartY: 0,
+    dotPulseTimeoutId: null
   };
 
   const modeSpecPaths = {
@@ -145,6 +170,14 @@
     relax_478: "assets/breathing/relax_478.json",
     coherent_55: "assets/breathing/coherent_55.json",
     physiological_sigh_326: "assets/breathing/physiological_sigh_326.json"
+  };
+
+  const modeSubtitles = {
+    box: "4-4-4-4 box breathing",
+    box_8888: "8-8-8-8 box breathing",
+    coherent_55: "5-5 coherent",
+    relax_478: "4-7-8 relax",
+    physiological_sigh_326: "3-1-2-6 sigh"
   };
 
   const modeDescriptions = {
@@ -166,8 +199,8 @@
 
   const AMBIENT_SOURCE_OPTIONS = [
     { id: "ocean", kind: "synth" },
-    { id: "forest", kind: "file", path: "assets/2026/nature/forest.wav" },
-    { id: "water", kind: "file", path: "assets/2026/nature/water.wav" }
+    { id: "forest", kind: "file", path: "assets/2026/nature/forest.m4a" },
+    { id: "water", kind: "file", path: "assets/2026/nature/water.m4a" }
   ];
 
   const audioConfig = {
@@ -251,28 +284,27 @@
   init();
 
   function init() {
-    elements.modeSelect.disabled = true;
-    state.sessionDurationSec = parseTimerValue(elements.timerSelect.value);
+    state.sessionDurationSec = DEFAULT_TIMER_SEC;
+    state.audioUnlocked = false;
+    state.soundMuted = true;
+    updateSoundToggleUI();
     initEntranceOverlay();
     bindEvents();
     bindAudioPrewarm();
     bindEntryAmbientAttempt();
+    buildModeDots();
     renderIdle();
 
     loadModeSpecs()
       .then(() => {
-        const initialMode = state.specsByModeId[elements.modeSelect.value]
-          ? elements.modeSelect.value
-          : "box";
-        elements.modeSelect.value = initialMode;
+        const initialMode = state.specsByModeId.box ? "box" : ORDERED_MODE_IDS[0];
         setMode(initialMode);
-        elements.modeSelect.disabled = false;
         renderIdle();
       })
       .catch(() => {
-        elements.startBtn.disabled = true;
-        elements.modeDescription.textContent = "Unable to load breathing modes";
-        elements.modeDescription.classList.remove("is-faded");
+        elements.modeSubtitle.textContent = "Unable to load breathing modes";
+        elements.modeDescription.textContent = "";
+        setIdleChromeVisible(true);
       });
 
     requestAnimationFrame(() => {
@@ -282,20 +314,6 @@
   }
 
   function bindEvents() {
-    elements.startBtn.addEventListener("click", beginStartFlow);
-    elements.stopBtn.addEventListener("click", handleStopRequest);
-
-    elements.modeSelect.addEventListener("change", (event) => {
-      setMode(event.target.value);
-    });
-
-    elements.timerSelect.addEventListener("change", (event) => {
-      state.sessionDurationSec = parseTimerValue(event.target.value);
-      if (state.running) {
-        resetRunningSessionTiming();
-      }
-    });
-
     elements.layout.addEventListener("click", (event) => {
       if (shouldIgnoreSurfaceClick(event.target)) return;
       if (state.startPending || state.isCountingDown || state.running) {
@@ -303,6 +321,66 @@
         return;
       }
       beginStartFlow();
+    });
+
+    elements.soundToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (
+        state.running ||
+        state.isCountingDown ||
+        state.startPending ||
+        state.stopSequenceActive
+      ) {
+        return;
+      }
+      if (!state.audioUnlocked) {
+        unlockAudio()
+          .then(() => {
+            if (!state.audioUnlocked) return;
+            setSoundMuted(false);
+          })
+          .catch(() => undefined);
+        return;
+      }
+      setSoundMuted(!state.soundMuted);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (!canChangeMode()) return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        cycleMode(-1);
+        ensureAmbientIfPermitted();
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        cycleMode(1);
+        ensureAmbientIfPermitted();
+      }
+    });
+
+    elements.layout.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (shouldIgnoreSurfaceClick(event.target)) return;
+        state.swipeStartX = event.clientX;
+        state.swipeStartY = event.clientY;
+      },
+      { passive: true }
+    );
+
+    elements.layout.addEventListener("pointerup", (event) => {
+      if (!canChangeMode()) return;
+      if (shouldIgnoreSurfaceClick(event.target)) return;
+      const dx = event.clientX - state.swipeStartX;
+      const dy = event.clientY - state.swipeStartY;
+      if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < 50) return;
+      if (dx < -50) {
+        cycleMode(1);
+        ensureAmbientIfPermitted();
+      } else if (dx > 50) {
+        cycleMode(-1);
+        ensureAmbientIfPermitted();
+      }
     });
 
     window.addEventListener("resize", syncCanvasSize);
@@ -353,8 +431,240 @@
   function shouldIgnoreSurfaceClick(target) {
     return Boolean(
       target &&
-        target.closest(".controls, .home-button, select, button, label, a")
+        target.closest(
+          ".home-button, a, .mode-dot, .sound-toggle, .project-note, .gesture-hints"
+        )
     );
+  }
+
+  function canChangeMode() {
+    return (
+      !state.running &&
+      !state.isCountingDown &&
+      !state.startPending &&
+      !state.stopSequenceActive
+    );
+  }
+
+  function setIdleChromeVisible(isVisible) {
+    const faded = !isVisible;
+    elements.modeBlock.classList.toggle("is-faded", faded);
+    elements.projectNote.classList.toggle("is-faded", faded);
+    elements.cornerRight.classList.toggle("is-faded", faded);
+    elements.haloStartLabel.classList.toggle("is-hidden", faded);
+  }
+
+  function buildModeDots() {
+    elements.modeDots.replaceChildren();
+    ORDERED_MODE_IDS.forEach((modeId, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "mode-dot";
+      button.dataset.modeId = modeId;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-selected", "false");
+      button.setAttribute("aria-label", modeSubtitles[modeId] || modeId);
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (!canChangeMode()) return;
+        selectMode(modeId);
+        ensureAmbientIfPermitted();
+      });
+      elements.modeDots.appendChild(button);
+    });
+    updateModeDots();
+  }
+
+  function getCurrentModeIndex() {
+    const index = ORDERED_MODE_IDS.indexOf(state.modeId);
+    return index >= 0 ? index : 0;
+  }
+
+  function updateModeDots() {
+    const activeIndex = getCurrentModeIndex();
+    const dots = elements.modeDots.querySelectorAll(".mode-dot");
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+  }
+
+  function pulseActiveDot() {
+    if (state.prefersReducedMotion) return;
+    const activeDot = elements.modeDots.querySelector(".mode-dot.is-active");
+    if (!activeDot) return;
+    if (state.dotPulseTimeoutId) {
+      window.clearTimeout(state.dotPulseTimeoutId);
+      state.dotPulseTimeoutId = null;
+    }
+    activeDot.classList.add("is-pulsing");
+    state.dotPulseTimeoutId = window.setTimeout(() => {
+      activeDot.classList.remove("is-pulsing");
+      state.dotPulseTimeoutId = null;
+    }, 600);
+  }
+
+  function cycleMode(delta) {
+    const count = ORDERED_MODE_IDS.length;
+    if (!count) return;
+    const nextIndex = (getCurrentModeIndex() + delta + count) % count;
+    selectMode(ORDERED_MODE_IDS[nextIndex]);
+  }
+
+  function selectMode(modeId) {
+    if (!state.specsByModeId[modeId] || modeId === state.modeId) return;
+    if (!canChangeMode()) return;
+
+    const applyMode = () => {
+      setMode(modeId, { animateDescription: false });
+      updateModeDots();
+      pulseActiveDot();
+    };
+
+    if (state.prefersReducedMotion) {
+      applyMode();
+      return;
+    }
+
+    elements.modeSubtitle.classList.add("is-transitioning");
+    elements.modeDescription.classList.add("is-transitioning");
+
+    window.setTimeout(() => {
+      setMode(modeId, { animateDescription: false });
+      updateModeDots();
+      pulseActiveDot();
+      requestAnimationFrame(() => {
+        elements.modeSubtitle.classList.remove("is-transitioning");
+        elements.modeDescription.classList.remove("is-transitioning");
+      });
+    }, 150);
+  }
+
+  function readSoundMutedPreference() {
+    try {
+      const stored = window.localStorage.getItem(SOUND_MUTED_KEY);
+      if (stored === null) return { hasPreference: false, muted: false };
+      return { hasPreference: true, muted: stored === "true" };
+    } catch {
+      return { hasPreference: false, muted: false };
+    }
+  }
+
+  function writeSoundMutedPreference(muted) {
+    try {
+      window.localStorage.setItem(SOUND_MUTED_KEY, muted ? "true" : "false");
+    } catch {
+      // Ignore storage failures.
+    }
+  }
+
+  function isSoundEffectivelyMuted() {
+    return !state.audioUnlocked || state.soundMuted;
+  }
+
+  function finishAudioUnlock() {
+    if (state.audioUnlocked) return;
+    state.audioUnlocked = true;
+    const pref = readSoundMutedPreference();
+    // First-time visitors: default to sound on once they've interacted.
+    // Returning visitors who explicitly muted: respect their preference.
+    state.soundMuted = pref.hasPreference ? pref.muted : false;
+    updateSoundToggleUI();
+    applySoundMutedToMaster();
+  }
+
+  function updateSoundToggleUI() {
+    const effectivelyMuted = isSoundEffectivelyMuted();
+    elements.soundToggle.classList.toggle("is-muted", effectivelyMuted);
+    elements.soundToggle.setAttribute("aria-pressed", effectivelyMuted ? "false" : "true");
+    elements.soundToggle.setAttribute(
+      "aria-label",
+      effectivelyMuted ? "Sound off" : "Sound on"
+    );
+    elements.soundToggle.title = effectivelyMuted ? "Sound off" : "Sound on";
+  }
+
+  function applySoundMutedToMaster() {
+    if (!audioState.cueMaster) return;
+    const target = isSoundEffectivelyMuted() ? 0 : dbToGain(audioConfig.cues.masterDb);
+    if (!state.audioCtx) {
+      audioState.cueMaster.gain.value = target;
+      return;
+    }
+    const now = state.audioCtx.currentTime;
+    audioState.cueMaster.gain.cancelScheduledValues(now);
+    audioState.cueMaster.gain.setValueAtTime(audioState.cueMaster.gain.value, now);
+    audioState.cueMaster.gain.linearRampToValueAtTime(target, now + 0.2);
+  }
+
+  function setSoundMuted(muted) {
+    state.soundMuted = Boolean(muted);
+    if (state.audioUnlocked) {
+      writeSoundMutedPreference(state.soundMuted);
+    }
+    updateSoundToggleUI();
+    applySoundMutedToMaster();
+  }
+
+  function ensureAmbientIfPermitted() {
+    unlockAudio()
+      .then(() => {
+        if (
+          state.audioUnlocked &&
+          !state.soundMuted &&
+          !state.running &&
+          !state.stopSequenceActive
+        ) {
+          beginWelcomeAmbient();
+        }
+      })
+      .catch(() => undefined);
+  }
+
+  function runHaloPressFeedback() {
+    if (state.prefersReducedMotion) return;
+    if (state.pressRafId) {
+      cancelAnimationFrame(state.pressRafId);
+      state.pressRafId = null;
+    }
+
+    const startTime = performance.now();
+    const pressInMs = 100;
+    const springMs = 200;
+    const relaxMs = 200;
+
+    const frame = (now) => {
+      const elapsed = now - startTime;
+
+      if (elapsed <= pressInMs) {
+        const t = easeOutCubic(elapsed / pressInMs);
+        state.pressScaleAmount = lerp(0, -0.05, t);
+        state.pressGlowBoost = lerp(0, 0.4, t);
+        state.pressRimAmount = lerp(0, 1, t);
+      } else if (elapsed <= pressInMs + springMs) {
+        const t = (elapsed - pressInMs) / springMs;
+        const spring = 1 - Math.pow(1 - t, 3);
+        state.pressScaleAmount = lerp(-0.05, 0, spring);
+      } else if (elapsed <= pressInMs + springMs + relaxMs) {
+        const t = (elapsed - pressInMs - springMs) / relaxMs;
+        state.pressGlowBoost = lerp(0.4, 0, easeInOutSine(t));
+        state.pressRimAmount = lerp(1, 0, easeInOutSine(t));
+        state.pressScaleAmount = 0;
+      } else {
+        state.pressScaleAmount = 0;
+        state.pressGlowBoost = 0;
+        state.pressRimAmount = 0;
+        state.pressRafId = null;
+        drawHalo(state.currentHaloScale, state.currentHaloGlow, state.currentHaloTemp, 0);
+        return;
+      }
+
+      drawHalo(state.currentHaloScale, state.currentHaloGlow, state.currentHaloTemp, 0);
+      state.pressRafId = requestAnimationFrame(frame);
+    };
+
+    state.pressRafId = requestAnimationFrame(frame);
   }
 
   function loadModeSpecs() {
@@ -376,7 +686,8 @@
     });
   }
 
-  function setMode(modeId) {
+  function setMode(modeId, options = {}) {
+    const { animateDescription = true } = options;
     const nextSpec = state.specsByModeId[modeId];
     if (!nextSpec) return;
     const shouldShowDescription =
@@ -387,7 +698,9 @@
     state.modeId = modeId;
     state.spec = nextSpec;
     animateModeBackgroundSignature(getModeBackgroundSignature(modeId));
-    renderModeDescription(shouldShowDescription, { animateChange: shouldShowDescription });
+    renderModeDescription(shouldShowDescription, {
+      animateChange: shouldShowDescription && animateDescription
+    });
     if (state.running) {
       resetRunningSessionTiming();
     }
@@ -464,54 +777,55 @@
       window.clearTimeout(state.modeDescriptionTimeoutId);
       state.modeDescriptionTimeoutId = null;
     }
+    elements.modeSubtitle.classList.remove("is-transitioning");
     elements.modeDescription.classList.remove("is-transitioning");
   }
 
   function renderModeDescription(isVisible, options = {}) {
     const { animateChange = false } = options;
+    const subtitle = modeSubtitles[state.modeId] || "";
     const description = modeDescriptions[state.modeId] || "";
     clearModeDescriptionTransition();
 
-    if (!isVisible || !description) {
-      elements.modeDescription.textContent = description;
-      elements.modeDescription.classList.toggle("is-faded", !isVisible || !description);
+    elements.modeSubtitle.textContent = subtitle;
+    elements.modeDescription.textContent = description;
+    updateModeDots();
+
+    if (!isVisible || !subtitle) {
+      setIdleChromeVisible(isVisible && Boolean(subtitle));
       return;
     }
 
-    if (!animateChange || state.prefersReducedMotion || !elements.modeDescription.textContent) {
-      elements.modeDescription.textContent = description;
-      elements.modeDescription.classList.remove("is-faded");
-      return;
+    setIdleChromeVisible(true);
+
+    if (animateChange && !state.prefersReducedMotion && subtitle) {
+      elements.modeSubtitle.classList.add("is-transitioning");
+      elements.modeDescription.classList.add("is-transitioning");
+
+      state.modeDescriptionTimeoutId = window.setTimeout(() => {
+        requestAnimationFrame(() => {
+          elements.modeSubtitle.classList.remove("is-transitioning");
+          elements.modeDescription.classList.remove("is-transitioning");
+        });
+        state.modeDescriptionTimeoutId = null;
+      }, 150);
     }
-
-    elements.modeDescription.classList.remove("is-faded");
-    elements.modeDescription.classList.add("is-transitioning");
-
-    state.modeDescriptionTimeoutId = window.setTimeout(() => {
-      elements.modeDescription.textContent = description;
-      requestAnimationFrame(() => {
-        elements.modeDescription.classList.remove("is-transitioning");
-      });
-      state.modeDescriptionTimeoutId = null;
-    }, 420);
-  }
-
-  function setControlsState({ startDisabled, stopDisabled }) {
-    elements.startBtn.disabled = Boolean(startDisabled);
-    elements.stopBtn.disabled = Boolean(stopDisabled);
   }
 
   function setHaloTextState(kind, label = "", countdown = "") {
     elements.haloText.dataset.state = kind;
 
     if (kind === "idle") {
+      elements.haloStartLabel.hidden = false;
       elements.haloLabel.hidden = true;
       elements.haloCountdown.hidden = true;
       elements.haloLabel.textContent = "";
       elements.haloCountdown.textContent = "";
-      elements.haloText.setAttribute("aria-label", "");
+      elements.haloText.setAttribute("aria-label", "Start");
       return;
     }
+
+    elements.haloStartLabel.hidden = true;
 
     if (kind === "countdown") {
       elements.haloLabel.hidden = true;
@@ -538,13 +852,15 @@
     state.lastBeatIndex = "";
     state.tempScalar = 0;
     state.currentHaloPulse = 0;
+    state.pressScaleAmount = 0;
+    state.pressGlowBoost = 0;
+    state.pressRimAmount = 0;
     state.sessionHandoffActive = false;
     state.sessionHandoffScale = IDLE_HALO.scale;
     state.sessionHandoffGlow = IDLE_HALO.glow;
     state.stopSequenceActive = false;
     state.stopSequenceToken += 1;
     state.currentAmbientIntensity = IDLE_HALO.intensity;
-    setControlsState({ startDisabled: false, stopDisabled: true });
     setSessionBarVisible(false);
     updateSessionBar(0);
     renderModeDescription(true);
@@ -564,9 +880,9 @@
       return;
     }
     stopFinishChord();
+    runHaloPressFeedback();
     state.startPending = true;
-    renderModeDescription(false);
-    setControlsState({ startDisabled: true, stopDisabled: false });
+    setIdleChromeVisible(false);
 
     unlockAudio()
       .catch(() => undefined)
@@ -576,12 +892,16 @@
       })
       .finally(() => {
         state.startPending = false;
+        if (!state.running && !state.isCountingDown && !state.stopSequenceActive) {
+          setIdleChromeVisible(true);
+        }
       });
   }
 
   async function startCountdown() {
     if (!state.spec) return;
     state.isCountingDown = true;
+    setIdleChromeVisible(false);
     const token = state.countdownToken + 1;
     state.countdownToken = token;
 
@@ -639,7 +959,7 @@
     state.sessionEndTime = getSessionEndTime(state.startTime, state.sessionDurationSec);
     state.lastPhaseIndex = -1;
     state.lastBeatIndex = "";
-    setControlsState({ startDisabled: true, stopDisabled: false });
+    setIdleChromeVisible(false);
     setSessionBarVisible(Boolean(state.sessionDurationSec));
     startAudioForSession();
     duckAmbientForSessionStart();
@@ -668,9 +988,8 @@
     setSessionBarVisible(false);
     state.sessionHandoffActive = false;
     state.currentHaloPulse = 0;
-    setControlsState({ startDisabled: true, stopDisabled: true });
+    setIdleChromeVisible(false);
     setHaloTextState("idle");
-    renderModeDescription(false);
 
     playFinishChord();
     restoreAmbientAfterNaturalCompletion();
@@ -711,7 +1030,8 @@
     return resumePromise
       .then(() => prewarmAudio(state.audioCtx))
       .then(() => {
-        if (!state.running) {
+        finishAudioUnlock();
+        if (!state.running && !isSoundEffectivelyMuted()) {
           return beginWelcomeAmbient();
         }
         return undefined;
@@ -753,7 +1073,7 @@
       audioState.cueMaster = ctx.createGain();
       audioState.cueMaster.connect(ctx.destination);
     }
-    audioState.cueMaster.gain.value = dbToGain(audioConfig.cues.masterDb);
+    applySoundMutedToMaster();
   }
 
   function ensureVoiceBeat(ctx) {
@@ -1471,7 +1791,13 @@
     const height = elements.haloCanvas.clientHeight || HALO_BASE_SIZE;
     const dpr = Math.max(1, window.devicePixelRatio || 1);
     const baseUnit = Math.min(width, height) / HALO_BASE_SIZE;
-    const effectiveScale = Math.max(0.1, scale) * (1 + (state.prefersReducedMotion ? 0 : pulseScale));
+    const pressScale = state.prefersReducedMotion ? 0 : state.pressScaleAmount || 0;
+    const pressGlowBoost = state.prefersReducedMotion ? 0 : state.pressGlowBoost || 0;
+    const pressRimAmount = state.prefersReducedMotion ? 0 : state.pressRimAmount || 0;
+    const effectiveScale = Math.max(
+      0.1,
+      scale * (1 + (state.prefersReducedMotion ? 0 : pulseScale + pressScale))
+    );
     const coreRadius = (HALO_CORE_DIAMETER / 2) * baseUnit * effectiveScale;
     const glowRadius = (HALO_GLOW_DIAMETER / 2) * baseUnit * effectiveScale;
     const centerX = width / 2;
@@ -1479,6 +1805,9 @@
     const glowColor = getGlowColor(tempScalar);
     const rimColor = getRimColor(tempScalar);
     const clampedGlow = clamp(glow, 0, 1);
+    const glowAlpha = 0.45 * clampedGlow * (1 + pressGlowBoost);
+    const rimAlpha = 0.25 + 0.25 * pressRimAmount;
+    const rimWidth = Math.max(1, (1.5 + 1.0 * pressRimAmount) * baseUnit * effectiveScale);
 
     haloCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     haloCtx.clearRect(0, 0, width, height);
@@ -1489,7 +1818,7 @@
     HALO_GAUSSIAN_STOPS.forEach((stop) => {
       gradient.addColorStop(
         stop.loc,
-        `rgba(${glowColor[0]}, ${glowColor[1]}, ${glowColor[2]}, ${(stop.alpha * 0.45 * clampedGlow).toFixed(4)})`
+        `rgba(${glowColor[0]}, ${glowColor[1]}, ${glowColor[2]}, ${(stop.alpha * glowAlpha).toFixed(4)})`
       );
     });
     haloCtx.fillStyle = gradient;
@@ -1503,8 +1832,8 @@
     haloCtx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
     haloCtx.fill();
 
-    haloCtx.strokeStyle = `rgba(${rimColor[0]}, ${rimColor[1]}, ${rimColor[2]}, 0.25)`;
-    haloCtx.lineWidth = Math.max(1, 1.5 * baseUnit * effectiveScale);
+    haloCtx.strokeStyle = `rgba(${rimColor[0]}, ${rimColor[1]}, ${rimColor[2]}, ${rimAlpha.toFixed(4)})`;
+    haloCtx.lineWidth = rimWidth;
     haloCtx.beginPath();
     haloCtx.arc(centerX, centerY, Math.max(0, coreRadius - haloCtx.lineWidth * 0.5), 0, Math.PI * 2);
     haloCtx.stroke();
