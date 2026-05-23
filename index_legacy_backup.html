@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en" class="force-cursor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelly Chen</title>
+    
+    <!-- Force HTTPS Redirect -->
+    <script>
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
+    </script>
+
+    <!-- Ensure custom cursor re-applies on refresh/tab focus -->
+    <script>
+        (function ensureCursorPaints() {
+            const root = document.documentElement;
+            function refreshCursor() {
+                root.classList.remove('force-cursor');
+                void root.offsetHeight; // force style recalc / repaint
+                root.classList.add('force-cursor');
+            }
+
+            root.classList.add('force-cursor');
+            window.addEventListener('pageshow', refreshCursor);
+            window.addEventListener('focus', refreshCursor);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) refreshCursor();
+            });
+        })();
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128514351-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-128514351-1');
+    </script>
+    <script type="text/javascript">
+        window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+        heap.load("3026647544");
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html.force-cursor,
+        html.force-cursor * {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CradialGradient id='starGlow'%3E%3Cstop offset='0%25' style='stop-color:rgb(240,210,255);stop-opacity:1'/%3E%3Cstop offset='40%25' style='stop-color:rgb(170,175,255);stop-opacity:0.8'/%3E%3Cstop offset='100%25' style='stop-color:rgb(100,140,255);stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='16' fill='url(%23starGlow)'/%3E%3Ccircle cx='20' cy='20' r='4.5' fill='rgb(245,220,255)' opacity='1'/%3E%3C/svg%3E") 20 20, auto !important;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #000000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        body.mobile-overlay-active {
+            overflow: hidden;
+        }
+
+        /* Subtle animated starfield background (behind everything) */
+        #bgStarsCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        /* Slight vignette to keep it minimal + readable */
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(1200px 800px at 70% 30%, rgba(84, 69, 255, 0.08), rgba(0, 0, 0, 0) 60%),
+                radial-gradient(900px 700px at 25% 75%, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0) 55%),
+                radial-gradient(1200px 900px at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65) 75%),
+                radial-gradient(1400px 1100px at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85) 100%);
+        }
+
+        /* Subtle blue drift across the screen */
+        .bg-vignette::before {
+            content: "";
+            position: absolute;
+            inset: -25%;
+            pointer-events: none;
+            opacity: 0.55;
+            filter: blur(34px);
+            mix-blend-mode: screen;
+            background:
+                radial-gradient(700px 520px at 15% 35%, rgba(84, 69, 255, 0.32), rgba(0, 0, 0, 0) 65%),
+                radial-gradient(520px 420px at 85% 70%, rgba(84, 69, 255, 0.24), rgba(0, 0, 0, 0) 60%);
+            transform: translate3d(-10%, -6%, 0);
+            animation: bgBlueDrift 26s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgBlueDrift {
+            0%   { transform: translate3d(-12%, -8%, 0); }
+            100% { transform: translate3d(10%, 9%, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-vignette::before {
+                animation: none;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none; /* Firefox */
+            position: relative;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        .container {
+            display: flex;
+            min-height: 500vh;
+            width: 100%;
+        }
+        
+        /* Left Side - Scrollable Content */
+        .left-side {
+            width: 38.2%;
+            min-height: 500vh;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        .section {
+            height: 100vh;
+            min-height: 100vh;
+            padding: 60px 200px 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        
+        .section:first-child {
+            padding-top: 60px;
+        }
+        
+        /* Pill Styles */
+        .pill-stack {
+            position: relative;
+            margin-bottom: 40px;
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.18s ease;
+            will-change: opacity;
+        }
+
+        
+        .pill-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+        }
+        
+        .pill {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 400;
+            width: fit-content;
+            white-space: nowrap;
+            transition: opacity 0.2s ease, width 0.2s ease, transform 0.2s ease;
+        }
+        
+        .pill-primary {
+            background: white;
+            color: #1a1147;
+            transform: rotate(-2deg);
+        }
+        
+        .pill-accent {
+            background: white;
+            color: #3e27b3;
+            transform: rotate(2deg);
+        }
+        
+        .section-description {
+            font-size: 18px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        /* Project Items */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            opacity: 1;
+            transition: opacity 0.18s ease;
+            will-change: opacity;
+        }
+        
+        .project-item {
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            padding: 16px 0;
+        }
+        
+        .project-title {
+            font-size: 18px;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        .project-item:hover .project-title,
+        .project-item.active .project-title {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
+        }
+        
+        .project-meta {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+        
+        .project-item .project-link {
+            color: inherit;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+        
+        .project-item:hover .project-link,
+        .project-item.active .project-link {
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+        
+        /* Links in media descriptions should be underlined */
+        .media-description .project-link {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: all 0.3s ease;
+            font-size: inherit;
+        }
+        
+        .media-description .project-link:hover {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
+        }
+        
+        /* Right Side - Fixed Hero */
+        .right-side {
+            width: 61.8%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 60px;
+            padding-left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            overflow: visible;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .hero-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 650px;
+        }
+        
+        /* Playground link styling - matches hero-subtitle with underline */
+        a.project-link {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        a.project-link:hover {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
+        }
+        
+        /* Footer link styling - no underline by default, shows on hover */
+        a.footer-link {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a.footer-link:hover {
+            color: rgba(255, 255, 255, 1);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-shadow: 0 0 0.8px currentColor, 0 0 0.8px currentColor, 0 0 0.8px currentColor;
+        }
+        
+        /* Media Preview */
+        .media-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            background: transparent;
+            z-index: 5;
+            padding: 0;
+        }
+        
+        .media-preview.active {
+            opacity: 1;
+            pointer-events: none;
+        }
+        
+        .media-preview.fading-out {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .media-preview video {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);  
+        }
+        
+        /* Horizon specific styles with layered image and video */
+        .media-preview-container {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-preview img.device-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+        
+        .media-preview video.overlay-video {
+            position: absolute;
+            top: 5%;
+            left: 12.5%;
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .media-preview.active video.overlay-video {
+            opacity: 1;
+        }
+        
+        /* Sequential video container for messenger stories */
+        .sequential-videos {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sequential-videos video {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sequential-videos video.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        /* Full height media preview for specific items */
+        #preview-messenger-stories video,
+        #preview-ig-broadcast video,
+        #preview-messenger-broadcast video,
+        #preview-craft video,
+        #preview-template video {
+            max-height: 100vh;
+            height: 100%;
+            width: auto;
+            max-width: none;
+            object-fit: contain;
+        }
+        
+        /* Slightly smaller for messenger stories */
+        #preview-messenger-stories video {
+            max-height: 80vh;
+            height: 80%;
+        }
+        
+        /* 80% size and top aligned for messenger broadcast */
+        #preview-messenger-broadcast {
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        #preview-messenger-broadcast video {
+            max-height: 90vh;
+            height: 85%;
+        }
+        
+        /* 90% size and top aligned for ig broadcast */
+        #preview-ig-broadcast {
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        #preview-ig-broadcast video {
+            max-height: 90vh;
+            height: 90%;
+        }
+        
+        #preview-messenger-stories,
+        #preview-ig-broadcast,
+        #preview-messenger-broadcast,
+        #preview-craft,
+        #preview-template {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Override alignment for messenger broadcast and ig broadcast */
+        #preview-messenger-broadcast,
+        #preview-ig-broadcast {
+            align-items: flex-start;
+        }
+        
+        /* Smaller centered video for Breathe */
+        #preview-breathe {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-breathe video {
+            max-width: 45%;
+            max-height: calc(100vh - 320px);
+            border-radius: 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+        
+        #preview-messenger-stories .sequential-videos {
+            max-height: 100vh;
+            height: 100%;
+        }
+        
+        /* Smaller centered video for Kaizen */
+        #preview-kaizen {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-kaizen video {
+            max-width: 70%;
+            max-height: 70%;
+        }
+        
+        /* Smaller centered image for Stargazer */
+        #preview-stargazer {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #preview-stargazer img {
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Video overlay text */
+        .video-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Audiowide', cursive;
+            font-size: 48px;
+            color: white;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .video-overlay-text a {
+            pointer-events: none;
+        }
+        
+        .media-preview.active .video-overlay-text a {
+            pointer-events: auto;
+        }
+        
+        /* Hover description text below media */
+        .media-description {
+            position: absolute;
+            top: calc(100vh - 140px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .media-preview.active .media-description {
+            opacity: 1;
+        }
+        
+        .media-preview.active .media-description,
+        .media-preview.active .media-description * {
+            pointer-events: auto;
+        }
+        
+        /* Hover hint - prominent pulsing circle with star theme */
+        .hover-hint-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 500;
+        }
+        
+        .hover-hint-overlay.visible {
+            opacity: 1;
+        }
+        
+        /* Smaller pulsing circle - concentrated on first item */
+        .spotlight {
+            position: absolute;
+            left: 12%;
+            top: 50%;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 245, 255, 0.75) 0%,
+                rgba(250, 235, 255, 0.6) 15%,
+                rgba(235, 220, 255, 0.45) 30%,
+                rgba(200, 190, 255, 0.25) 50%,
+                transparent 70%
+            );
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: circlePulse 2s ease-in-out infinite;
+            transform: translate(-50%, -50%);
+            box-shadow: 
+                0 0 20px rgba(250, 235, 255, 0.4),
+                0 0 35px rgba(200, 190, 255, 0.25);
+        }
+        
+        @keyframes circlePulse {
+            0%, 100% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.45);
+            }
+            50% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+        
+        /* Floating star particles - matching cursor palette */
+        .star-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(245, 220, 255, 1);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatStar 2.5s ease-in-out infinite;
+            box-shadow: 
+                0 0 6px rgba(245, 220, 255, 0.9),
+                0 0 12px rgba(170, 175, 255, 0.6),
+                0 0 20px rgba(100, 140, 255, 0.4);
+        }
+        
+        .star-particle:nth-child(2) { animation-delay: 0.5s; }
+        .star-particle:nth-child(3) { animation-delay: 1s; }
+        .star-particle:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes floatStar {
+            0% { 
+                opacity: 0;
+                transform: translate(0, 0) scale(0.2);
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% { 
+                opacity: 0;
+                transform: translate(var(--float-x), var(--float-y)) scale(1.2);
+            }
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+        
+        .scroll-dot {
+            position: relative;
+            width: 6px;
+            height: 6px;
+            padding: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            appearance: none;
+            cursor: pointer;
+            transition: background 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .scroll-dot::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28px;
+            height: 14px;
+            transform: translate(-50%, -50%);
+        }
+
+        .scroll-dot:focus-visible {
+            outline: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .scroll-dot:hover:not(.active),
+            .scroll-dot:focus-visible:not(.active) {
+                background: rgba(255, 255, 255, 0.4);
+            }
+
+            .scroll-dot.active:hover,
+            .scroll-dot.active:focus-visible {
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+
+        .scroll-dot.active {
+            background: rgba(255, 255, 255, 0.5);
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        /* Bounce Chevron */
+        .bounce-chevron {
+            position: fixed;
+            bottom: 60px;
+            left: 60px;
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeInBounce 2s ease-in-out 1s forwards, subtleBounce 2s ease-in-out 3s infinite;
+            pointer-events: none;
+            display: none; /* Hidden for GitHub version */
+        }
+        
+        .bounce-chevron svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+        
+        @keyframes fadeInBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes subtleBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+        
+        .bounce-chevron.hidden {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-side {
+                width: 100%;
+            }
+            
+            .right-side {
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                right: 0;
+                top: 0;
+                background: rgba(0, 0, 0, 0.95);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                z-index: 9998;
+                visibility: hidden;
+            }
+            
+            .right-side.mobile-active {
+                opacity: 1;
+                pointer-events: auto;
+                visibility: visible;
+            }
+            
+            .hero-title {
+                font-size: 24px;
+            }
+            
+            .media-preview-container {
+                max-width: 90%;
+                max-height: 90%;
+            }
+            
+            .media-preview.active .media-preview-container video,
+            .media-preview.active .media-preview-container img {
+                pointer-events: auto;
+            }
+            
+            /* Close button for mobile overlay */
+            .mobile-close-btn {
+                display: block;
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                color: white;
+                font-size: 24px;
+                line-height: 1;
+                cursor: pointer;
+                z-index: 10000;
+                pointer-events: auto !important;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-close-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.1);
+            }
+            
+            .project-item {
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .project-item:active {
+                opacity: 0.7;
+            }
+
+        }
+        
+        @media (max-width: 768px) {
+            .media-preview video.overlay-video {
+                top: 5%;
+                left: 12.5%;
+                width: 75%;
+                height: 75%;
+            }
+            
+            .section {
+                padding: 40px 30px 60px 30px;
+            }
+            
+            .media-description {
+                width: 80%;
+                font-size: 14px;
+                top: auto;
+                bottom: 40px;
+                transform: translateX(-50%);
+            }
+            
+            .mobile-close-btn {
+                top: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* Page fade out transition */
+        body {
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        body.fade-out {
+            opacity: 0;
+        }
+
+        /* ───────────────────────────────────────────────
+         Entrance overlay
+         ─────────────────────────────────────────────── */
+        .entrance-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .entrance-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .entrance-text {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Helvetica, Arial, sans-serif;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .entrance-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .entrance-text {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Entrance overlay -->
+    <div class="entrance-overlay" id="entranceOverlay">
+        <div class="entrance-text">
+            <p>Take a breath.</p>
+            <p>Welcome to my work.</p>
+        </div>
+    </div>
+    <script>
+        // Immediately hide entrance if already shown (runs before page renders)
+        if (sessionStorage.getItem('entranceShown')) {
+            document.getElementById('entranceOverlay').classList.add('hidden');
+        }
+    </script>
+
+    <canvas id="bgStarsCanvas" aria-hidden="true"></canvas>
+    <div class="bg-vignette" aria-hidden="true"></div>
+    
+    <!-- Hover Hint - Smaller Circle Focused on First Item -->
+    <div class="hover-hint-overlay" id="hoverHintOverlay">
+        <div class="spotlight"></div>
+        <div class="star-particle" style="left: 12%; top: 45%; --float-x: -25px; --float-y: -35px;"></div>
+        <div class="star-particle" style="left: 18%; top: 50%; --float-x: 40px; --float-y: -10px;"></div>
+        <div class="star-particle" style="left: 6%; top: 50%; --float-x: -40px; --float-y: 15px;"></div>
+        <div class="star-particle" style="left: 12%; top: 55%; --float-x: 15px; --float-y: 35px;"></div>
+    </div>
+    
+    <div class="scroll-container" id="scrollContainer">
+    <div class="container">
+        <!-- Left Side - Scrollable Content -->
+        <div class="left-side">
+            <!-- Section 0: Hero -->
+            <section class="section" data-section="0">
+                <h1 class="hero-title">Shelly Chen</h1>
+                <p class="hero-subtitle">Designer focused on craft, delight, and shipping products at scale.</p>
+            </section>
+            
+            <!-- Section 1: Shipped Products -->
+            <section class="section" data-section="1">
+                <div class="pill-stack" id="pillStack">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1">Shipped</span>
+                        <span class="pill pill-accent" id="pill2">Products</span>
+                    </div>
+                </div>
+                
+                <div class="project-list">
+                    <div class="project-item" data-video="horizon">
+                        <h2 class="project-title" data-text="Horizon website redesign">Horizon website redesign</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="vr-feed">
+                        <h2 class="project-title" data-text="VR + mobile feed redesign">VR + mobile feed redesign</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="messenger-stories">
+                        <h2 class="project-title" data-text="Messenger stories">Messenger stories</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="ig-broadcast">
+                        <h2 class="project-title" data-text="IG broadcast channel">IG broadcast channel</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="messenger-broadcast">
+                        <h2 class="project-title" data-text="Messenger broadcast channel">Messenger broadcast channel</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 2: Craft & Delight -->
+            <section class="section" data-section="2">
+                <div class="pill-stack" id="pillStack2">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1-section2">Craft &</span>
+                        <span class="pill pill-accent" id="pill2-section2">Delight</span>
+                    </div>
+                </div>
+                
+                <div class="project-list">
+                    <div class="project-item" data-video="craft">
+                        <h2 class="project-title" data-text="Craft, motion, and delight through Origami prototypes">Craft, motion, and delight through Origami prototypes</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="kaizen">
+                        <h2 class="project-title" data-text="Kaizen and craft programs">Kaizen and craft programs</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 3: Vibe Coding -->
+            <section class="section" data-section="3">
+                <div class="pill-stack" id="pillStack3">
+                    <div class="pill-container">
+                        <span class="pill pill-primary" id="pill1-section3">Vibe</span>
+                        <span class="pill pill-accent" id="pill2-section3">Coding</span>
+                    </div>
+                </div>
+                
+                <div class="project-list">
+                    <div class="project-item" data-video="breathe">
+                        <h2 class="project-title" data-text="Just Breathe - a multimodal breathing companion">Just Breathe - a multimodal breathing companion</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="template">
+                        <h2 class="project-title" data-text="Built reusable Horizon template using Cursor + Xcode">Built reusable Horizon template using Cursor + Xcode</h2>
+                    </div>
+                    
+                    <div class="project-item" data-video="stargazer">
+                        <h2 class="project-title" data-text="Founded Stargazer, an org-wide vibe coding program">Founded Stargazer, an org-wide vibe coding program</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 4: Footer -->
+            <section class="section" data-section="4">
+                <h1 class="hero-title">Crafted with Cursor + 🤍</h1>
+                <p>
+                    <a href="assets/Resume_Shelly_Chen.pdf" class="footer-link" target="_blank" rel="noopener noreferrer">Resume</a>
+                </p>
+            </section>
+        </div>
+    </div>
+    </div>
+    
+    <!-- Right Side - Fixed Media -->
+    <div class="right-side">
+        <!-- Mobile close button -->
+        <button class="mobile-close-btn" id="mobileCloseBtn" style="display: none;">×</button>
+        
+        <!-- Media Previews -->
+        <div class="media-preview" id="preview-horizon">
+            <div class="media-preview-container">
+                <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
+                <video src="assets/2026/horizon.mp4?v=20260516c" class="overlay-video" loop muted playsinline preload="auto"></video>
+            </div>
+            <div class="media-description">Led Horizon website redesign for <a href="https://horizon.meta.com/" target="_blank" class="project-link">Connect 2025 launch</a>.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-vr-feed">
+            <video src="assets/2026/vr_feed.mp4" loop muted playsinline></video>
+            <div class="media-description">Shipped VR and mobile feed redesigns, announced at <a href="https://www.youtube.com/clip/Ugkx6x11NY80rNJ9Q2ax32rZQ7WJ6wo7V1ht" target="_blank" class="project-link">Connect 2025</a>.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-messenger-stories">
+            <div class="sequential-videos">
+                <video src="assets/2026/stories1.mp4" muted playsinline data-index="0"></video>
+                <video src="assets/2026/stories2.mp4" muted playsinline data-index="1"></video>
+                <video src="assets/2026/stories3.mp4" muted playsinline data-index="2"></video>
+                <video src="assets/2026/stories4.mp4" muted playsinline data-index="3"></video>
+            </div>
+            <div class="media-description">Led <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, shipping 29 craft improvements.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-ig-broadcast">
+            <video src="assets/2026/ig_bc.mp4" loop muted playsinline></video>
+            <div class="media-description">Founding design team. 0→1 launch, GTM Jun 2023 (<a href="https://www.cnbctv18.com/technology/now-connect-with-your-favourite-creators-on-instagram-broadcast-channels-16944171.htm" target="_blank" class="project-link">CNBC</a>, <a href="https://tech.yahoo.com/social-media/article/instagram-is-rolling-out-its-telegram-like-broadcast-channels-worldwide-160815133.html" target="_blank" class="project-link">Yahoo News</a>). Scaled 10M→124M DAU, 455M MAU.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-messenger-broadcast">
+            <video src="assets/2026/msgr_bc.mp4" loop muted playsinline></video>
+            <div class="media-description">Lead designer, owning end-to-end design for 20 key projects for Oct 2024 GTM (<a href="https://www.theverge.com/2023/10/18/23922888/facebook-broadcast-channels-instagram-whatsapp" target="_blank" class="project-link">The Verge</a>). Grew DAU 286K → 5M.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-craft">
+            <video src="assets/2026/craft.mp4" loop muted playsinline></video>
+        </div>
+        
+        <div class="media-preview" id="preview-kaizen">
+            <video src="assets/2026/kaizen.mp4" loop muted playsinline></video>
+            <div class="media-description">Led <a href="https://www.figma.com/proto/8I7sokENkcUEZLWwdstNb5/Kaizen?page-id=215%3A13447&node-id=5002-34316&viewport=103%2C224%2C0.09&t=cIXXh9ShEEZhpJvZ-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Kaizen for VR Feed</a>, <a href="https://docs.google.com/presentation/d/10XIeylhh3ckuXfvPXS09q3GGFVTqAEGcY46suwSyUW8/edit?usp=sharing" target="_blank" class="project-link">Messenger Stories Craft Backlog</a>, <a href="https://docs.google.com/presentation/d/1l50uCNIU3dvknfWaX1uMbedj1zBiI4bLP1M11EaYAU4/edit?usp=sharing" target="_blank" class="project-link">CM Craft Backlog</a>.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-breathe">
+            <video src="assets/2026/breathe_demo.mp4" loop muted playsinline></video>
+            <div class="media-description">A cross-platform breathing companion built with vibe coding, with haptic and breath-guiding audio cues across <a href="https://github.com/shellyxichen/Breathe" target="_blank" rel="noopener noreferrer" class="project-link">iOS</a>, <a href="breathing.html" class="project-link">web</a>, and Meta Ray Ban Display Glass.</div>
+        </div>
+        
+        <div class="media-preview" id="preview-template">
+            <video src="assets/2026/template.mp4" loop muted playsinline></video>
+        </div>
+        
+        <div class="media-preview" id="preview-stargazer">
+            <img src="assets/2026/stargazer.png" alt="Stargazer">
+            <div class="media-description">Org-wide education program to teach designers vibe coding. Published <a href="https://docs.google.com/document/d/19COQqmWGIsU5IUXp8IRTCCtcvBfCkDb7QxUT-1e6fqE/edit?usp=sharing" target="_blank" class="project-link">starter guides</a> and hosted weekly office hours, including <a href="https://www.figma.com/proto/odyuhcftoTisXxmgvEeuNJ/Vibe-coding?page-id=189%3A7717&node-id=189-23266&viewport=-6739%2C57%2C0.44&t=2PIYE5MhEEzYbBE4-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="project-link">Vibe Coding 101</a>.</div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <button class="scroll-dot active" data-section="0" aria-label="Hero"></button>
+        <button class="scroll-dot" data-section="1" aria-label="Shipped Products"></button>
+        <button class="scroll-dot" data-section="2" aria-label="Craft & Delight"></button>
+        <button class="scroll-dot" data-section="3" aria-label="Vibe Coding"></button>
+        <button class="scroll-dot" data-section="4" aria-label="Footer"></button>
+    </div>
+    
+    <!-- Bounce Chevron -->
+    <div class="bounce-chevron">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 5L12 8L19 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 11L12 14L19 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    
+    <script>
+        // OPTION 2: Reset hover state when scrolling between sections + hover hint
+        
+        const projectItems = document.querySelectorAll('.project-item');
+        const projectItemsWithVideo = document.querySelectorAll('.project-item[data-video]');
+        const mediaPreviews = document.querySelectorAll('.media-preview');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        const hoverHintOverlay = document.getElementById('hoverHintOverlay');
+        
+        let currentActivePreview = null;
+        let fadeOutTimeout = null;
+        let lastActiveSection = 0;
+        let hoveredSections = new Set(); // Track which sections have been hovered
+        let hasUserEverHovered = false; // Track if user has hovered on any project item
+        let hintTimeout = null;
+        let recurringHintTimeout = null;
+
+        function playVideoSafely(video) {
+            if (!video) return;
+
+            try {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            } catch (error) {
+                // Ignore unsupported media errors so hover interactions stay responsive.
+            }
+        }
+        
+        // Helper function to activate a preview
+        function activatePreview(videoId) {
+            const preview = document.getElementById(`preview-${videoId}`);
+            
+            if (!preview) return;
+            
+            // Clear any pending fade-out timeout
+            if (fadeOutTimeout) {
+                clearTimeout(fadeOutTimeout);
+                fadeOutTimeout = null;
+            }
+            
+            // If there's a currently active preview that's different, fade it out
+            if (currentActivePreview && currentActivePreview !== preview) {
+                const oldPreview = currentActivePreview;
+                const oldVideos = oldPreview.querySelectorAll('video');
+                
+                oldVideos.forEach(v => {
+                    v.pause();
+                    v.onended = null;
+                });
+                
+                oldPreview.classList.add('fading-out');
+                oldPreview.classList.remove('active');
+                
+                setTimeout(() => {
+                    oldPreview.classList.remove('fading-out');
+                    oldVideos.forEach(v => {
+                        v.currentTime = 0;
+                        v.classList.remove('active');
+                    });
+                }, 300);
+            }
+            
+            // Show and play current preview
+            preview.classList.add('active');
+            currentActivePreview = preview;
+            
+            // Special handling for messenger-stories (sequential videos)
+            if (videoId === 'messenger-stories') {
+                const sequentialVideos = preview.querySelectorAll('video');
+                let currentIndex = 0;
+                
+                const playNextVideo = () => {
+                    if (currentIndex < sequentialVideos.length) {
+                        sequentialVideos.forEach(v => v.classList.remove('active'));
+                        
+                        const currentVideo = sequentialVideos[currentIndex];
+                        currentVideo.classList.add('active');
+                        playVideoSafely(currentVideo);
+                        
+                        currentVideo.onended = () => {
+                            currentIndex++;
+                            if (currentIndex < sequentialVideos.length) {
+                                playNextVideo();
+                            } else {
+                                currentIndex = 0;
+                                playNextVideo();
+                            }
+                        };
+                    }
+                };
+                
+                playNextVideo();
+            } else {
+                const video = preview.querySelector('video');
+                if (video) {
+                    playVideoSafely(video);
+                }
+            }
+        }
+        
+        // Helper function to reset all previews
+        function resetAllPreviews() {
+            mediaPreviews.forEach(preview => {
+                const videos = preview.querySelectorAll('video');
+                
+                videos.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                    v.onended = null;
+                    v.classList.remove('active');
+                });
+                
+                preview.classList.remove('active', 'fading-out');
+            });
+            
+            // Remove active class from all project items
+            projectItemsWithVideo.forEach(item => item.classList.remove('active'));
+            
+            currentActivePreview = null;
+        }
+        
+        // Show hover hint with visual effects
+        function showHoverHint(section, sectionIndex) {
+            // Don't show hint on mobile or if user has already hovered on any section
+            if (isMobile || hasUserEverHovered) {
+                return;
+            }
+            
+            // Check if this section has already been hovered
+            const sectionId = `section-${sectionIndex}`;
+            const hasInteractedWithSection = hoveredSections.has(sectionId);
+            
+            if (!hasInteractedWithSection && section) {
+                // Find the first project item in the section
+                const firstItem = section.querySelector('.project-item[data-video]');
+                if (firstItem) {
+                    // Calculate position relative to viewport
+                    const itemRect = firstItem.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    
+                    // Calculate percentage position (center of the first item)
+                    const topPercent = ((itemRect.top + itemRect.height / 2) / viewportHeight * 100);
+                    
+                    // If already visible, fade out first, then reposition and fade in
+                    const isCurrentlyVisible = hoverHintOverlay.classList.contains('visible');
+                    
+                    if (isCurrentlyVisible) {
+                        // Fade out
+                        hoverHintOverlay.classList.remove('visible');
+                        
+                        // Wait for fade out, then reposition and fade in
+                        setTimeout(() => {
+                            // Update spotlight position
+                            const spotlight = hoverHintOverlay.querySelector('.spotlight');
+                            if (spotlight) {
+                                spotlight.style.top = `${topPercent}%`;
+                            }
+                            
+                            // Update star particles positions around the spotlight
+                            const starParticles = hoverHintOverlay.querySelectorAll('.star-particle');
+                            if (starParticles.length >= 4) {
+                                starParticles[0].style.top = `${topPercent - 5}%`;
+                                starParticles[1].style.top = `${topPercent}%`;
+                                starParticles[2].style.top = `${topPercent}%`;
+                                starParticles[3].style.top = `${topPercent + 5}%`;
+                            }
+                            
+                            // Fade back in
+                            hoverHintOverlay.classList.add('visible');
+                        }, 600); // Match the CSS transition time
+                    } else {
+                        // Not currently visible, just position and show
+                        const spotlight = hoverHintOverlay.querySelector('.spotlight');
+                        if (spotlight) {
+                            spotlight.style.top = `${topPercent}%`;
+                        }
+                        
+                        // Update star particles positions around the spotlight
+                        const starParticles = hoverHintOverlay.querySelectorAll('.star-particle');
+                        if (starParticles.length >= 4) {
+                            starParticles[0].style.top = `${topPercent - 5}%`;
+                            starParticles[1].style.top = `${topPercent}%`;
+                            starParticles[2].style.top = `${topPercent}%`;
+                            starParticles[3].style.top = `${topPercent + 5}%`;
+                        }
+                        
+                        hoverHintOverlay.classList.add('visible');
+                    }
+                }
+                
+                // Auto-hide after 6 seconds
+                if (hintTimeout) clearTimeout(hintTimeout);
+                hintTimeout = setTimeout(() => {
+                    hideHoverHint();
+                }, 6000);
+                
+                // Set up recurring hint if no interaction (show again after 10 seconds)
+                if (recurringHintTimeout) clearTimeout(recurringHintTimeout);
+                recurringHintTimeout = setTimeout(() => {
+                    // Only show again if user hasn't interacted with any section at all
+                    if (!hasUserEverHovered && !hoveredSections.has(sectionId)) {
+                        showHoverHint(section, sectionIndex);
+                    }
+                }, 10000);
+            }
+        }
+        
+        // Hide hover hint
+        function hideHoverHint() {
+            hoverHintOverlay.classList.remove('visible');
+            if (hintTimeout) {
+                clearTimeout(hintTimeout);
+                hintTimeout = null;
+            }
+        }
+        
+        // Mark current section as interacted
+        function markSectionAsHovered(sectionIndex) {
+            const sectionId = `section-${sectionIndex}`;
+            hoveredSections.add(sectionId);
+            
+            // Mark that user has hovered on any section (disables all future hints)
+            hasUserEverHovered = true;
+            
+            // Clear recurring hint for this section
+            if (recurringHintTimeout) {
+                clearTimeout(recurringHintTimeout);
+                recurringHintTimeout = null;
+            }
+            
+            // Hide the hint immediately
+            hideHoverHint();
+        }
+        
+        // Detect mobile device
+        let isMobile = window.matchMedia('(max-width: 1024px)').matches || 
+                       ('ontouchstart' in window) || 
+                       (navigator.maxTouchPoints > 0);
+        
+        const rightSide = document.querySelector('.right-side');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        
+        // Function to update mobile state
+        function updateMobileState() {
+            const wasMobile = isMobile;
+            isMobile = window.matchMedia('(max-width: 1024px)').matches || 
+                      ('ontouchstart' in window) || 
+                      (navigator.maxTouchPoints > 0);
+            
+            // Show/hide close button based on mobile state
+            if (mobileCloseBtn) {
+                mobileCloseBtn.style.display = isMobile ? 'block' : 'none';
+            }
+            
+            // If switching from mobile to desktop, close overlay
+            if (wasMobile && !isMobile) {
+                hideMobileOverlay();
+            }
+        }
+        
+        // Update mobile state on resize
+        window.addEventListener('resize', updateMobileState);
+        
+        // Initial setup
+        updateMobileState();
+        
+        // Function to show mobile overlay
+        function showMobileOverlay(videoId, item) {
+            activatePreview(videoId);
+            
+            // Remove active class from all project items
+            projectItemsWithVideo.forEach(i => i.classList.remove('active'));
+            
+            // Add active class to currently clicked item
+            item.classList.add('active');
+            
+            // Show overlay on mobile
+            if (isMobile && rightSide) {
+                rightSide.classList.add('mobile-active');
+                document.body.classList.add('mobile-overlay-active');
+            }
+            
+            // Mark the current section as interacted
+            markSectionAsHovered(lastActiveSection);
+        }
+        
+        // Function to hide mobile overlay
+        function hideMobileOverlay() {
+            if (rightSide) {
+                rightSide.classList.remove('mobile-active');
+                document.body.classList.remove('mobile-overlay-active');
+            }
+            resetAllPreviews();
+        }
+        
+        // Close button handler
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hideMobileOverlay();
+            });
+        }
+        
+        // Close overlay when clicking on the overlay background (not on the media itself)
+        if (isMobile && rightSide) {
+            rightSide.addEventListener('click', function(e) {
+                // Don't close if clicking on links, videos, images, or buttons
+                if (e.target.tagName === 'A' || 
+                    e.target.tagName === 'VIDEO' || 
+                    e.target.tagName === 'IMG' ||
+                    e.target.tagName === 'BUTTON' ||
+                    e.target.classList.contains('media-description')) {
+                    return;
+                }
+                
+                // Only close if clicking on the background or media-preview container
+                if (e.target === rightSide || e.target.classList.contains('media-preview')) {
+                    hideMobileOverlay();
+                }
+            });
+        }
+        
+        // Video preview interactions for items with data-video
+        projectItemsWithVideo.forEach(item => {
+            // Click handler (for mobile)
+            item.addEventListener('click', function(e) {
+                if (isMobile) {
+                    e.preventDefault();
+                    const videoId = this.getAttribute('data-video');
+                    showMobileOverlay(videoId, this);
+                }
+            });
+            
+            // Hover handler (for desktop)
+            item.addEventListener('mouseenter', function() {
+                if (!isMobile) {
+                    const videoId = this.getAttribute('data-video');
+                    activatePreview(videoId);
+                    
+                    // Remove active class from all project items
+                    projectItemsWithVideo.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to currently hovered item
+                    this.classList.add('active');
+                    
+                    // Mark the current section as hovered
+                    markSectionAsHovered(lastActiveSection);
+                }
+            });
+        });
+        
+        // Scroll indicator updates
+        const scrollContainer = document.getElementById('scrollContainer');
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+        const sections = document.querySelectorAll('.section');
+        const bounceChevron = document.querySelector('.bounce-chevron');
+        
+        // Update active dot on scroll
+        scrollContainer.addEventListener('scroll', function() {
+            const scrollPosition = scrollContainer.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                // Calculate opacity based on scroll position
+                const sectionMiddle = sectionTop + sectionHeight / 2;
+                const viewportCenter = scrollPosition + windowHeight / 2;
+                const distanceFromCenter = viewportCenter - sectionMiddle;
+                
+                let opacity;
+                if (distanceFromCenter > 0) {
+                    const fadeRange = windowHeight * 0.15;
+                    opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
+                } else {
+                    const fadeRange = windowHeight * 0.4;
+                    opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
+                }
+                
+                const pillStack = section.querySelector('.pill-stack');
+                const projectList = section.querySelector('.project-list');
+                
+                if (pillStack) {
+                    pillStack.style.opacity = opacity;
+                }
+                
+                if (projectList) {
+                    projectList.style.opacity = opacity;
+                    projectList.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
+                }
+                
+                if (scrollPosition >= sectionTop - windowHeight / 3 && 
+                    scrollPosition < sectionTop + sectionHeight - windowHeight / 3) {
+                    scrollDots.forEach(dot => dot.classList.remove('active'));
+                    scrollDots[index].classList.add('active');
+                    
+                    // OPTION 2 LOGIC: Reset all previews when entering a new section
+                    if (lastActiveSection !== index) {
+                        lastActiveSection = index;
+                        resetAllPreviews();
+                        
+                        // Hide mobile overlay when changing sections
+                        if (isMobile) {
+                            hideMobileOverlay();
+                        }
+                        
+                        // Hide hover hint immediately when switching sections
+                        hideHoverHint();
+                        
+                        // Show/hide bounce chevron based on section
+                        if (index === 0) {
+                            bounceChevron.classList.remove('hidden');
+                        } else {
+                            bounceChevron.classList.add('hidden');
+                        }
+                        
+                        // Show hover hint when entering a project section (not hero) - desktop only
+                        if (index > 0 && !isMobile) {
+                            setTimeout(() => {
+                                showHoverHint(section, index);
+                            }, 1500);
+                        } else {
+                            // Clear recurring hint when on hero section
+                            if (recurringHintTimeout) {
+                                clearTimeout(recurringHintTimeout);
+                                recurringHintTimeout = null;
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Click on dots to scroll
+        scrollDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const sectionIndex = parseInt(this.getAttribute('data-section'));
+                const sectionTop = sections[sectionIndex].offsetTop;
+                scrollContainer.scrollTo({ 
+                    top: sectionTop, 
+                    behavior: 'smooth' 
+                });
+            });
+        });
+        
+        // Initialize opacity on page load
+        function initializeOpacity() {
+            const scrollPosition = scrollContainer.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionMiddle = sectionTop + sectionHeight / 2;
+                const viewportCenter = scrollPosition + windowHeight / 2;
+                const distanceFromCenter = viewportCenter - sectionMiddle;
+                
+                let opacity;
+                if (distanceFromCenter > 0) {
+                    const fadeRange = windowHeight * 0.15;
+                    opacity = Math.max(0, Math.min(1, 1 - distanceFromCenter / fadeRange));
+                } else {
+                    const fadeRange = windowHeight * 0.4;
+                    opacity = Math.max(0.3, Math.min(1, 1 + distanceFromCenter / fadeRange));
+                }
+                
+                const pillStack = section.querySelector('.pill-stack');
+                const projectList = section.querySelector('.project-list');
+                
+                if (pillStack) {
+                    pillStack.style.opacity = opacity;
+                }
+                
+                if (projectList) {
+                    projectList.style.opacity = opacity;
+                    projectList.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
+                }
+            });
+        }
+        
+        initializeOpacity();
+    </script>
+
+    <script>
+        (function initStarfieldBackground() {
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const canvas = document.getElementById('bgStarsCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+            if (!ctx) return;
+
+            const state = {
+                dpr: 1,
+                w: 0,
+                h: 0,
+                stars: [],
+                trail: [],
+                mouse: { x: 0.5, y: 0.5, active: false, lastMoveAt: 0 },
+                comet: { x: 0, y: 0, vx: 0, vy: 0, initialized: false },
+                raf: 0,
+                lastT: 0
+            };
+
+            function clamp(v, min, max) {
+                return Math.max(min, Math.min(max, v));
+            }
+
+            function rgba(c, a) {
+                return `rgba(${c.r}, ${c.g}, ${c.b}, ${a})`;
+            }
+
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+                state.dpr = dpr;
+                state.w = Math.max(1, Math.floor(rect.width));
+                state.h = Math.max(1, Math.floor(rect.height));
+
+                canvas.width = Math.floor(state.w * dpr);
+                canvas.height = Math.floor(state.h * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                const area = state.w * state.h;
+                const targetCount = clamp(Math.floor(area / 14000), 70, 180);
+                state.stars = makeStars(targetCount);
+
+                if (!state.comet.initialized) {
+                    state.comet.x = state.w * 0.5;
+                    state.comet.y = state.h * 0.5;
+                    state.comet.initialized = true;
+                }
+            }
+
+            function makeStars(count) {
+                const stars = [];
+                for (let i = 0; i < count; i++) {
+                    const depth = Math.random();
+                    const size = 0.9 + Math.pow(depth, 1.7) * 2.1;
+                    const baseA = 0.08 + Math.random() * 0.25;
+                    const twinkle = 0.12 + Math.random() * 0.28;
+                    const speedY = (0.6 + Math.random() * 1.2) * (0.08 + depth * 0.18);
+                    const speedX = (Math.random() - 0.5) * 0.015 * (0.3 + depth * 0.7);
+                    const hue = Math.random() < 0.12 ? 220 : (Math.random() < 0.20 ? 260 : 0);
+                    stars.push({
+                        x: Math.random(),
+                        y: Math.random(),
+                        depth,
+                        size,
+                        baseA,
+                        twinkle,
+                        phase: Math.random() * Math.PI * 2,
+                        speedY,
+                        speedX,
+                        hue
+                    });
+                }
+                return stars;
+            }
+
+            function onPointerMove(e) {
+                if (prefersReducedMotion) return;
+                const x = 'clientX' in e ? e.clientX : 0;
+                const y = 'clientY' in e ? e.clientY : 0;
+                state.mouse.x = clamp(x / Math.max(1, state.w), 0, 1);
+                state.mouse.y = clamp(y / Math.max(1, state.h), 0, 1);
+                state.mouse.active = true;
+                state.mouse.lastMoveAt = performance.now();
+            }
+
+            function drawBackground(t) {
+                const dt = state.lastT ? Math.min(0.05, (t - state.lastT) / 1000) : 0.016;
+                state.lastT = t;
+
+                ctx.clearRect(0, 0, state.w, state.h);
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'source-over';
+                for (const s of state.stars) {
+                    s.phase += dt * (0.55 + s.depth * 0.9);
+                    s.y += dt * s.speedY * 0.02;
+                    s.x += dt * s.speedX;
+                    
+                    if (s.y > 1.02) s.y = -0.02;
+                    if (s.x > 1.02) s.x = -0.02;
+                    if (s.x < -0.02) s.x = 1.02;
+
+                    const px = s.x * state.w;
+                    const py = s.y * state.h;
+
+                    const tw = Math.sin(s.phase) * 0.5 + 0.5;
+                    const a = s.baseA + tw * s.twinkle;
+
+                    ctx.beginPath();
+                    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+                    if (s.hue === 0) {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${a.toFixed(4)})`;
+                    } else if (s.hue === 220) {
+                        ctx.fillStyle = `rgba(150, 190, 255, ${(a * 0.95).toFixed(4)})`;
+                    } else {
+                        ctx.fillStyle = `rgba(190, 160, 255, ${(a * 0.85).toFixed(4)})`;
+                    }
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                if (!prefersReducedMotion && state.mouse.active) {
+                    const sinceMove = t - state.mouse.lastMoveAt;
+                    const cometVisible = sinceMove < 1200;
+
+                    const tx = state.mouse.x * state.w;
+                    const ty = state.mouse.y * state.h;
+                    const ease = 1 - Math.pow(0.001, dt);
+
+                    const px = state.comet.x;
+                    const py = state.comet.y;
+                    state.comet.x += (tx - state.comet.x) * (0.22 * ease + 0.06);
+                    state.comet.y += (ty - state.comet.y) * (0.22 * ease + 0.06);
+
+                    const vx = state.comet.x - px;
+                    const vy = state.comet.y - py;
+
+                    const speed = Math.sqrt(vx * vx + vy * vy);
+                    const intensity = clamp(speed / 18, 0, 1) * (cometVisible ? 1 : 0);
+
+                    if (intensity > 0.01) {
+                        state.trail.push({ x: state.comet.x, y: state.comet.y, t });
+                        const cutoff = t - 680;
+                        while (state.trail.length && state.trail[0].t < cutoff) state.trail.shift();
+
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'lighter';
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+
+                        for (let i = 1; i < state.trail.length; i++) {
+                            const a0 = (i - 1) / state.trail.length;
+                            const a1 = i / state.trail.length;
+                            const p0 = state.trail[i - 1];
+                            const p1 = state.trail[i];
+
+                            const alpha = (0.08 + 0.38 * (1 - a1)) * intensity;
+                            const width = 1.2 + (1 - a1) * 6 * intensity;
+
+                            const progress = 1 - a1;
+                            const r = Math.floor(100 + progress * 140);
+                            const g = Math.floor(140 + progress * 70);
+                            const b = 255;
+
+                            const gradient = ctx.createLinearGradient(p0.x, p0.y, p1.x, p1.y);
+                            gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${(alpha * 0.9).toFixed(4)})`);
+                            gradient.addColorStop(1, `rgba(${Math.floor(r * 0.8)}, ${Math.floor(g * 0.85)}, ${b}, ${alpha.toFixed(4)})`);
+                            
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = width;
+                            
+                            const glowR = Math.floor(100 + progress * 100);
+                            const glowG = Math.floor(140 + progress * 50);
+                            ctx.shadowColor = `rgba(${glowR}, ${glowG}, 255, ${(0.6 + progress * 0.2).toFixed(2)})`;
+                            ctx.shadowBlur = (18 + progress * 8) * intensity;
+
+                            ctx.beginPath();
+                            ctx.moveTo(p0.x, p0.y);
+                            ctx.lineTo(p1.x, p1.y);
+                            ctx.stroke();
+                        }
+
+                        ctx.restore();
+                    } else if (!cometVisible) {
+                        if (state.trail.length) state.trail.splice(0, Math.max(1, Math.floor(state.trail.length * 0.12)));
+                    }
+                }
+            }
+
+            function renderOnce() {
+                ctx.clearRect(0, 0, state.w, state.h);
+                ctx.save();
+                ctx.globalCompositeOperation = 'source-over';
+                for (const s of state.stars) {
+                    const px = s.x * state.w;
+                    const py = s.y * state.h;
+                    const a = s.baseA + 0.08;
+                    ctx.beginPath();
+                    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${a.toFixed(4)})`;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function tick(t) {
+                drawBackground(t);
+                state.raf = requestAnimationFrame(tick);
+            }
+
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('pointermove', onPointerMove, { passive: true });
+
+            if (prefersReducedMotion) {
+                renderOnce();
+                return;
+            }
+
+            state.raf = requestAnimationFrame(tick);
+        })();
+
+        // ─────────────────────────────────────────────────────
+        // Entrance overlay - auto fade after 4 seconds (once per session)
+        // ─────────────────────────────────────────────────────
+        const entranceOverlay = document.getElementById('entranceOverlay');
+        
+        // Check if entrance has been shown in this session
+        const entranceShown = sessionStorage.getItem('entranceShown');
+        
+        if (entranceShown) {
+            // Skip entrance if already shown in this session
+            entranceOverlay.classList.add('hidden');
+        } else {
+            // Show entrance and mark as shown
+            setTimeout(() => {
+                entranceOverlay.classList.add('hidden');
+                sessionStorage.setItem('entranceShown', 'true');
+            }, 4000);
+        }
+
+    </script>
+</body>
+</html>
