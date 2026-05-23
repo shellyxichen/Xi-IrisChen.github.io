@@ -39,8 +39,9 @@ Contains assets used by the old portfolio pages:
 ## Current Active Files (Root)
 - index.html - Main portfolio page
 - playground.html - Nature experience page
-- index_test1.html, index_test2.html, index_test3.html, index_test_option2.html - Test versions
+- breathing.html - Breathing prototype page
 - assets/2026/ - Current project assets
+- assets/2026/proto/mp4/ - Web-compressed prototype videos
 - assets/css/playground.css - Playground styles
 - assets/js/playground.js - Playground functionality
 - assets/Resume_Shelly_Chen.pdf - Resume (linked from main page)

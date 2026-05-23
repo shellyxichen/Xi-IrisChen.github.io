@@ -1,0 +1,371 @@
+assets/2026/101.mp4
+assets/2026/101.png
+assets/2026/breathe_demo.mp4
+assets/2026/craft.mov
+assets/2026/craft.mp4
+assets/2026/guide.png
+assets/2026/horizon.mp4
+assets/2026/ig_bc.mov
+assets/2026/ig_bc.mp4
+assets/2026/kaizen.mp4
+assets/2026/msgr_bc.mp4
+assets/2026/nature/forest.m4a
+assets/2026/nature/water.m4a
+assets/2026/stargazer.png
+assets/2026/stories1.mov
+assets/2026/stories2.mov
+assets/2026/stories3.mov
+assets/2026/stories4.mov
+assets/2026/template.mov
+assets/2026/template.mp4
+assets/2026/trash/.DS_Store
+assets/2026/trash/craft.mov
+assets/2026/vr_feed.mov
+assets/img/.DS_Store
+assets/img/about me/.DS_Store
+assets/img/about me/AR.png
+assets/img/about me/Ambient visualization.png
+assets/img/about me/Blockchain.png
+assets/img/about me/Crowdsourcing.png
+assets/img/about me/Machine learning.png
+assets/img/about me/UX design internship in Tencent.png
+assets/img/about me/UX designer and researcher at Georgia tech.png
+assets/img/about me/UX intern in Microsoft Research Asia.png
+assets/img/about me/Ubiquitous computing.png
+assets/img/about me/Voice user interface.png
+assets/img/about me/none.png
+assets/img/align/.DS_Store
+assets/img/align/add parameter.gif
+assets/img/align/competitive analysis.png
+assets/img/align/consideration1.png
+assets/img/align/consideration2_1.png
+assets/img/align/consideration2_2.png
+assets/img/align/consideration2_3.png
+assets/img/align/consideration2_4.png
+assets/img/align/cover.png
+assets/img/align/current parameter.gif
+assets/img/align/final design1.png
+assets/img/align/final design2.png
+assets/img/align/final design3.png
+assets/img/align/information architecture.png
+assets/img/align/overview.png
+assets/img/align/problem.png
+assets/img/align/process.png
+assets/img/align/process2.png
+assets/img/align/rate.png
+assets/img/align/role.png
+assets/img/align/why crowdsourcing.png
+assets/img/align/why route condition.png
+assets/img/continuum/.DS_Store
+assets/img/continuum/ML.png
+assets/img/continuum/Notif_receive.gif
+assets/img/continuum/Notif_send.gif
+assets/img/continuum/Receive.gif
+assets/img/continuum/Send.gif
+assets/img/continuum/add_device_iter.png
+assets/img/continuum/addnew.gif
+assets/img/continuum/cancel_iter_1.gif
+assets/img/continuum/cancel_iter_2.gif
+assets/img/continuum/concept.mp4
+assets/img/continuum/cover.png
+assets/img/continuum/devices.png
+assets/img/continuum/entry.png
+assets/img/continuum/mirror_iter.png
+assets/img/continuum/nonpersonal_iter_1.gif
+assets/img/continuum/nonpersonal_iter_2.gif
+assets/img/continuum/painpoints.png
+assets/img/continuum/predictive_iteration.png
+assets/img/continuum/problem.png
+assets/img/continuum/process.png
+assets/img/continuum/send_iteration.png
+assets/img/continuum/target.gif
+assets/img/facebook/overview.png
+assets/img/finger/Ring Design.png
+assets/img/finger/hardware design.png
+assets/img/finger/overview.png
+assets/img/finger/scenario1.png
+assets/img/finger/scenario2.png
+assets/img/gatepal/.DS_Store
+assets/img/gatepal/DecisionMaking.png
+assets/img/gatepal/Research Goal.png
+assets/img/gatepal/User Flow.png
+assets/img/gatepal/User Tasks.png
+assets/img/gatepal/affinity mapping.png
+assets/img/gatepal/interaction/3mode.gif
+assets/img/gatepal/interaction/add amenity.gif
+assets/img/gatepal/interaction/behavior nav.gif
+assets/img/gatepal/interaction/make decision.gif
+assets/img/gatepal/journey map.png
+assets/img/gatepal/overview.png
+assets/img/gatepal/process.png
+assets/img/gatepal/usability testing/Check In Counter_route1.png
+assets/img/gatepal/usability testing/Flight.png
+assets/img/gatepal/usability testing/Get to gate.png
+assets/img/gatepal/usability testing/Route Detail.png
+assets/img/google/.DS_Store
+assets/img/google/analyze_browse1.png
+assets/img/google/analyze_browse2.png
+assets/img/google/analyze_browse22.png
+assets/img/google/analyze_info.png
+assets/img/google/analyze_propose.png
+assets/img/google/cover.png
+assets/img/google/iteration1.png
+assets/img/google/iteration1_1.png
+assets/img/google/iteration1_2.png
+assets/img/google/iteration1_3.png
+assets/img/google/iteration2_1.png
+assets/img/google/iteration2_2.png
+assets/img/google/iteration2_22.png
+assets/img/google/navigation bar1.png
+assets/img/google/navigation bar2.png
+assets/img/google/offline.png
+assets/img/google/online and offline.png
+assets/img/google/online.png
+assets/img/google/outcome1.png
+assets/img/google/outcome2.png
+assets/img/google/outcome3.png
+assets/img/google/overview.png
+assets/img/google/personas1.png
+assets/img/google/personas2.png
+assets/img/google/process.png
+assets/img/google/research.png
+assets/img/google/target.png
+assets/img/google/user flow others.png
+assets/img/google/user flow1.png
+assets/img/google/user flow2.png
+assets/img/google/visual design.png
+assets/img/google/whiteboard.jpeg
+assets/img/google/wireframe.png
+assets/img/google/wireframe1.png
+assets/img/google/wireframe2.png
+assets/img/google/wireframe3.png
+assets/img/google/wireframe4.png
+assets/img/google/wireframe_web.png
+assets/img/hobby/.DS_Store
+assets/img/hobby/design.png
+assets/img/hobby/development.png
+assets/img/hobby/music.png
+assets/img/hobby/photography.png
+assets/img/hobby/sports.png
+assets/img/hobby/travel.png
+assets/img/infnote/decentralize.png
+assets/img/infnote/design1.png
+assets/img/infnote/design2.png
+assets/img/infnote/design3.png
+assets/img/infnote/design4.png
+assets/img/infnote/design5.png
+assets/img/infnote/design6.png
+assets/img/infnote/follow.png
+assets/img/infnote/freely.png
+assets/img/infnote/hierarchy.png
+assets/img/infnote/login_after.gif
+assets/img/infnote/login_before.gif
+assets/img/infnote/new post.png
+assets/img/infnote/overview.png
+assets/img/infnote/safety.png
+assets/img/infnote/target.png
+assets/img/infnote/top.png
+assets/img/infonice/Customization.png
+assets/img/infonice/close the loop.png
+assets/img/infonice/competitive analysis.png
+assets/img/infonice/data to information.png
+assets/img/infonice/demo.mp4
+assets/img/infonice/design concept.png
+assets/img/infonice/evaluation1.png
+assets/img/infonice/evaluation2.png
+assets/img/infonice/insight comparison.gif
+assets/img/infonice/interface design.png
+assets/img/infonice/overview.png
+assets/img/infonice/overview2.png
+assets/img/infonice/paper writing.png
+assets/img/infonice/problem space.png
+assets/img/infonice/why infographics.png
+assets/img/insvoice/.DS_Store
+assets/img/insvoice/@.mp4
+assets/img/insvoice/accessibility.png
+assets/img/insvoice/add a comment.mp4
+assets/img/insvoice/challenge.png
+assets/img/insvoice/competitive analysis.png
+assets/img/insvoice/consideration1.png
+assets/img/insvoice/consideration2.png
+assets/img/insvoice/consideration3.png
+assets/img/insvoice/cover.png
+assets/img/insvoice/design criteria.png
+assets/img/insvoice/design prompt.png
+assets/img/insvoice/journey map.png
+assets/img/insvoice/less effort.png
+assets/img/insvoice/overview.png
+assets/img/insvoice/personas.png
+assets/img/insvoice/send.mp4
+assets/img/insvoice/user flow.png
+assets/img/insvoice/video.mp4
+assets/img/main/.DS_Store
+assets/img/main/align.png
+assets/img/main/continuum.png
+assets/img/main/facebook.png
+assets/img/main/gatepal.png
+assets/img/main/gesture.png
+assets/img/main/google.png
+assets/img/main/homedepot.png
+assets/img/main/infNote.png
+assets/img/main/infinity-loader.gif
+assets/img/main/infinity-placeholder.png
+assets/img/main/infinity.gif
+assets/img/main/insvoice.png
+assets/img/main/microsoft.png
+assets/img/main/nest.png
+assets/img/main/profile.png
+assets/img/main/socialeyes copy.png
+assets/img/main/socialeyes.png
+assets/img/main/socialeyes1.png
+assets/img/main/socialeyes2.png
+assets/img/main/tencent.png
+assets/img/main/vinyl.png
+assets/img/nest/.DS_Store
+assets/img/nest/ambientviz.png
+assets/img/nest/concepts.png
+assets/img/nest/cover.gif
+assets/img/nest/cover.png
+assets/img/nest/device.png
+assets/img/nest/final1.png
+assets/img/nest/final2.png
+assets/img/nest/overview.png
+assets/img/nest/platform.png
+assets/img/nest/process.png
+assets/img/nest/tasklist.gif
+assets/img/nest/userneeds.png
+assets/img/personalicon.png
+assets/img/profile.png
+assets/img/socialeyes/.DS_Store
+assets/img/socialeyes/cone.png
+assets/img/socialeyes/confirm.mp4
+assets/img/socialeyes/cover.png
+assets/img/socialeyes/design principles.png
+assets/img/socialeyes/design_1.mp4
+assets/img/socialeyes/design_2.mp4
+assets/img/socialeyes/design_3.mp4
+assets/img/socialeyes/design_4.mp4
+assets/img/socialeyes/leave.mp4
+assets/img/socialeyes/outline_1.mp4
+assets/img/socialeyes/outline_2.mp4
+assets/img/socialeyes/overview.png
+assets/img/socialeyes/process.png
+assets/img/socialeyes/research.png
+assets/img/socialeyes/result.png
+assets/img/socialeyes/sleep_1.png
+assets/img/socialeyes/sleep_2.mp4
+assets/img/socialeyes/tech_1.mp4
+assets/img/socialeyes/tech_2.mp4
+assets/img/socialeyes/testing.png
+assets/img/tencent/.DS_Store
+assets/img/tencent/challenge1.png
+assets/img/tencent/challenge2.png
+assets/img/tencent/collection.gif
+assets/img/tencent/collection1.png
+assets/img/tencent/collection2.png
+assets/img/tencent/collection3.png
+assets/img/tencent/concept1.png
+assets/img/tencent/concept2_1.png
+assets/img/tencent/concept2_2.png
+assets/img/tencent/concept2_3.png
+assets/img/tencent/concept3_1.png
+assets/img/tencent/concept3_2.png
+assets/img/tencent/do not disturb.png
+assets/img/tencent/do not disturb_overview.png
+assets/img/tencent/functionality guide.mp4
+assets/img/tencent/iteration2.png
+assets/img/tencent/iteration3.png
+assets/img/tencent/iteration4.png
+assets/img/tencent/iteration_1.png
+assets/img/tencent/iteration_2.png
+assets/img/tencent/mapping.png
+assets/img/tencent/mindmap.png
+assets/img/tencent/notes.gif
+assets/img/tencent/notes.mp4
+assets/img/tencent/online survey 2.png
+assets/img/tencent/overview.mp4
+assets/img/tencent/personas.png
+assets/img/tencent/process.png
+assets/img/tencent/project.png
+assets/img/tencent/refine1.mp4
+assets/img/tencent/refine2.png
+assets/img/tencent/refine3.png
+assets/img/tencent/refine4.png
+assets/img/tencent/solution1.png
+assets/img/tencent/solution2.png
+assets/img/tencent/understanding1.png
+assets/img/tencent/understanding3.png
+assets/img/tencent/understanding4.png
+assets/img/tencent/visual design.png
+assets/img/thd/.DS_Store
+assets/img/thd/JTBD1.png
+assets/img/thd/JTBD2.png
+assets/img/thd/affinity mapping.png
+assets/img/thd/brainstorming.png
+assets/img/thd/challenge.png
+assets/img/thd/chart.mp4
+assets/img/thd/competitive analysis.png
+assets/img/thd/concept feedback.png
+assets/img/thd/concept.png
+assets/img/thd/concept1.png
+assets/img/thd/concept2.png
+assets/img/thd/concept3.png
+assets/img/thd/cover.png
+assets/img/thd/empathy1.png
+assets/img/thd/empathy2.png
+assets/img/thd/evaluation.png
+assets/img/thd/evaluation1.png
+assets/img/thd/evaluation2.png
+assets/img/thd/final design/.DS_Store
+assets/img/thd/final design/AR.png
+assets/img/thd/final design/bay overview.png
+assets/img/thd/final design/bay tasks.png
+assets/img/thd/final design/expert flow1.png
+assets/img/thd/final design/expert flow2.png
+assets/img/thd/final design/project overview.png
+assets/img/thd/iteration1.png
+assets/img/thd/iteration2.png
+assets/img/thd/outcome1.gif
+assets/img/thd/outcome1.png
+assets/img/thd/outcome2.gif
+assets/img/thd/outcome2.png
+assets/img/thd/outcome3.gif
+assets/img/thd/outcome3.png
+assets/img/thd/overview.png
+assets/img/thd/process.png
+assets/img/thd/research.png
+assets/img/thd/success criteria.png
+assets/img/thd/visual design.png
+assets/img/thd/wireframe1.png
+assets/img/thd/wireframe2.png
+assets/img/thd/wireframe3.png
+assets/img/vinyl/.DS_Store
+assets/img/vinyl/Shneiderman_1.png
+assets/img/vinyl/Shneiderman_2.png
+assets/img/vinyl/Shneiderman_3.png
+assets/img/vinyl/color.png
+assets/img/vinyl/compare_artists.mp4
+assets/img/vinyl/compare_songs.mp4
+assets/img/vinyl/concept.png
+assets/img/vinyl/concept_decision.png
+assets/img/vinyl/cover.gif
+assets/img/vinyl/cover.mp4
+assets/img/vinyl/cover.png
+assets/img/vinyl/dataset.png
+assets/img/vinyl/discover.mp4
+assets/img/vinyl/guideline.gif
+assets/img/vinyl/guideline.mp4
+assets/img/vinyl/hairball_1.png
+assets/img/vinyl/hairball_2.png
+assets/img/vinyl/info1.png
+assets/img/vinyl/info2.png
+assets/img/vinyl/informative_1.png
+assets/img/vinyl/informative_2.png
+assets/img/vinyl/interconnective.gif
+assets/img/vinyl/interconnective.mp4
+assets/img/vinyl/moodboard.png
+assets/img/vinyl/video.mp4
+index_test1.html
+index_test2.html
+index_test3.html
+index_test_option2.html
