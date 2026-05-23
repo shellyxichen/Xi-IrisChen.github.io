@@ -1640,7 +1640,7 @@
                 <p class="hero-headline">AI-native product designer crafting delightful interactions for new technologies ✨</p>
                 <div class="hero-subtitle hero-subtitle--mobile">
                     <!-- <p class="hero-belief-text">'The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.'</p> -->
-                    <p class="hero-belief-text">I believe in the power of calm technology — products that quietly weave into everyday life and bring small moments of joy.</p>
+                    <p class="hero-belief-text">I believe in the power of <span class="emphasis">calm technology</span> — products that quietly weave into everyday life and bring small moments of joy.</p>
                     <p class="hero-belief-text">I'm inspired to craft experiences that feel <span class="emphasis">simpler, softer, and more human</span> — make using technology as refreshing as taking a walk in the woods.</p>
                 </div>
             </section>
@@ -1724,7 +1724,7 @@
                     </div>
                     <div class="project-item" data-video="breathe">
                         <span class="project-index">06</span>
-                        <h2 class="project-title">Just breathe (<a href="breathing.html" class="project-link">proto</a>)</h2>
+                        <h2 class="project-title">Just breathe (<a href="just-breathe.html" class="project-link">proto</a>)</h2>
                     </div>
                 </div>
             </section>
@@ -1748,7 +1748,7 @@
         <div class="hero-belief-stage" id="heroBeliefStage">
             <div class="hero-belief-copy">
                 <!-- <p class="hero-belief-text">'The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.'</p> -->
-                <p class="hero-belief-text">I believe in the power of calm technology — products that quietly weave into everyday life and bring small moments of joy.</p>
+                <p class="hero-belief-text">I believe in the power of <span class="emphasis">calm technology</span> — products that quietly weave into everyday life and bring small moments of joy.</p>
                 <p class="hero-belief-text">I'm inspired to craft experiences that feel <span class="emphasis">simpler, softer, and more human</span> — make using technology as refreshing as taking a walk in the woods.</p>
             </div>
         </div>
@@ -1762,7 +1762,7 @@
         <div class="catalog-context-stage" data-catalog="2" id="catalogContext2">
             <div class="catalog-context-copy">
                 <p class="hero-belief-text">I redesigned Horizon discovery across VR, mobile, and web: <span class="emphasis">unveiled at Connect 2025</span>.</p>
-                <p class="hero-belief-text">Lately, I'm empowering <span class="emphasis">Metaverse and WhatsApp designers</span> to prototype — building the <span class="emphasis">templates, skills, and guides</span>.</p>
+                <p class="hero-belief-text">Lately, I'm empowering <span class="emphasis">Metaverse and WhatsApp designers</span> to vibe code and ship — building the <span class="emphasis">templates, skills, and guides</span>.</p>
             </div>
         </div>
         
@@ -1869,7 +1869,7 @@
                     </video>
                 </div>
             </div>
-            <div class="media-description">Multimodal breathing companion — iOS, web, Meta Ray-Ban Display.</div>
+            <div class="media-description">A multimodal breathing companion with haptic and breathing-guiding audio cues — iOS, web, and Meta Ray-Ban Display.</div>
         </div>
     </div>
     
@@ -2539,22 +2539,32 @@
         (function initHeroNameStarBurst() {
             const label = document.querySelector('.hero-title__label');
             const layer = document.getElementById('heroStarBurst');
-            if (!label || !layer) return;
+            if (!layer) return;
 
-            const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!canHover || reducedMotion) return;
+            if (reducedMotion) return;
 
-            const SKY_FROM_TOP = 0.25;
-            const GROUND_FROM_TOP = 0.9;
             const COOLDOWN_MS = 2500;
             const GLOW_MS = 2000;
             const STAR_COUNT = 20;
             const EMIT_WINDOW_MS = 220;
+            const SKY_SPREAD = 160;
+            const RISE_MIN = 70;
+            const RISE_MAX = 160;
+            const DROP_MIN = 280;
+            const DROP_MAX = 400;
             let lastBurstAt = 0;
             let glowTimer = null;
 
+            function shouldIgnoreBurstClick(target) {
+                if (!(target instanceof Element)) return true;
+                return !!target.closest(
+                    'a, button, input, select, textarea, label, [role="button"], .scroll-dot, .project-item'
+                );
+            }
+
             function startNameGlow() {
+                if (!label) return;
                 label.classList.remove('hero-title__label--glow');
                 void label.offsetWidth;
                 label.classList.add('hero-title__label--glow');
@@ -2568,29 +2578,25 @@
                 return a + (b - a) * t;
             }
 
-            function createStar() {
-                const rect = label.getBoundingClientRect();
+            function createStar(originX, originY) {
                 const vh = window.innerHeight;
-                const skyY = vh * SKY_FROM_TOP;
-                const groundY = vh * GROUND_FROM_TOP;
-                const originX = rect.left + rect.width / 2;
-                const originY = rect.top + rect.height * 0.5;
-                const skySpread = Math.max(rect.width * 2.2, 160);
 
                 const star = document.createElement('span');
                 star.className = 'hero-burst-star';
                 const size = 4 + Math.random() * 4;
                 const angle = Math.random() * Math.PI * 2;
                 const reach = 0.55 + Math.random() * 0.45;
+                const rise = RISE_MIN + Math.random() * (RISE_MAX - RISE_MIN);
+                const drop = DROP_MIN + Math.random() * (DROP_MAX - DROP_MIN);
 
-                const apexX = originX + Math.cos(angle) * skySpread * reach;
-                const apexY = skyY + (Math.random() - 0.5) * vh * 0.05;
+                const apexX = originX + Math.cos(angle) * SKY_SPREAD * reach;
+                const apexY = Math.max(8, originY - rise);
                 const crestX = lerp(originX, apexX, 0.9);
                 const crestY = lerp(originY, apexY, 0.9);
                 const fallX = apexX + (Math.random() - 0.5) * 48;
-                const fallY = groundY + Math.random() * 20;
-                const rot = (Math.random() - 0.5) * 30;             // ±15°
-                const dur = 7 + Math.random() * 3;                  // 7–10s
+                const fallY = Math.min(vh - 20, originY + drop);
+                const rot = (Math.random() - 0.5) * 30;
+                const dur = 7 + Math.random() * 3;
 
                 star.style.left = `${originX - size / 2}px`;
                 star.style.top = `${originY - size / 2}px`;
@@ -2606,7 +2612,7 @@
                 star.addEventListener('animationend', () => star.remove(), { once: true });
             }
 
-            function spawnBurst() {
+            function spawnBurst(clientX, clientY) {
                 const now = performance.now();
                 if (now - lastBurstAt < COOLDOWN_MS) return;
                 lastBurstAt = now;
@@ -2615,13 +2621,13 @@
                 for (let i = 0; i < STAR_COUNT; i++) {
                     const baseDelay = (i / STAR_COUNT) * EMIT_WINDOW_MS;
                     const jitter = Math.random() * 60;
-                    setTimeout(createStar, baseDelay + jitter);
+                    setTimeout(() => createStar(clientX, clientY), baseDelay + jitter);
                 }
             }
 
-            label.addEventListener('mouseenter', spawnBurst);
-            label.addEventListener('focus', () => {
-                if (label.matches(':focus-visible')) spawnBurst();
+            document.addEventListener('click', (e) => {
+                if (shouldIgnoreBurstClick(e.target)) return;
+                spawnBurst(e.clientX, e.clientY);
             });
         })();
 

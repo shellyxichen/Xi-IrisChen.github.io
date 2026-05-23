@@ -39,7 +39,7 @@ Contains assets used by the old portfolio pages:
 ## Current Active Files (Root)
 - index.html - Main portfolio page
 - playground.html - Nature experience page
-- breathing.html - Breathing prototype page
+- just-breathe.html - Just Breathe prototype page (formerly breathing.html)
 - assets/2026/ - Current project assets
 - assets/2026/proto/mp4/ - Web-compressed prototype videos
 - assets/css/playground.css - Playground styles
