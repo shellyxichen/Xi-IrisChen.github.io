@@ -1409,10 +1409,6 @@
                 visibility: visible;
             }
             
-            .hero-title {
-                font-size: 24px;
-            }
-            
             .media-preview-container {
                 max-width: 90%;
                 max-height: 90%;
@@ -1515,7 +1511,6 @@
             
             .media-description {
                 width: 80%;
-                font-size: 14px;
             }
 
             .media-preview:has(.media-description) .media-description {
@@ -1546,6 +1541,36 @@
         
         body.fade-out {
             opacity: 0;
+        }
+
+        /* Large monitors: scale type only above 1600px (laptop sizes stay at base px) */
+        @media (min-width: 1600px) {
+            .pill,
+            .section-description,
+            .project-index,
+            .project-title,
+            .project-meta,
+            .hero-headline,
+            .hero-belief-text,
+            .catalog-context-text,
+            .finale-sep,
+            a.project-link,
+            a.footer-link,
+            .entrance-text p {
+                font-size: clamp(18px, calc(18px + (100vw - 1600px) * 6 / 960), 24px);
+            }
+
+            .hero-title {
+                font-size: clamp(24px, calc(24px + (100vw - 1600px) * 16 / 960), 40px);
+            }
+
+            .video-overlay-text {
+                font-size: clamp(48px, calc(48px + (100vw - 1600px) * 32 / 960), 80px);
+            }
+
+            .media-description {
+                font-size: clamp(16px, calc(16px + (100vw - 1600px) * 4 / 960), 20px);
+            }
         }
 
         /* ───────────────────────────────────────────────
@@ -1642,7 +1667,7 @@
             <!-- Section 0: Hero -->
             <section class="section" data-section="0">
                 <h1 class="hero-title"><span class="hero-title__label" tabindex="0">Shelly Chen</span></h1>
-                <p class="hero-headline">AI-native product designer crafting delightful interactions for new technologies ✨</p>
+                <p class="hero-headline">AI-native product designer crafting delightful interactions ✨</p>
                 <div class="hero-subtitle hero-subtitle--mobile">
                     <!-- <p class="hero-belief-text">'The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.'</p> -->
                     <p class="hero-belief-text">I believe in the power of <span class="emphasis">calm technology</span> — products that quietly weave into everyday life and bring small moments of joy.</p>
@@ -1713,7 +1738,7 @@
                     </div>
                     <div class="project-item" data-video="phoenix">
                         <span class="project-index">02</span>
-                        <h2 class="project-title">Phoenix discovery (<a href="https://silver-sunflower-424143.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-link">proto</a>)</h2>
+                        <h2 class="project-title"><a href="https://silver-sunflower-424143.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-link">Phoenix discovery (proto)</a></h2>
                     </div>
                     <div class="project-item" data-video="horizon-website">
                         <span class="project-index">03</span>
@@ -1729,7 +1754,7 @@
                     </div>
                     <div class="project-item" data-video="breathe">
                         <span class="project-index">06</span>
-                        <h2 class="project-title">Just breathe (<a href="just-breathe.html" class="project-link">proto</a>)</h2>
+                        <h2 class="project-title">Just breathe (<a href="just-breathe.html" target="_blank" rel="noopener noreferrer" class="project-link">web</a> · <a href="https://github.com/shellyxichen/Breathe" target="_blank" rel="noopener noreferrer" class="project-link">iOS</a> · Meta Ray-Ban Display)</h2>
                     </div>
                 </div>
             </section>
@@ -1835,16 +1860,18 @@
         <!-- Spatial · AI-Native catalog -->
         <div class="media-preview" id="preview-vr-feed">
             <video src="assets/2026/vr_feed.mp4" loop muted playsinline preload="metadata"></video>
+            <div class="media-description">Shipped VR and mobile feed redesigns, announced at Connect 2025.</div>
         </div>
         <div class="media-preview" id="preview-phoenix">
             <video src="assets/2026/proto/mp4/phoenix.mp4" loop muted playsinline preload="metadata"></video>
-            <div class="media-description">Phoenix next gen discovery prototype — A-Frame, WebXR.</div>
+            <div class="media-description">Phoenix next gen discovery prototype — my first vibe coded prototype, built with A-Frame, WebXR.</div>
         </div>
         <div class="media-preview" id="preview-horizon-website">
             <div class="media-preview-container">
                 <img src="assets/2026/horizon_device.png" alt="Horizon device" class="device-image">
                 <video src="assets/2026/proto/mp4/horizon-website.mp4" class="overlay-video" loop muted playsinline preload="metadata"></video>
             </div>
+            <div class="media-description">Led Horizon website redesign for Connect 2025 launch.</div>
         </div>
         <div class="media-preview preview--iphone" id="preview-horizon-template">
             <div class="media-preview-container">
@@ -1874,7 +1901,7 @@
                     </video>
                 </div>
             </div>
-            <div class="media-description">A multimodal breathing companion with haptic and breathing-guiding audio cues — iOS, web, and Meta Ray-Ban Display.</div>
+            <div class="media-description">Personal side project — multimodal breathing companion with haptic and breath-guiding audio.</div>
         </div>
     </div>
     
@@ -1910,6 +1937,7 @@
         let hasUserEverHovered = false; // Track if user has hovered on any project item
         let hintTimeout = null;
         let recurringHintTimeout = null;
+        let triggerFinaleHeartBurst = null;
 
         function playVideoSafely(video) {
             if (!video) return;
@@ -2443,7 +2471,13 @@
         function advanceSection(direction) {
             const current = getCurrentSectionIndex();
             const next = current + direction;
-            if (next < 0 || next >= sections.length) return;
+            if (next < 0 || next >= sections.length) {
+                const lastIndex = sections.length - 1;
+                if (direction === 1 && current === lastIndex && triggerFinaleHeartBurst) {
+                    triggerFinaleHeartBurst();
+                }
+                return;
+            }
             lockSectionScroll();
             scrollToSection(next);
         }
@@ -2744,7 +2778,7 @@
 
             const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!canHover || reducedMotion) return;
+            if (reducedMotion) return;
 
             // Messenger-style cascade: emit hearts over time, each floats up & fades
             const COOLDOWN_MS = 1500;
@@ -2809,10 +2843,14 @@
                 }
             }
 
-            heart.addEventListener('mouseenter', spawnBurst);
-            heart.addEventListener('focus', () => {
-                if (heart.matches(':focus-visible')) spawnBurst();
-            });
+            triggerFinaleHeartBurst = spawnBurst;
+
+            if (canHover) {
+                heart.addEventListener('mouseenter', spawnBurst);
+                heart.addEventListener('focus', () => {
+                    if (heart.matches(':focus-visible')) spawnBurst();
+                });
+            }
         })();
     </script>
 
