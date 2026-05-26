@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Just Breathe</title>
     <link rel="stylesheet" href="assets/css/breathing.css" />
+    <link rel="stylesheet" href="assets/css/ios-sheet.css" />
     <style>
       .entrance-overlay {
         position: fixed;
@@ -126,11 +127,7 @@
             rel="noopener noreferrer"
           ><em>Breath</em></a>
           by James Nestor and yoga pranayama. A calm companion for web,
-          <a
-            href="https://github.com/shellyxichen/Breathe"
-            target="_blank"
-            rel="noopener noreferrer"
-          >iOS</a>,
+          <a href="https://testflight.apple.com/join/rfMEyAHM" id="iosDownload">iOS</a>,
           and wearable displays.
         </p>
       </aside>
@@ -164,6 +161,21 @@
         </button>
       </aside>
     </main>
+
+    <div class="ios-sheet" id="iosSheet" hidden>
+      <div class="ios-sheet__panel" role="dialog" aria-labelledby="iosSheetLabel">
+        <p class="ios-sheet__label" id="iosSheetLabel">Scan with your iPhone</p>
+        <img
+          src="assets/just-breathe/testflight-qr.png"
+          width="220"
+          height="220"
+          alt="QR code to install Just Breathe on TestFlight"
+        />
+        <p class="ios-sheet__note">Install via TestFlight</p>
+      </div>
+    </div>
+
     <script src="assets/js/breathing.js"></script>
+    <script src="assets/js/ios-sheet.js"></script>
   </body>
 </html>

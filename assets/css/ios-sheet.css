@@ -1,0 +1,60 @@
+.ios-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.ios-sheet[hidden] {
+  display: none !important;
+}
+
+.ios-sheet.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ios-sheet__panel {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 8px 24px 24px;
+  cursor: default;
+}
+
+.ios-sheet__label {
+  margin: 0 0 20px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.ios-sheet__panel img {
+  display: block;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.ios-sheet__note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ios-sheet {
+    transition: none;
+  }
+}
