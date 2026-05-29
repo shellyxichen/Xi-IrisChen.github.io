@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" class="force-cursor">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>A Day</title>
+    <link rel="stylesheet" href="assets/css/for-oura.css" />
+    <script>
+      (function ensureCursorPaints() {
+        const root = document.documentElement;
+        function refreshCursor() {
+          root.classList.remove("force-cursor");
+          void root.offsetHeight;
+          root.classList.add("force-cursor");
+        }
+        root.classList.add("force-cursor");
+        window.addEventListener("pageshow", refreshCursor);
+        window.addEventListener("focus", refreshCursor);
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) refreshCursor();
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="entrance-overlay" id="entranceOverlay">
+      <div class="entrance-text">
+        <p>A quieter way to begin.</p>
+        <p>From sunrise to sunset.</p>
+      </div>
+    </div>
+
+    <a
+      href="index.html"
+      class="home-button"
+      aria-label="Back to home"
+      title="Back to home"
+    >
+      <img src="assets/2026/icon/home.png" alt="" class="home-default" />
+      <img src="assets/2026/icon/home_hover.png" alt="" class="home-hover" />
+    </a>
+
+    <div
+      class="sky"
+      id="sky"
+      role="application"
+      aria-label="Drag to move through the day"
+    ></div>
+
+    <label class="sr-only" for="timeSlider">Time of day</label>
+    <input
+      type="range"
+      class="sr-only"
+      id="timeSlider"
+      min="0"
+      max="1440"
+      step="1"
+      value="0"
+      aria-valuemin="0"
+      aria-valuemax="1440"
+      tabindex="0"
+    />
+
+    <div class="stars" id="stars" aria-hidden="true"></div>
+
+    <div class="ring-wrap" id="ringWrap" aria-hidden="true">
+      <canvas id="ringCanvas" width="280" height="280" aria-hidden="true"></canvas>
+    </div>
+
+    <div id="fxLayer" class="fx-layer" aria-hidden="true"></div>
+    <div id="heartBurstLayer" class="heart-burst-layer" aria-hidden="true"></div>
+
+    <p class="dayline" id="dayline" aria-live="polite"></p>
+
+    <script src="assets/js/for-oura.js"></script>
+  </body>
+</html>
